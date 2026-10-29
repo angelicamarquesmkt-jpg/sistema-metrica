@@ -422,6 +422,57 @@ button.li:hover .t{color:var(--accent)}
 .mini:hover{filter:brightness(.97)}
 .paid-chk{accent-color:var(--ok);width:17px;height:17px}
 
+
+/* campanhas */
+.sec-t{font:700 16px/1.2 var(--f-display);margin:18px 0 10px}
+.p-t{font:800 22px/1.1 var(--f-display);margin:0;letter-spacing:-.01em}
+.kpis.k5{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media (max-width:1100px){.kpis.k5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.kpis.k5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi .val.sm{font-size:28px}
+.dl{font-size:11.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+.dl.up{color:var(--ok)} .dl.down{color:var(--bad)}
+.kpi.hot .dl{color:#fff}
+.cli.fold .fold-ic{background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+.cli-n.cn4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:400px){.cli-n.cn4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fold-f{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:28px}
+.spk{width:120px;height:28px;flex:none}
+.spk path{fill:none;stroke:var(--accent);stroke-width:2;vector-effect:non-scaling-stroke}
+.ia-box{margin-bottom:14px;border-color:var(--accent)}
+.ia-box .md p{margin:0 0 8px;font-size:14px;line-height:1.5} .ia-box .md ul{margin:0 0 8px;padding-left:18px;font-size:14px;line-height:1.5} .ia-box .md h4{margin:10px 0 4px;font-size:14px}
+.alr-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;padding-bottom:22px}
+@media (max-width:400px){.alr-list{grid-template-columns:minmax(0,1fr)}}
+.alr{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--muted);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.alr h4{margin:2px 0 0;font:700 15px/1.3 var(--f-body);overflow-wrap:anywhere}
+.alr p{margin:0;font-size:13.5px;line-height:1.45;color:var(--fg)}
+.alr .alr-a{background:var(--surface-2);border-radius:8px;padding:8px 10px}
+.alr-e{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.alr-h{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.alr .sev{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.alr-f{display:flex;gap:6px;margin-top:4px}
+.alr.s-critica{border-left-color:var(--bad);background:var(--bad-soft)} .alr.s-critica .sev{color:var(--bad)}
+.alr.s-alta{border-left-color:var(--bad)} .alr.s-alta .sev{color:var(--bad)}
+.alr.s-media{border-left-color:var(--warn)} .alr.s-media .sev{color:var(--warn)}
+.alr.s-info .sev{color:var(--muted)}
+.alr.s-positivo{border-left-color:var(--ok)} .alr.s-positivo .sev{color:var(--ok)}
+.ctbl table{min-width:880px}
+.ctbl td{vertical-align:middle}
+.ctbl .tn{display:flex;gap:8px;align-items:center;min-width:240px}
+.ctbl .tt{font-weight:600;overflow-wrap:anywhere}
+.ctbl .ts{display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-top:3px}
+.ctbl tr.lv-conjunto .tn{padding-left:22px} .ctbl tr.lv-anuncio .tn{padding-left:44px}
+.ctbl tr.lv-campanha td{background:var(--surface-2)} .ctbl tr.lv-campanha td:first-child{border-radius:8px 0 0 8px} .ctbl tr.lv-campanha td:last-child{border-radius:0 8px 8px 0}
+.ctbl tr.off .tt{color:var(--muted)}
+.tg{border:1px solid var(--line);background:var(--surface);border-radius:6px;width:24px;height:24px;display:grid;place-items:center;font-size:12px;flex:none;padding:0}
+.tg-sp{width:24px;flex:none}
+.thumb{width:36px;height:36px;border-radius:6px;object-fit:cover;flex:none;background:var(--surface-2)}
+.chart .b-g{fill:var(--accent-soft);stroke:var(--accent);stroke-width:.5}
+.chart .l-r{fill:none;stroke:var(--fg);stroke-width:2;vector-effect:non-scaling-stroke}
+.lgd{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:6px}
+.lgd i{display:inline-block;width:12px;height:8px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.lgd i.b-g{background:var(--accent-soft);border:1px solid var(--accent)} .lgd i.l-r{height:2px;background:var(--fg)}
+
 /* recargas */
 .acc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .acc.urg{border-color:var(--bad)}
@@ -683,6 +734,7 @@ textarea.field{resize:vertical;min-height:70px}
       <li><a href="#crm" data-view="crm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg>CRM<span class="badge num" id="menuBadge" hidden></span></a></li>
       <li><a href="#whatsapp" data-view="whatsapp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.45L3.5 20.5l1.6-4.3A8.5 8.5 0 1 1 20.5 11.5z"/><path d="M9 9.5c.3 2 2.2 4.1 4.5 4.6"/></svg>Conversas WhatsApp<span class="badge num" id="menuWa" hidden></span></a></li>
       <li><a href="#clientes" data-view="clientes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18.5 14.8c1.6.8 2.6 2.5 3 5.2"/></svg>Clientes<span class="count num" id="menuCli" hidden></span></a></li>
+      <li><a href="#campanhas" data-view="campanhas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 15l3-3 2 2 4-4"/></svg>Campanhas<span class="badge num" id="menuCamp" hidden></span></a></li>
       <li><a href="#demandas" data-view="demandas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M9 2.5h6v3H9z"/><path d="M8 11l2 2 4-4"/><path d="M8 17h8"/></svg>Demandas<span class="count num" id="menuDem" hidden></span></a></li>
       <li><a href="#gestor" data-view="gestor"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20.5c.9-3.8 3.6-6 7-6s6.1 2.2 7 6"/><path d="M17.5 3.5l1.2 1.2 2.3-2.3"/></svg>Demandas do gestor<span class="count num" id="menuGes" hidden></span></a></li>
       <li><a href="#agenda" data-view="agenda"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3v3H8z"/></svg>Agenda<span class="count num" id="menuAg" hidden></span></a></li>
@@ -836,6 +888,11 @@ textarea.field{resize:vertical;min-height:70px}
     <div id="kTools" class="ag-opts"></div>
   </div>
   <div id="kBody"><div class="loading">A carregar…</div></div>
+</main>
+
+<main class="gut" id="viewCamp" hidden>
+  <div id="pBanner"></div>
+  <div id="pBody"><div class="loading">A carregar campanhas…</div></div>
 </main>
 
 <main class="gut" id="viewRec" hidden>
@@ -2786,7 +2843,7 @@ function renderInt(cfg, lg, st){
 $("#iBody").addEventListener("click", async e => { const c = e.target.closest("[data-copytxt]"); if (!c) return; try { await navigator.clipboard.writeText(c.dataset.copytxt); toast("Copiado"); } catch(_){ toast("Selecione o texto e copie com Ctrl+C", true); } });
 
 /* ---------- routing ---------- */
-const VIEWS = {dashboard:{title:"Dashboard", el:"#viewDash", novo:"+ Novo lead"}, crm:{title:"CRM", el:"#viewCrm", novo:"+ Novo lead"}, clientes:{title:"Clientes ativos", el:"#viewCli", novo:"+ Novo cliente"}, demandas:{title:"Demandas operacionais", el:"#viewDem", novo:"+ Nova demanda"}, gestor:{title:"Demandas do gestor", el:"#viewGes", novo:"+ Nova tarefa"}, agenda:{title:"Agenda", el:"#viewAg", novo:"+ Novo evento"}, financeiro:{title:"Financeiro", el:"#viewFin", novo:"+ Nova despesa"}, recargas:{title:"Recargas das contas de anúncios", el:"#viewRec", novo:"+ Nova conta"}, remarketing:{title:"Remarketing", el:"#viewRmk", novo:"+ Público"}, agentes:{title:"Agentes", el:"#viewAgt", novo:"+ Novo lead"}, whatsapp:{title:"Conversas WhatsApp", el:"#viewWa", novo:"+ Novo lead"}, integracao:{title:"Integração Meta e agente", el:"#viewInt", novo:"+ Novo lead"}};
+const VIEWS = {dashboard:{title:"Dashboard", el:"#viewDash", novo:"+ Novo lead"}, crm:{title:"CRM", el:"#viewCrm", novo:"+ Novo lead"}, clientes:{title:"Clientes ativos", el:"#viewCli", novo:"+ Novo cliente"}, demandas:{title:"Demandas operacionais", el:"#viewDem", novo:"+ Nova demanda"}, gestor:{title:"Demandas do gestor", el:"#viewGes", novo:"+ Nova tarefa"}, agenda:{title:"Agenda", el:"#viewAg", novo:"+ Novo evento"}, financeiro:{title:"Financeiro", el:"#viewFin", novo:"+ Nova despesa"}, campanhas:{title:"Campanhas dos clientes", el:"#viewCamp", novo:"+ Ligar conta"}, recargas:{title:"Recargas das contas de anúncios", el:"#viewRec", novo:"+ Nova conta"}, remarketing:{title:"Remarketing", el:"#viewRmk", novo:"+ Público"}, agentes:{title:"Agentes", el:"#viewAgt", novo:"+ Novo lead"}, whatsapp:{title:"Conversas WhatsApp", el:"#viewWa", novo:"+ Novo lead"}, integracao:{title:"Integração Meta e agente", el:"#viewInt", novo:"+ Novo lead"}};
 let curView = "dashboard";
 function route(){
   const v = VIEWS[location.hash.slice(1)] ? location.hash.slice(1) : "dashboard";
@@ -2800,6 +2857,7 @@ function route(){
   if (v === "agenda") agendaEnter();
   if (v === "financeiro") loadFin();
   if (v === "recargas") loadRec();
+  if (v === "campanhas") { campSel = null; loadCamp(); }
   if (v === "remarketing") loadRmk();
   if (v === "agentes") enterAgentes();
   if (v === "whatsapp") enterWa(); else stopWaPoll();
@@ -2987,6 +3045,7 @@ $("#btnNew").addEventListener("click", () => {
   if (curView === "gestor") { openDemanda(null, {area:"gestor"}); return; }
   if (curView === "agenda") { openEvento({}); return; }
   if (curView === "recargas") { openConta(null); return; }
+  if (curView === "campanhas") { openContaMeta(null); return; }
   if (curView === "remarketing") { openPublico(null, {}); return; }
   if (curView === "financeiro") { $("#fdDesc").focus(); $("#fDespForm").scrollIntoView({block:"center", behavior:"smooth"}); return; }
   const blank = {origem:"meta_form", campanha: leads.find(l => l.campanha && !l.exemplo)?.campanha || ""};
@@ -3113,6 +3172,252 @@ $("#btnDelEx").addEventListener("click", () => {
   } else { b.dataset.armed = "1"; b.textContent = "Confirmar: apagar exemplos"; setTimeout(() => { if (b.dataset.armed){ delete b.dataset.armed; b.textContent = "Remover exemplos"; } }, 5000); }
 });
 
+/* ---------- campanhas (Meta Ads por cliente) ---------- */
+var campContas = [], campAlertas = [], campAnal = [], campSel = null, campDias = 7, campBusy = false, campDet = null, campOpen = new Set(), campSevF = "", campSyncT = null;
+const SEV = {critica:{n:"Crítico", o:0}, alta:{n:"Alto", o:1}, media:{n:"Médio", o:2}, info:{n:"Dica", o:3}, positivo:{n:"Positivo", o:4}};
+const NIVEL = {conta:"Conta", campanha:"Campanha", conjunto:"Conjunto", anuncio:"Anúncio"};
+const EST = {ACTIVE:["Ativo","ok"], PAUSED:["Pausado",""], CAMPAIGN_PAUSED:["Campanha pausada",""], ADSET_PAUSED:["Conjunto pausado",""], IN_PROCESS:["Em revisão","soon"], WITH_ISSUES:["Com problemas","late"], DISAPPROVED:["Reprovado","late"], PENDING_REVIEW:["Em revisão","soon"], ARCHIVED:["Arquivado",""], DELETED:["Apagado",""], PREAPPROVED:["Pré-aprovado","soon"], PENDING_BILLING_INFO:["Falta faturação","late"]};
+const eur2 = n => n == null || !isFinite(n) ? "—" : new Intl.NumberFormat("pt-PT",{style:"currency",currency:"EUR",minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+const pc = (n, d=2) => n == null || !isFinite(n) ? "—" : (n*100).toLocaleString("pt-PT",{minimumFractionDigits:d,maximumFractionDigits:d}) + "%";
+const int = n => n == null ? "—" : Number(n).toLocaleString("pt-PT");
+function campRange(){ const fim = ymd(addDays(new Date(), campDias === 1 ? 1 : 0)), ini = ymd(addDays(new Date(), campDias === 1 ? 0 : -campDias)); return {ini, fim, pini: ymd(addDays(new Date(ini + "T12:00:00"), -(campDias === 1 ? 1 : campDias))), pfim: ini}; }
+function kz(a){
+  a = a || {}; const g = Number(a.gasto||0), imp = Number(a.imp||0), cll = Number(a.cll||0), res = Number(a.leads||0) + Number(a.conv||0);
+  return {g, imp, cll, cl: Number(a.cl||0), res, leads:Number(a.leads||0), conv:Number(a.conv||0), lpv:Number(a.lpv||0), v3:Number(a.v3||0),
+    ctr: imp ? cll/imp : null, cpc: cll ? g/cll : null, cpm: imp ? g/imp*1000 : null, cpl: res ? g/res : null, cr: cll ? res/cll : null, hook: imp && a.v3 ? a.v3/imp : null};
+}
+function delta(a, b, inverso){
+  if (a == null || b == null || !isFinite(a) || !isFinite(b) || b === 0) return "";
+  const d = (a - b) / Math.abs(b); if (Math.abs(d) < 0.03) return `<span class="dl">=</span>`;
+  const bom = inverso ? d < 0 : d > 0;
+  return `<span class="dl ${bom ? "up" : "down"}">${d > 0 ? "▲" : "▼"} ${Math.round(Math.abs(d)*100)}%</span>`;
+}
+const SUMS = `coalesce(sum(m.gasto),0) as gasto, coalesce(sum(m.impressoes),0) as imp, coalesce(sum(m.cliques),0) as cl, coalesce(sum(m.cliques_link),0) as cll, coalesce(sum(m.leads),0) as leads, coalesce(sum(m.conversas),0) as conv, coalesce(sum(m.lpv),0) as lpv, coalesce(sum(m.video_3s),0) as v3`;
+
+async function loadCamp(silent){
+  if (!mcp) { if (mcpResolved && !silent) $("#pBanner").innerHTML = `<div class="banner"><b>Sem ligação aos dados</b>As campanhas usam o seu Supabase.</div>`; return; }
+  if (campBusy) return; campBusy = true;
+  const r = campRange();
+  try {
+    const x = await sql(`select json_build_object(
+      'contas', coalesce((select json_agg(c order by c.cliente nulls first, c.nome) from (
+        select a.id, a.nome, a.conta_ref, a.cliente_id, a.ativa, a.sincronizado_em, a.sync_erro, a.metas, a.moeda, a.quem_paga, cl.nome as cliente,
+          (select row_to_json(s) from (select ${SUMS} from public.ads_metricas m where m.conta_id = a.id and m.data >= ${lit(r.ini)} and m.data < ${lit(r.fim)}) s) as atual,
+          (select row_to_json(s) from (select ${SUMS} from public.ads_metricas m where m.conta_id = a.id and m.data >= ${lit(r.pini)} and m.data < ${lit(r.pfim)}) s) as antes,
+          (select json_agg(d order by d.data) from (select m.data, ${SUMS} from public.ads_metricas m where m.conta_id = a.id and m.data >= current_date - 30 group by m.data) d) as serie,
+          (select count(*) from public.ads_entidades e where e.conta_id = a.id and e.nivel = 'campanha' and e.estado = 'ACTIVE')::int as camp_ativas,
+          (select count(*) from public.ads_entidades e where e.conta_id = a.id and e.nivel = 'anuncio' and e.estado = 'ACTIVE')::int as ads_ativos
+        from public.contas_anuncios a left join public.clientes cl on cl.id = a.cliente_id
+        where a.plataforma = 'Meta Ads') c), '[]'),
+      'alertas', coalesce((select json_agg(al order by al.dia desc, al.created_at desc) from (select * from public.ads_alertas where estado = 'aberto' order by dia desc limit 300) al), '[]'),
+      'analises', coalesce((select json_agg(an) from (select distinct on (coalesce(conta_id::text,'')) * from public.ads_analises order by coalesce(conta_id::text,''), dia desc, created_at desc) an), '[]')
+    ) as d`);
+    const d = x[x.length - 1].d; campContas = d.contas || []; campAlertas = d.alertas || []; campAnal = d.analises || [];
+    $("#pBanner").innerHTML = "";
+  } catch(e){ if (!silent) $("#pBanner").innerHTML = `<div class="banner"><b>Não consegui carregar as campanhas</b>${esc(errMsg(e))}</div>`; }
+  finally { campBusy = false; }
+  campBadge();
+  if (curView === "campanhas") { if (campSel) await loadCampDet(); else renderCamp(); }
+}
+function campBadge(){
+  const n = campAlertas.filter(a => a.severidade === "critica" || a.severidade === "alta").length, b = $("#menuCamp");
+  if (!b) return; b.hidden = !n; b.textContent = n; b.title = n + " alertas importantes nas campanhas";
+}
+function sevOrd(a, b){ return (SEV[a.severidade]?.o ?? 9) - (SEV[b.severidade]?.o ?? 9); }
+function alertaHTML(a, mostrarConta){
+  const conta = mostrarConta ? campContas.find(c => c.id === a.conta_id) : null;
+  return `<article class="alr s-${a.severidade}" data-alr="${a.id}">
+    <div class="alr-h"><span class="sev">${SEV[a.severidade]?.n || a.severidade}</span><span class="pill">${NIVEL[a.nivel] || a.nivel}</span>${a.origem === "ia" ? `<span class="pill meta">Gestor IA</span>` : ""}${conta ? `<span class="pill">${esc(conta.cliente || conta.nome)}</span>` : ""}<span class="muted" style="margin-left:auto">${fmtDate(a.dia + "T12:00:00", false)}</span></div>
+    <h4>${esc(a.titulo)}</h4>
+    ${a.entidade_nome && a.nivel !== "conta" ? `<div class="alr-e">${esc(a.entidade_nome)}</div>` : ""}
+    ${a.diagnostico ? `<p>${esc(a.diagnostico)}</p>` : ""}
+    ${a.acao ? `<p class="alr-a"><b>O que fazer:</b> ${esc(a.acao)}</p>` : ""}
+    <div class="alr-f"><button class="mini" type="button" data-alrok="${a.id}">Feito</button><button class="mini" type="button" data-alrign="${a.id}">Ignorar</button></div>
+  </article>`;
+}
+function campPeriodo(){ return `<div class="seg" id="pDias" role="group" aria-label="Período">${[[1,"Hoje"],[7,"7 dias"],[14,"14 dias"],[30,"30 dias"]].map(([v,t]) => `<button type="button" data-d="${v}" aria-pressed="${campDias === v}">${t}</button>`).join("")}</div>`; }
+function syncTxt(c){
+  if (c.sync_erro) return `<span class="pill late" title="${esc(c.sync_erro)}">Erro na leitura</span>`;
+  if (!c.conta_ref) return `<span class="pill soon">Conta por ligar</span>`;
+  if (!c.sincronizado_em) return `<span class="pill soon">Ainda sem dados</span>`;
+  return `<span class="muted">Atualizado ${ago(c.sincronizado_em)}</span>`;
+}
+function spark(serie, campo){
+  const pts = (serie || []).slice(-30); if (pts.length < 2) return "";
+  const vals = pts.map(p => campo === "res" ? Number(p.leads||0) + Number(p.conv||0) : Number(p[campo]||0)), mx = Math.max(...vals, 1), W = 120, H = 28;
+  const d = vals.map((v, i) => `${i ? "L" : "M"}${(i/(vals.length-1)*W).toFixed(1)},${(H - 2 - v/mx*(H-4)).toFixed(1)}`).join("");
+  return `<svg class="spk" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><path d="${d}"/></svg>`;
+}
+function renderCamp(){
+  const W = $("#pBody"); if (!W) return;
+  const alrs = campAlertas.slice().sort(sevOrd);
+  const tot = campContas.reduce((o, c) => { const k = kz(c.atual); o.g += k.g; o.res += k.res; o.cll += k.cll; o.imp += k.imp; return o; }, {g:0,res:0,cll:0,imp:0});
+  const totA = campContas.reduce((o, c) => { const k = kz(c.antes); o.g += k.g; o.res += k.res; return o; }, {g:0,res:0});
+  const glob = campAnal.find(a => !a.conta_id);
+  const n = s => alrs.filter(a => a.severidade === s).length;
+  W.innerHTML = `<div class="ag-bar"><div>${campPeriodo()}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="button" id="pSync">Atualizar dados agora</button></div></div>
+    <section class="kpis">
+      <div class="kpi hot"><div class="lbl">Investido</div><div class="val num">${eur(tot.g)}</div><div class="sub">${delta(tot.g, totA.g)} vs período anterior</div></div>
+      <div class="kpi"><div class="lbl">Leads / conversas</div><div class="val num">${int(tot.res)}</div><div class="sub">${delta(tot.res, totA.res)} vs período anterior</div></div>
+      <div class="kpi"><div class="lbl">Custo por lead</div><div class="val num">${tot.res ? eur2(tot.g/tot.res) : "—"}</div><div class="sub">${delta(tot.res ? tot.g/tot.res : null, totA.res ? totA.g/totA.res : null, true)} média de todas as contas</div></div>
+      <div class="kpi"><div class="lbl">Alertas abertos</div><div class="val num">${alrs.length}</div><div class="sub">${n("critica") ? `<span class="pill late">${n("critica")} críticos</span>` : ""}${n("alta") ? `<span class="pill late">${n("alta")} altos</span>` : ""}${n("media") ? `<span class="pill soon">${n("media")} médios</span>` : ""}${!alrs.length ? "Tudo em ordem" : ""}</div></div>
+    </section>
+    ${glob ? `<section class="panel ia-box"><div class="panel-h"><h2>Gestor de tráfego IA · resumo do dia</h2><span class="muted">${fmtDate(glob.dia + "T12:00:00", false)}</span></div><div class="md">${md(glob.resumo)}</div></section>` : ""}
+    <h3 class="sec-t">Clientes</h3>
+    <div class="cli-grid">${campContas.map(c => {
+      const k = kz(c.atual), ka = kz(c.antes), na = campAlertas.filter(a => a.conta_id === c.id && (a.severidade === "critica" || a.severidade === "alta")).length, nm = campAlertas.filter(a => a.conta_id === c.id).length;
+      return `<button class="cli fold" type="button" data-pc="${c.id}">
+        <div class="cli-h"><div class="av fold-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+          <div><div class="t">${esc(c.cliente || c.nome)}</div><div class="s">${c.cliente ? esc(c.nome) + " · " : "Conta da agência · "}${c.camp_ativas} campanhas ativas · ${c.ads_ativos} anúncios</div></div>
+          ${na ? `<span class="pill late">${na} alerta${na > 1 ? "s" : ""}</span>` : nm ? `<span class="pill soon">${nm}</span>` : c.sincronizado_em ? `<span class="pill ok">OK</span>` : ""}</div>
+        <div class="cli-n cn4"><div><span>Gasto</span><b class="num">${eur(k.g)}</b></div><div><span>Leads</span><b class="num">${k.res}</b></div><div><span>CPL</span><b class="num">${eur2(k.cpl)}</b> ${delta(k.cpl, ka.cpl, true)}</div><div><span>CTR link</span><b class="num">${pc(k.ctr)}</b></div></div>
+        <div class="fold-f">${syncTxt(c)}${spark(c.serie, "res")}</div>
+      </button>`; }).join("") || `<div class="empty-p">Ainda não há contas Meta ligadas. Use “+ Ligar conta”.</div>`}</div>
+    <div class="panel-h" style="margin-top:6px"><h3 class="sec-t" style="margin:0 auto 0 0">Avisos do gestor</h3>
+      <div class="seg" id="pSev">${[["","Todos"],["critica","Críticos"],["alta","Altos"],["media","Médios"],["info","Dicas"],["positivo","Positivos"]].map(([v,t]) => `<button type="button" data-s="${v}" aria-pressed="${campSevF === v}">${t}</button>`).join("")}</div></div>
+    <div class="alr-list">${alrs.filter(a => !campSevF || a.severidade === campSevF).map(a => alertaHTML(a, true)).join("") || `<div class="empty-p">Sem avisos ${campSevF ? "deste tipo" : "abertos"}. ${campContas.some(c => c.sincronizado_em) ? "" : "Os avisos aparecem depois da primeira leitura das campanhas."}</div>`}</div>`;
+}
+async function loadCampDet(){
+  const c = campContas.find(x => x.id === campSel); if (!c) { campSel = null; renderCamp(); return; }
+  const r = campRange();
+  $("#pBody").innerHTML = `<div class="loading">A carregar ${esc(c.cliente || c.nome)}…</div>`;
+  try {
+    const x = await sql(`select json_build_object(
+      'ents', coalesce((select json_agg(e) from public.ads_entidades e where e.conta_id = ${lit(c.id)} and coalesce(e.estado,'') not in ('DELETED','ARCHIVED')), '[]'),
+      'ads', coalesce((select json_agg(s) from (select m.anuncio_id, ${SUMS}, max(m.rank_qualidade) filter (where m.rank_qualidade is not null) as rq, max(m.rank_engajamento) filter (where m.rank_engajamento is not null) as re, max(m.rank_conversao) filter (where m.rank_conversao is not null) as rc
+          from public.ads_metricas m where m.conta_id = ${lit(c.id)} and m.data >= ${lit(r.ini)} and m.data < ${lit(r.fim)} group by m.anuncio_id) s), '[]'),
+      'antes', coalesce((select json_agg(s) from (select m.anuncio_id, ${SUMS} from public.ads_metricas m where m.conta_id = ${lit(c.id)} and m.data >= ${lit(r.pini)} and m.data < ${lit(r.pfim)} group by m.anuncio_id) s), '[]'),
+      'serie', coalesce((select json_agg(d order by d.data) from (select m.data, ${SUMS} from public.ads_metricas m where m.conta_id = ${lit(c.id)} and m.data >= current_date - 30 group by m.data) d), '[]')
+    ) as d`);
+    campDet = x[x.length - 1].d; renderCampDet();
+  } catch(e){ $("#pBody").innerHTML = `<div class="banner"><b>Não consegui carregar as campanhas desta conta</b>${esc(errMsg(e))}</div>`; }
+}
+function somaK(lista){ const o = {}; lista.forEach(a => ["gasto","imp","cl","cll","leads","conv","lpv","v3"].forEach(k => o[k] = (o[k]||0) + Number(a[k]||0))); return o; }
+function linhaHTML(nivel, e, k, kAnt, extra, aberto, filhos){
+  const est = EST[e.estado] || [e.estado || "—", ""], alr = campAlertas.filter(a => a.entidade_id === e.id), sv = alr.slice().sort(sevOrd)[0];
+  const orc = e.orcamento_diario ? eur(e.orcamento_diario) + "/dia" : e.orcamento_total ? eur(e.orcamento_total) + " total" : "";
+  return `<tr class="lv-${nivel}${est[1] === "" && e.estado !== "ACTIVE" ? " off" : ""}">
+    <td><div class="tn">${filhos ? `<button class="tg" type="button" data-tg="${e.id}" aria-expanded="${aberto}" aria-label="${aberto ? "Fechar" : "Abrir"}">${aberto ? "▾" : "▸"}</button>` : `<span class="tg-sp"></span>`}
+      ${nivel === "anuncio" && e.miniatura ? `<img class="thumb" src="${esc(e.miniatura)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ""}
+      <div><div class="tt">${esc(e.nome || e.id)}</div><div class="ts"><span class="pill ${est[1]}">${est[0]}</span>${orc ? ` <span class="muted">${orc}</span>` : ""}${extra || ""}${sv ? ` <span class="pill ${sv.severidade === "positivo" ? "ok" : sv.severidade === "critica" || sv.severidade === "alta" ? "late" : "soon"}" title="${esc(alr.map(a => a.titulo).join(" · "))}">${alr.length} aviso${alr.length > 1 ? "s" : ""}</span>` : ""}</div></div></div></td>
+    <td class="n num">${eur2(k.g)}</td><td class="n num">${int(k.imp)}</td><td class="n num">${int(k.cll)}</td>
+    <td class="n num">${pc(k.ctr)}</td><td class="n num">${eur2(k.cpc)}</td><td class="n num">${eur2(k.cpm)}</td>
+    <td class="n num"><b>${k.res}</b></td><td class="n num"><b>${eur2(k.cpl)}</b> ${delta(k.cpl, kAnt?.cpl, true)}</td><td class="n num">${pc(k.cr, 1)}</td>
+  </tr>`;
+}
+function renderCampDet(){
+  const c = campContas.find(x => x.id === campSel), D = campDet; if (!c || !D) return;
+  const byAd = Object.fromEntries(D.ads.map(a => [a.anuncio_id, a])), byAdA = Object.fromEntries(D.antes.map(a => [a.anuncio_id, a]));
+  const ents = D.ents, camps = ents.filter(e => e.nivel === "campanha"), sets = ents.filter(e => e.nivel === "conjunto"), ads = ents.filter(e => e.nivel === "anuncio");
+  const adsDe = (campo, id) => ads.filter(a => a[campo] === id);
+  const kOf = (lista, mapa) => kz(somaK(lista.map(a => mapa[a.id]).filter(Boolean)));
+  const ordem = (a, b) => (a.estado === "ACTIVE" ? 0 : 1) - (b.estado === "ACTIVE" ? 0 : 1) || (kz(somaK((a._l||[]).map(x => byAd[x.id]).filter(Boolean))).g < kz(somaK((b._l||[]).map(x => byAd[x.id]).filter(Boolean))).g ? 1 : -1);
+  camps.forEach(x => x._l = adsDe("campanha_id", x.id)); sets.forEach(x => x._l = adsDe("conjunto_id", x.id)); ads.forEach(x => x._l = [x]);
+  const visivel = e => e.estado === "ACTIVE" || kOf(e._l, byAd).imp > 0;
+  const k = kz(somaK(D.ads)), ka = kz(somaK(D.antes));
+  const alrs = campAlertas.filter(a => a.conta_id === c.id).sort(sevOrd), an = campAnal.find(a => a.conta_id === c.id);
+  const metas = c.metas || {};
+  let rows = "";
+  camps.filter(visivel).sort(ordem).forEach(cp => {
+    const ab = campOpen.has(cp.id), ss = sets.filter(s => s.campanha_id === cp.id && visivel(s)).sort(ordem);
+    rows += linhaHTML("campanha", cp, kOf(cp._l, byAd), kOf(cp._l, byAdA), cp.objetivo ? ` <span class="muted">${esc(String(cp.objetivo).replace("OUTCOME_","").toLowerCase())}</span>` : "", ab, ss.length);
+    if (!ab) return;
+    ss.forEach(s => {
+      const ab2 = campOpen.has(s.id), aa = ads.filter(a => a.conjunto_id === s.id && visivel(a)).sort(ordem);
+      rows += linhaHTML("conjunto", s, kOf(s._l, byAd), kOf(s._l, byAdA), s.otimizacao ? ` <span class="muted">${esc(String(s.otimizacao).toLowerCase().replace(/_/g," "))}</span>` : "", ab2, aa.length);
+      if (!ab2) return;
+      aa.forEach(a => { const m = byAd[a.id] || {}; const rk = [m.rq, m.re, m.rc].some(x => x && x.startsWith("BELOW")) ? ` <span class="pill late">ranking baixo</span>` : "";
+        rows += linhaHTML("anuncio", a, kz(m), kz(byAdA[a.id]), (a.cta ? ` <span class="muted">CTA ${esc(a.cta.replace(/_/g," ").toLowerCase())}</span>` : "") + rk, false, 0); });
+    });
+  });
+  const serie = D.serie || [], mx = Math.max(1, ...serie.map(s => Number(s.gasto||0))), mxr = Math.max(1, ...serie.map(s => Number(s.leads||0)+Number(s.conv||0)));
+  const Wc = 640, Hc = 150, bw = serie.length ? Wc / serie.length : 0;
+  const chart = serie.length ? `<svg viewBox="0 0 ${Wc} ${Hc + 20}" role="img" aria-label="Gasto e leads por dia, últimos 30 dias">${serie.map((s, i) => { const h = Number(s.gasto||0)/mx*(Hc-10); return `<rect x="${(i*bw+bw*0.15).toFixed(1)}" y="${(Hc-h).toFixed(1)}" width="${(bw*0.7).toFixed(1)}" height="${h.toFixed(1)}" rx="2" class="b-g"><title>${fmtDate(s.data+"T12:00:00", false)} · ${eur2(Number(s.gasto))} · ${Number(s.leads||0)+Number(s.conv||0)} leads</title></rect>`; }).join("")}
+    <path class="l-r" d="${serie.map((s, i) => `${i ? "L" : "M"}${(i*bw+bw/2).toFixed(1)},${(Hc - (Number(s.leads||0)+Number(s.conv||0))/mxr*(Hc-10)).toFixed(1)}`).join("")}"/>
+    ${serie.map((s, i) => i % Math.ceil(serie.length/6) === 0 ? `<text x="${(i*bw+bw/2).toFixed(1)}" y="${Hc+15}" text-anchor="middle">${s.data.slice(8,10)}/${s.data.slice(5,7)}</text>` : "").join("")}</svg>
+    <div class="lgd"><span><i class="b-g"></i>Gasto</span><span><i class="l-r"></i>Leads</span></div>` : `<div class="empty-p">Sem dados ainda.</div>`;
+  $("#pBody").innerHTML = `<div class="ag-bar"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn" type="button" id="pBack">‹ Todos os clientes</button><h2 class="p-t">${esc(c.cliente || c.nome)}</h2>${syncTxt(c)}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">${campPeriodo()}<button class="btn" type="button" id="pSync">Atualizar</button><button class="btn" type="button" id="pCfg">Metas e conta</button></div></div>
+    ${c.sync_erro ? `<div class="banner"><b>A Meta não deixou ler esta conta</b>${esc(c.sync_erro)}</div>` : ""}
+    <section class="kpis k5">
+      <div class="kpi hot"><div class="lbl">Investido</div><div class="val num">${eur(k.g)}</div><div class="sub">${delta(k.g, ka.g)} vs anterior</div></div>
+      <div class="kpi"><div class="lbl">Leads</div><div class="val num">${k.res}</div><div class="sub">${delta(k.res, ka.res)}${k.conv ? ` · ${k.conv} conversas` : ""}</div></div>
+      <div class="kpi"><div class="lbl">Custo por lead</div><div class="val num">${eur2(k.cpl)}</div><div class="sub">${delta(k.cpl, ka.cpl, true)}${metas.cpl_max ? ` meta ${eur2(Number(metas.cpl_max))}` : ""}</div></div>
+      <div class="kpi"><div class="lbl">CTR link</div><div class="val num">${pc(k.ctr)}</div><div class="sub">${delta(k.ctr, ka.ctr)} · ${int(k.cll)} cliques</div></div>
+      <div class="kpi"><div class="lbl">CPC · CPM</div><div class="val num sm">${eur2(k.cpc)}</div><div class="sub">CPM ${eur2(k.cpm)} ${delta(k.cpm, ka.cpm, true)}</div></div>
+    </section>
+    <div class="dgrid">
+      <section class="panel span2"><div class="panel-h"><h2>Gasto e leads por dia</h2><span class="muted">últimos 30 dias</span></div><div class="chart">${chart}</div></section>
+      <section class="panel"><div class="panel-h"><h2>Funil</h2><span class="muted">período</span></div><div class="funnel">${[["Impressões", k.imp], ["Cliques no link", k.cll], ["Visitas à página", k.lpv], ["Leads", k.res]].filter((x, i) => i !== 2 || x[1]).map(([n, v], i, arr) => `<div class="f-row"><span>${n}</span><div class="f-bar"><i style="width:${arr[0][1] ? Math.max(1.5, Math.sqrt(v/arr[0][1])*100) : 0}%"></i></div><span class="n"><b>${int(v)}</b>${i ? ` · ${pc(arr[i-1][1] ? v/arr[i-1][1] : null, 1)}` : ""}</span></div>`).join("")}</div></section>
+    </div>
+    ${an ? `<section class="panel ia-box"><div class="panel-h"><h2>Análise do gestor IA</h2><span class="muted">${fmtDate(an.dia + "T12:00:00", false)}${an.nota != null ? ` · nota ${an.nota}/10` : ""}</span></div><div class="md">${md(an.resumo)}</div></section>` : ""}
+    ${alrs.length ? `<h3 class="sec-t">Avisos (${alrs.length})</h3><div class="alr-list">${alrs.map(a => alertaHTML(a, false)).join("")}</div>` : ""}
+    <section class="panel" style="margin-bottom:28px"><div class="panel-h"><h2>Campanhas, conjuntos e anúncios</h2><span class="muted">clique ▸ para abrir</span></div>
+      <div class="tbl ctbl"><table><thead><tr><th>Nome</th><th class="n">Gasto</th><th class="n">Impr.</th><th class="n">Cliques</th><th class="n">CTR</th><th class="n">CPC</th><th class="n">CPM</th><th class="n">Leads</th><th class="n">CPL</th><th class="n">Conv.</th></tr></thead>
+      <tbody>${rows || `<tr><td colspan="10" class="empty-p">${c.sincronizado_em ? "Sem campanhas com atividade neste período." : "Ainda sem dados desta conta."}</td></tr>`}</tbody></table></div></section>`;
+}
+async function campSync(id){
+  const b = $("#pSync"); if (b) { b.disabled = true; b.textContent = "A ler a Meta…"; }
+  const antes = Object.fromEntries(campContas.map(c => [c.id, c.sincronizado_em]));
+  try { await sql(`select public.ads_sincronizar(${id ? lit(id) : "null"}, 30) as id`); }
+  catch(e){ toast(errMsg(e), true); if (b) { b.disabled = false; b.textContent = "Atualizar"; } return; }
+  toast("A ler as campanhas na Meta. Demora até 1 minuto.");
+  let n = 0; clearInterval(campSyncT);
+  campSyncT = setInterval(async () => {
+    n++;
+    try { const r = await sql(`select id, sincronizado_em from public.contas_anuncios where plataforma = 'Meta Ads'`);
+      const mudou = r.some(x => (!id || x.id === id) && x.sincronizado_em && x.sincronizado_em !== antes[x.id]);
+      if (mudou || n > 12) { clearInterval(campSyncT); await loadCamp(); toast(mudou ? "Campanhas atualizadas" : "Ainda a processar. Volte a abrir daqui a pouco."); }
+    } catch(_){ if (n > 12) clearInterval(campSyncT); }
+  }, 6000);
+}
+function openContaMeta(id){
+  const c = id ? campContas.find(x => x.id === id) : {metas:{}}; const m = c.metas || {};
+  modal(id ? "Metas e conta · " + esc(c.cliente || c.nome) : "Ligar conta de anúncios Meta", "O ID está no Gestor de Anúncios, ao lado do nome da conta (act_…). As metas servem de referência para os avisos; sem meta, uso a média dos últimos 30 dias.", `<form id="pcForm"><div class="grid2">
+    <div class="fl"><label for="pc_n">Nome da conta</label><input class="field" id="pc_n" required value="${esc(c.nome || "")}"></div>
+    <div class="fl"><label for="pc_c">Cliente</label><select class="field" id="pc_c"><option value="">Métrica Digital (agência)</option>${clientes.map(x => `<option value="${x.id}" ${x.id === c.cliente_id ? "selected" : ""}>${esc(x.nome)}</option>`).join("")}</select></div>
+    <div class="fl"><label for="pc_r">ID da conta de anúncios</label><input class="field" id="pc_r" placeholder="act_1234567890" required value="${esc(c.conta_ref || "")}"></div>
+    <div class="fl"><label for="pc_cpl">Meta de custo por lead (€)</label><input class="field" id="pc_cpl" type="number" step="0.01" min="0" placeholder="ex.: 8" value="${m.cpl_max ?? ""}"></div>
+    <div class="fl"><label for="pc_ctr">CTR de link mínimo (%)</label><input class="field" id="pc_ctr" type="number" step="0.1" min="0" placeholder="0,8" value="${m.ctr_min ?? ""}"></div>
+    <div class="fl"><label for="pc_f">Frequência máxima (7 dias)</label><input class="field" id="pc_f" type="number" step="0.1" min="1" placeholder="3" value="${m.freq_max ?? ""}"></div>
+  </div><div class="dr-f"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn primary" type="submit">Guardar</button></div></form>`);
+  $("#pcForm").addEventListener("submit", async e => {
+    e.preventDefault(); const b = e.target.querySelector("[type=submit]"); b.disabled = true;
+    let ref = $("#pc_r").value.trim().replace(/\s/g, ""); if (/^\d+$/.test(ref)) ref = "act_" + ref;
+    const num = v => v === "" ? undefined : Number(String(v).replace(",", "."));
+    const metas = {cpl_max: num($("#pc_cpl").value), ctr_min: num($("#pc_ctr").value), freq_max: num($("#pc_f").value)};
+    Object.keys(metas).forEach(k => metas[k] === undefined && delete metas[k]);
+    const o = {nome: $("#pc_n").value.trim(), cliente_id: $("#pc_c").value || null, conta_ref: ref, metas};
+    try {
+      let row;
+      if (id) row = await updateRow("contas_anuncios", id, o);
+      else row = await insertRow("contas_anuncios", {...o, plataforma: "Meta Ads", ativa: true, quem_paga: o.cliente_id ? "cliente" : "agencia", alerta_dias: 3});
+      closeLayer(); toast("Conta guardada"); await loadCamp();
+      if (row && (!id || ref !== c.conta_ref)) campSync(row.id);
+    } catch(err){ toast(errMsg(err), true); b.disabled = false; }
+  });
+}
+$("#viewCamp").addEventListener("click", async e => {
+  const t = e.target;
+  const pc = t.closest("[data-pc]"); if (pc) { campSel = pc.dataset.pc; campOpen = new Set(); window.scrollTo(0,0); loadCampDet(); return; }
+  if (t.closest("#pBack")) { campSel = null; campDet = null; renderCamp(); window.scrollTo(0,0); return; }
+  const dd = t.closest("#pDias [data-d]"); if (dd) { campDias = Number(dd.dataset.d); await loadCamp(); return; }
+  const sv = t.closest("#pSev [data-s]"); if (sv) { campSevF = sv.dataset.s; renderCamp(); return; }
+  if (t.closest("#pSync")) { campSync(campSel); return; }
+  if (t.closest("#pCfg")) { openContaMeta(campSel); return; }
+  const tg = t.closest("[data-tg]"); if (tg) { const id = tg.dataset.tg; campOpen.has(id) ? campOpen.delete(id) : campOpen.add(id); renderCampDet(); return; }
+  const ok = t.closest("[data-alrok],[data-alrign]");
+  if (ok) {
+    const id = ok.dataset.alrok || ok.dataset.alrign, est = ok.dataset.alrok ? "resolvido" : "ignorado";
+    ok.disabled = true;
+    try { await sql(`update public.ads_alertas set estado = ${lit(est)}, resolvido_em = now() where id = ${lit(id)} returning id`);
+      campAlertas = campAlertas.filter(a => a.id !== id); campBadge();
+      const el = $(`[data-alr="${id}"]`); if (el) el.remove();
+      toast(est === "resolvido" ? "Marcado como feito" : "Aviso ignorado durante 14 dias");
+    } catch(err){ toast(errMsg(err), true); ok.disabled = false; }
+  }
+});
+
 /* ---------- boot ---------- */
 function showBanner(title, text){ $("#banner").innerHTML = $("#dBanner").innerHTML = `<div class="banner"><b>${esc(title)}</b>${esc(text)}</div>`; }
 renderMetrics(); renderDash();
@@ -3122,6 +3427,7 @@ renderMetrics(); renderDash();
   if (curView === "financeiro") loadFin(); else if (mcp) finBadge();
   if (mcp && curView !== "recargas") loadRec(true); else if (curView === "recargas") loadRec();
   if (curView === "remarketing") loadRmk();
+  if (curView === "campanhas") loadCamp(); else if (mcp) loadCamp(true);
   if (curView === "agentes") enterAgentes();
   if (curView === "whatsapp") enterWa();
   if (curView === "integracao") loadInt();
