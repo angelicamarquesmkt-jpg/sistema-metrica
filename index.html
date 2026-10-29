@@ -423,6 +423,16 @@ button.li:hover .t{color:var(--accent)}
 .paid-chk{accent-color:var(--ok);width:17px;height:17px}
 
 
+/* relatórios */
+.rel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:14px;margin-bottom:28px}
+.rel{padding:16px}
+.rel-h{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.rel-h .t{font-weight:700;font-size:15.5px}
+.rel-h .s{font-size:12.5px;color:var(--muted)}
+.rel .cli-n{margin-bottom:12px}
+.rel-r{margin:0 0 12px;font-size:13.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.rel-f{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.rel-f .btn[disabled]{opacity:.5;cursor:not-allowed}
 /* campanhas */
 .sec-t{font:700 16px/1.2 var(--f-display);margin:18px 0 10px}
 .p-t{font:800 22px/1.1 var(--f-display);margin:0;letter-spacing:-.01em}
@@ -735,6 +745,7 @@ textarea.field{resize:vertical;min-height:70px}
       <li><a href="#whatsapp" data-view="whatsapp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.45L3.5 20.5l1.6-4.3A8.5 8.5 0 1 1 20.5 11.5z"/><path d="M9 9.5c.3 2 2.2 4.1 4.5 4.6"/></svg>Conversas WhatsApp<span class="badge num" id="menuWa" hidden></span></a></li>
       <li><a href="#clientes" data-view="clientes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18.5 14.8c1.6.8 2.6 2.5 3 5.2"/></svg>Clientes<span class="count num" id="menuCli" hidden></span></a></li>
       <li><a href="#campanhas" data-view="campanhas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 15l3-3 2 2 4-4"/></svg>Campanhas<span class="badge num" id="menuCamp" hidden></span></a></li>
+      <li><a href="#relatorios" data-view="relatorios"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Relatórios<span class="badge num" id="menuRel" hidden></span></a></li>
       <li><a href="#demandas" data-view="demandas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M9 2.5h6v3H9z"/><path d="M8 11l2 2 4-4"/><path d="M8 17h8"/></svg>Demandas<span class="count num" id="menuDem" hidden></span></a></li>
       <li><a href="#gestor" data-view="gestor"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20.5c.9-3.8 3.6-6 7-6s6.1 2.2 7 6"/><path d="M17.5 3.5l1.2 1.2 2.3-2.3"/></svg>Demandas do gestor<span class="count num" id="menuGes" hidden></span></a></li>
       <li><a href="#agenda" data-view="agenda"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3v3H8z"/></svg>Agenda<span class="count num" id="menuAg" hidden></span></a></li>
@@ -888,6 +899,11 @@ textarea.field{resize:vertical;min-height:70px}
     <div id="kTools" class="ag-opts"></div>
   </div>
   <div id="kBody"><div class="loading">A carregar…</div></div>
+</main>
+
+<main class="gut" id="viewRel" hidden>
+  <div id="rBanner"></div>
+  <div id="rBody"><div class="loading">A carregar relatórios…</div></div>
 </main>
 
 <main class="gut" id="viewCamp" hidden>
@@ -2843,7 +2859,7 @@ function renderInt(cfg, lg, st){
 $("#iBody").addEventListener("click", async e => { const c = e.target.closest("[data-copytxt]"); if (!c) return; try { await navigator.clipboard.writeText(c.dataset.copytxt); toast("Copiado"); } catch(_){ toast("Selecione o texto e copie com Ctrl+C", true); } });
 
 /* ---------- routing ---------- */
-const VIEWS = {dashboard:{title:"Dashboard", el:"#viewDash", novo:"+ Novo lead"}, crm:{title:"CRM", el:"#viewCrm", novo:"+ Novo lead"}, clientes:{title:"Clientes ativos", el:"#viewCli", novo:"+ Novo cliente"}, demandas:{title:"Demandas operacionais", el:"#viewDem", novo:"+ Nova demanda"}, gestor:{title:"Demandas do gestor", el:"#viewGes", novo:"+ Nova tarefa"}, agenda:{title:"Agenda", el:"#viewAg", novo:"+ Novo evento"}, financeiro:{title:"Financeiro", el:"#viewFin", novo:"+ Nova despesa"}, campanhas:{title:"Campanhas dos clientes", el:"#viewCamp", novo:"+ Ligar conta"}, recargas:{title:"Recargas das contas de anúncios", el:"#viewRec", novo:"+ Nova conta"}, remarketing:{title:"Remarketing", el:"#viewRmk", novo:"+ Público"}, agentes:{title:"Agentes", el:"#viewAgt", novo:"+ Novo lead"}, whatsapp:{title:"Conversas WhatsApp", el:"#viewWa", novo:"+ Novo lead"}, integracao:{title:"Integração Meta e agente", el:"#viewInt", novo:"+ Novo lead"}};
+const VIEWS = {dashboard:{title:"Dashboard", el:"#viewDash", novo:"+ Novo lead"}, crm:{title:"CRM", el:"#viewCrm", novo:"+ Novo lead"}, clientes:{title:"Clientes ativos", el:"#viewCli", novo:"+ Novo cliente"}, demandas:{title:"Demandas operacionais", el:"#viewDem", novo:"+ Nova demanda"}, gestor:{title:"Demandas do gestor", el:"#viewGes", novo:"+ Nova tarefa"}, agenda:{title:"Agenda", el:"#viewAg", novo:"+ Novo evento"}, financeiro:{title:"Financeiro", el:"#viewFin", novo:"+ Nova despesa"}, campanhas:{title:"Campanhas dos clientes", el:"#viewCamp", novo:"+ Ligar conta"}, relatorios:{title:"Relatórios semanais", el:"#viewRel", novo:"+ Gerar relatórios"}, recargas:{title:"Recargas das contas de anúncios", el:"#viewRec", novo:"+ Nova conta"}, remarketing:{title:"Remarketing", el:"#viewRmk", novo:"+ Público"}, agentes:{title:"Agentes", el:"#viewAgt", novo:"+ Novo lead"}, whatsapp:{title:"Conversas WhatsApp", el:"#viewWa", novo:"+ Novo lead"}, integracao:{title:"Integração Meta e agente", el:"#viewInt", novo:"+ Novo lead"}};
 let curView = "dashboard";
 function route(){
   const v = VIEWS[location.hash.slice(1)] ? location.hash.slice(1) : "dashboard";
@@ -2858,6 +2874,7 @@ function route(){
   if (v === "financeiro") loadFin();
   if (v === "recargas") loadRec();
   if (v === "campanhas") { campSel = null; loadCamp(); }
+  if (v === "relatorios") loadRel();
   if (v === "remarketing") loadRmk();
   if (v === "agentes") enterAgentes();
   if (v === "whatsapp") enterWa(); else stopWaPoll();
@@ -3046,6 +3063,7 @@ $("#btnNew").addEventListener("click", () => {
   if (curView === "agenda") { openEvento({}); return; }
   if (curView === "recargas") { openConta(null); return; }
   if (curView === "campanhas") { openContaMeta(null); return; }
+  if (curView === "relatorios") { relGerarTodos(); return; }
   if (curView === "remarketing") { openPublico(null, {}); return; }
   if (curView === "financeiro") { $("#fdDesc").focus(); $("#fDespForm").scrollIntoView({block:"center", behavior:"smooth"}); return; }
   const blank = {origem:"meta_form", campanha: leads.find(l => l.campanha && !l.exemplo)?.campanha || ""};
@@ -3418,6 +3436,173 @@ $("#viewCamp").addEventListener("click", async e => {
   }
 });
 
+/* ---------- relatórios semanais ---------- */
+var relLista = [], relContas = [], relBusy = false, relSemana = null, relPollT = null;
+const REL_EST = {a_gerar:["A gerar","soon"], rascunho:["Por aprovar","soon"], aprovado:["Aprovado","meta"], enviado:["Enviado","ok"], erro:["Erro","late"]};
+function relPer(r){ const f = s => s.slice(8,10) + "/" + s.slice(5,7); return `${f(r.periodo_ini)} a ${f(r.periodo_fim)}`; }
+function relUltimaSemana(){ const h = new Date(); const dow = (h.getDay() + 6) % 7; const seg = addDays(h, -dow - 7); return {ini: ymd(seg), fim: ymd(addDays(seg, 6))}; }
+async function loadRel(silent){
+  if (!mcp) { if (mcpResolved && !silent) $("#rBanner").innerHTML = `<div class="banner"><b>Sem ligação aos dados</b>Os relatórios usam o seu Supabase.</div>`; return; }
+  if (relBusy) return; relBusy = true;
+  try {
+    const x = await sql(`select json_build_object(
+      'rels', coalesce((select json_agg(r order by r.periodo_ini desc, r.cliente) from (
+        select r.id, r.conta_id, r.cliente_id, r.periodo_ini, r.periodo_fim, r.titulo, r.resumo, r.destaques, r.proximos_passos, r.pdf_url, r.estado, r.erro, r.gerado_em, r.aprovado_em, r.enviado_em, r.enviado_para,
+          r.metricas->'atual' as k, r.metricas->'anterior' as k0, coalesce(cl.nome, a.nome) as cliente, cl.telefone, cl.responsavel
+        from public.relatorios r join public.contas_anuncios a on a.id = r.conta_id left join public.clientes cl on cl.id = r.cliente_id
+        order by r.periodo_ini desc limit 200) r), '[]'),
+      'contas', coalesce((select json_agg(c order by c.cliente) from (select a.id, a.nome, cl.nome as cliente from public.contas_anuncios a join public.clientes cl on cl.id = a.cliente_id where a.plataforma = 'Meta Ads' and a.cliente_id is not null and coalesce(a.ativa, true)) c), '[]')
+    ) as d`);
+    const d = x[x.length - 1].d; relLista = d.rels || []; relContas = d.contas || [];
+    $("#rBanner").innerHTML = "";
+  } catch(e){ if (!silent) $("#rBanner").innerHTML = `<div class="banner"><b>Não consegui carregar os relatórios</b>${esc(errMsg(e))}</div>`; }
+  finally { relBusy = false; }
+  relBadge();
+  if (curView === "relatorios") renderRel();
+}
+function relBadge(){
+  const n = relLista.filter(r => r.estado === "rascunho" || r.estado === "aprovado").length, b = $("#menuRel");
+  if (!b) return; b.hidden = !n; b.textContent = n; b.title = n + " relatórios por aprovar ou enviar";
+}
+function relCard(r){
+  const e = REL_EST[r.estado] || [r.estado, ""], k = r.k || {}, k0 = r.k0 || {};
+  const g = Number(k.g || 0), res = Number(k.res || 0), cpl = res ? g / res : null, cpl0 = Number(k0.res || 0) ? Number(k0.g || 0) / Number(k0.res) : null;
+  const tel = normWa(r.telefone), gerando = r.estado === "a_gerar";
+  return `<article class="panel rel" data-rel="${r.id}">
+    <div class="rel-h"><div class="av fold-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+      <div style="min-width:0"><div class="t">${esc(r.cliente)}</div><div class="s">Semana de ${relPer(r)}${r.gerado_em ? ` · gerado ${ago(r.gerado_em)}` : ""}</div></div>
+      <span class="pill ${e[1]}" style="margin-left:auto">${e[0]}</span></div>
+    <div class="cli-n cn4"><div><span>Investido</span><b class="num">${eur(g)}</b></div><div><span>Leads</span><b class="num">${res}</b></div><div><span>CPL</span><b class="num">${eur2(cpl)}</b> ${delta(cpl, cpl0, true)}</div><div><span>Cliques</span><b class="num">${int(k.cll)}</b></div></div>
+    ${r.resumo ? `<p class="rel-r">${esc(r.resumo)}</p>` : `<p class="rel-r muted">Sem resumo escrito: o PDF usa um resumo automático. Pode escrever um em “Editar textos”.</p>`}
+    ${r.estado === "erro" ? `<div class="banner" style="margin:0 0 10px"><b>Falhou a geração do PDF</b>${esc(r.erro || "")}</div>` : ""}
+    ${r.estado === "enviado" ? `<p class="muted" style="margin:0 0 10px">Enviado ${fmtDate(r.enviado_em)}${r.enviado_para ? " para +" + esc(r.enviado_para) : ""}</p>` : ""}
+    <div class="rel-f">
+      ${r.pdf_url && !gerando ? `<a class="btn" href="${esc(r.pdf_url)}" target="_blank" rel="noopener">Ver PDF</a>` : ""}
+      <button class="btn ghost" type="button" data-redit="${r.id}" ${gerando ? "disabled" : ""}>Editar textos</button>
+      <button class="btn ghost" type="button" data-rregen="${r.id}" ${gerando ? "disabled" : ""}>${gerando ? "A gerar…" : "Gerar de novo"}</button>
+      <span style="flex:1"></span>
+      ${r.estado === "rascunho" ? `<button class="btn primary" type="button" data-rapr="${r.id}">Aprovar</button>` : ""}
+      ${r.estado === "aprovado" || r.estado === "enviado" ? `<button class="btn ${r.estado === "aprovado" ? "primary" : ""} wa-btn" type="button" data-rwa="${r.id}">${r.estado === "enviado" ? "Reenviar" : "Enviar por WhatsApp"}</button>` : ""}
+      ${r.estado === "aprovado" ? `<button class="btn ghost" type="button" data-rdes="${r.id}">Anular aprovação</button>` : ""}
+      ${r.estado === "rascunho" ? `<button class="btn wa-btn" type="button" disabled title="Aprove primeiro o relatório">Enviar por WhatsApp</button>` : ""}
+    </div>
+    ${(r.estado === "aprovado" || r.estado === "enviado") && !tel ? `<p class="muted" style="margin:8px 0 0">Sem telefone na ficha deste cliente: ao enviar, peço o número e guardo-o.</p>` : ""}
+  </article>`;
+}
+function renderRel(){
+  const W = $("#rBody"); if (!W) return;
+  const semanas = [...new Set(relLista.map(r => r.periodo_ini))];
+  if (!relSemana || !semanas.includes(relSemana)) relSemana = semanas[0] || null;
+  const daSemana = relLista.filter(r => r.periodo_ini === relSemana);
+  const pend = relLista.filter(r => r.estado === "rascunho").length, porEnviar = relLista.filter(r => r.estado === "aprovado").length;
+  const ult = relUltimaSemana(), faltam = relContas.filter(c => !relLista.some(r => r.conta_id === c.id && r.periodo_ini === ult.ini));
+  W.innerHTML = `<div class="ag-bar"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      ${semanas.length ? `<label class="muted" for="rSem">Semana</label><select class="field" id="rSem" style="width:auto">${semanas.map(s => { const r = relLista.find(x => x.periodo_ini === s); return `<option value="${s}" ${s === relSemana ? "selected" : ""}>${relPer(r)}/${s.slice(0,4)}</option>`; }).join("")}</select>` : ""}
+    </div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="button" id="rGerar">${faltam.length ? `Gerar relatórios da última semana (${faltam.length})` : "Gerar de novo a última semana"}</button></div></div>
+    <section class="kpis">
+      <div class="kpi hot"><div class="lbl">Por aprovar</div><div class="val num">${pend}</div><div class="sub">Reveja o PDF e aprove</div></div>
+      <div class="kpi"><div class="lbl">Aprovados por enviar</div><div class="val num">${porEnviar}</div><div class="sub">Envie pelo WhatsApp</div></div>
+      <div class="kpi"><div class="lbl">Enviados</div><div class="val num">${relLista.filter(r => r.estado === "enviado").length}</div><div class="sub">no total</div></div>
+      <div class="kpi"><div class="lbl">Clientes com relatório</div><div class="val num">${relContas.length}</div><div class="sub">Todas as segundas-feiras</div></div>
+    </section>
+    <p class="muted" style="margin:0 0 14px">Todas as segundas-feiras de manhã é criado um PDF por cliente com a semana anterior (segunda a domingo). Nada é enviado sem a sua aprovação: aprove e depois carregue em “Enviar por WhatsApp”.</p>
+    <div class="rel-grid">${daSemana.map(relCard).join("") || `<div class="empty-p">Ainda não há relatórios. Carregue em “Gerar relatórios da última semana”.</div>`}</div>`;
+}
+function relPoll(ids){
+  let n = 0; clearInterval(relPollT);
+  relPollT = setInterval(async () => {
+    n++;
+    try {
+      const r = await sql(`select count(*)::int as n from public.relatorios where estado = 'a_gerar' and id in (${ids.map(lit).join(",") || "null"})`);
+      if (!r[0]?.n || n > 15) { clearInterval(relPollT); await loadRel(); toast(r[0]?.n ? "Ainda a gerar. Volte a abrir daqui a pouco." : "Relatórios prontos"); }
+    } catch(_){ if (n > 15) clearInterval(relPollT); }
+  }, 4000);
+}
+async function relGerarTodos(){
+  const b = $("#rGerar"); if (b) { b.disabled = true; b.textContent = "A gerar…"; }
+  const u = relUltimaSemana();
+  try {
+    const x = await sql(`insert into public.relatorios (conta_id, cliente_id, periodo_ini, periodo_fim, estado)
+      select a.id, a.cliente_id, ${lit(u.ini)}::date, ${lit(u.fim)}::date, 'a_gerar' from public.contas_anuncios a where a.plataforma = 'Meta Ads' and a.cliente_id is not null and coalesce(a.ativa, true)
+      on conflict (conta_id, periodo_ini) do update set estado = 'a_gerar', erro = null, updated_at = now()
+      returning id, conta_id`);
+    for (const r of x) await sql(`select public.relatorio_gerar(${lit(r.conta_id)}, ${lit(u.ini)}::date, ${lit(u.fim)}::date, ${lit(r.id)}) as req`);
+    relSemana = u.ini; await loadRel(); toast("A criar os PDFs. Demora uns segundos.");
+    relPoll(x.map(r => r.id));
+  } catch(e){ toast(errMsg(e), true); if (b) b.disabled = false; }
+}
+async function relRegen(id){
+  const r = relLista.find(x => x.id === id); if (!r) return;
+  try {
+    await sql(`update public.relatorios set estado = 'a_gerar', erro = null, updated_at = now() where id = ${lit(id)} returning id`);
+    await sql(`select public.relatorio_gerar(${lit(r.conta_id)}, ${lit(r.periodo_ini)}::date, ${lit(r.periodo_fim)}::date, ${lit(id)}) as req`);
+    r.estado = "a_gerar"; renderRel(); relPoll([id]);
+  } catch(e){ toast(errMsg(e), true); }
+}
+function relEditar(id){
+  const r = relLista.find(x => x.id === id); if (!r) return;
+  const ln = a => (Array.isArray(a) ? a : []).join("\n");
+  modal("Textos do relatório · " + esc(r.cliente), `Semana de ${relPer(r)}. Escreva para o cliente, em linguagem simples. Ao guardar, o PDF é criado de novo e volta a precisar de aprovação.`, `<form id="reForm">
+    <div class="fl"><label for="re_r">Resumo da semana</label><textarea class="field" id="re_r" rows="5" placeholder="Em branco = resumo automático com os números">${esc(r.resumo || "")}</textarea></div>
+    <div class="fl"><label for="re_d">Destaques (um por linha)</label><textarea class="field" id="re_d" rows="4">${esc(ln(r.destaques))}</textarea></div>
+    <div class="fl"><label for="re_p">Próximos passos (um por linha)</label><textarea class="field" id="re_p" rows="4">${esc(ln(r.proximos_passos))}</textarea></div>
+    <div class="dr-f"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn primary" type="submit">Guardar e gerar PDF</button></div></form>`);
+  $("#reForm").addEventListener("submit", async e => {
+    e.preventDefault(); const b = e.target.querySelector("[type=submit]"); b.disabled = true;
+    const lines = v => v.split("\n").map(s => s.trim().replace(/^[-•*]\s*/, "")).filter(Boolean);
+    const resumo = $("#re_r").value.trim() || null;
+    try {
+      await sql(`update public.relatorios set resumo = ${resumo == null ? "null" : lit(resumo)}, destaques = ${jsonRec(lines($("#re_d").value))}, proximos_passos = ${jsonRec(lines($("#re_p").value))}, updated_at = now() where id = ${lit(id)} returning id`);
+      closeLayer(); toast("Guardado. A criar o PDF…"); await relRegen(id);
+    } catch(err){ toast(errMsg(err), true); b.disabled = false; }
+  });
+}
+async function relEstado(id, estado){
+  try {
+    await sql(`update public.relatorios set estado = ${lit(estado)}, aprovado_em = ${estado === "aprovado" ? "now()" : "null"}, updated_at = now() where id = ${lit(id)} returning id`);
+    toast(estado === "aprovado" ? "Aprovado. Já pode enviar pelo WhatsApp." : "Aprovação anulada"); await loadRel();
+  } catch(e){ toast(errMsg(e), true); }
+}
+function relMsg(r){
+  const k = r.k || {}, g = Number(k.g || 0), res = Number(k.res || 0);
+  const nome = String(r.responsavel || "").trim().split(/\s+/)[0];
+  return `Olá${nome ? " " + nome : ""}! Segue o relatório semanal das campanhas de ${r.cliente} (semana de ${relPer(r)}):\n${r.pdf_url}\n\n` +
+    (g ? `Em resumo: investimento de ${eur(g)}, ${res} ${res === 1 ? "lead" : "leads"}${res ? ` a ${eur2(g / res)} cada` : ""}.\n\n` : "") +
+    `Qualquer dúvida, estou por aqui.\nAngélica · Métrica Digital`;
+}
+async function relEnviar(id){
+  const r = relLista.find(x => x.id === id); if (!r) return;
+  if (r.estado !== "aprovado" && r.estado !== "enviado") { toast("Aprove primeiro o relatório", true); return; }
+  const tel = normWa(r.telefone);
+  modal("Enviar relatório · " + esc(r.cliente), "Abre o WhatsApp com a mensagem e o link do PDF já escritos. Confirme lá o envio.", `<form id="rwForm">
+    <div class="fl"><label for="rw_t">Telefone do cliente</label><input class="field" id="rw_t" type="tel" required value="${esc(r.telefone || "")}" placeholder="912 345 678">${!tel && r.cliente_id ? `<small class="muted">Fica guardado na ficha do cliente.</small>` : ""}</div>
+    <div class="fl"><label for="rw_m">Mensagem</label><textarea class="field" id="rw_m" rows="8">${esc(relMsg(r))}</textarea></div>
+    <div class="dr-f"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn primary" type="submit">Abrir WhatsApp e marcar como enviado</button></div></form>`);
+  $("#rwForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const t = normWa($("#rw_t").value); if (!t) { toast("Telefone inválido", true); return; }
+    const txt = $("#rw_m").value;
+    const a = document.createElement("a"); a.href = "https://wa.me/" + t + "?text=" + encodeURIComponent(txt); a.target = "_blank"; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove();
+    try {
+      if (r.cliente_id && normWa(r.telefone) !== t) await sql(`update public.clientes set telefone = ${lit($("#rw_t").value.trim())} where id = ${lit(r.cliente_id)} returning id`);
+      await sql(`update public.relatorios set estado = 'enviado', enviado_em = now(), enviado_para = ${lit(t)}, updated_at = now() where id = ${lit(id)} returning id`);
+      closeLayer(); toast("Marcado como enviado"); await loadRel();
+    } catch(err){ toast(errMsg(err), true); }
+  });
+}
+$("#viewRel").addEventListener("click", async e => {
+  const t = e.target;
+  if (t.closest("#rGerar")) { relGerarTodos(); return; }
+  const b = t.closest("[data-redit],[data-rregen],[data-rapr],[data-rdes],[data-rwa]"); if (!b) return;
+  const d = b.dataset;
+  if (d.redit) relEditar(d.redit);
+  else if (d.rregen) { b.disabled = true; relRegen(d.rregen); }
+  else if (d.rapr) { b.disabled = true; relEstado(d.rapr, "aprovado"); }
+  else if (d.rdes) { b.disabled = true; relEstado(d.rdes, "rascunho"); }
+  else if (d.rwa) relEnviar(d.rwa);
+});
+$("#viewRel").addEventListener("change", e => { if (e.target.id === "rSem") { relSemana = e.target.value; renderRel(); } });
+
 /* ---------- boot ---------- */
 function showBanner(title, text){ $("#banner").innerHTML = $("#dBanner").innerHTML = `<div class="banner"><b>${esc(title)}</b>${esc(text)}</div>`; }
 renderMetrics(); renderDash();
@@ -3428,6 +3613,7 @@ renderMetrics(); renderDash();
   if (mcp && curView !== "recargas") loadRec(true); else if (curView === "recargas") loadRec();
   if (curView === "remarketing") loadRmk();
   if (curView === "campanhas") loadCamp(); else if (mcp) loadCamp(true);
+  if (curView === "relatorios") loadRel(); else if (mcp) loadRel(true);
   if (curView === "agentes") enterAgentes();
   if (curView === "whatsapp") enterWa();
   if (curView === "integracao") loadInt();
