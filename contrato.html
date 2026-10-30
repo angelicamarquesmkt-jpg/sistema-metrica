@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Contrato · Métrica Digital</title>
+<link rel="icon" type="image/png" href="assets/marca/icone-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#FF5A1F;--ac2:#E8251F;--ink:#15110F;--fg:#1C1714;--muted:#6F655F;--line:#E6DFDA;--bg:#F5F2EF;--card:#fff;--soft:#FFF1EA;--ok:#13834B;--bad:#C62828;--r:16px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.top{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.top::before{content:"";position:absolute;right:-60px;top:-40px;width:340px;height:260px;background:linear-gradient(135deg,var(--ac),var(--ac2));transform:skewX(-28deg);opacity:.95}
+.top-in{position:relative;max-width:760px;margin:0 auto;padding:22px 16px 26px;display:flex;align-items:center;gap:14px}
+.top img{width:64px;height:auto;display:block}
+.top b{font:700 17px/1.2 Poppins,sans-serif;display:block}
+.top small{color:#D9CFC9;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+main{max-width:760px;margin:-10px auto 40px;padding:0 16px;position:relative}
+.card{background:var(--card);border-radius:var(--r);box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 30px rgba(28,23,20,.06);padding:24px;margin-bottom:16px}
+h1{font:800 24px/1.25 Poppins,sans-serif;margin:0 0 6px;letter-spacing:-.01em}
+h2{font:700 17px/1.3 Poppins,sans-serif;margin:0 0 12px}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.steps{display:flex;gap:6px;margin:0 0 18px;flex-wrap:wrap}
+.steps span{font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;background:#F1ECE8;color:var(--muted)}
+.steps span.on{background:var(--soft);color:var(--ac2)}
+.steps span.done{background:#E3F4EA;color:var(--ok)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
+.full{grid-column:1/-1}
+@media (max-width:560px){.grid{grid-template-columns:1fr}.card{padding:18px}h1{font-size:21px}}
+label{display:block;font-size:13px;font-weight:600;margin:0 0 5px}
+input[type=text],input[type=email],input[type=tel]{width:100%;font:inherit;padding:12px 13px;border:1.5px solid var(--line);border-radius:11px;background:#fff;color:var(--fg);outline:none;transition:border-color .15s}
+input:focus{border-color:var(--ac)}
+.err input,input.err{border-color:var(--bad)}
+.fe{display:none;color:var(--bad);font-size:12.5px;margin-top:4px}
+.err .fe{display:block}
+.seg{display:flex;background:#F1ECE8;border-radius:12px;padding:4px;gap:4px}
+.seg button{flex:1;border:0;background:none;font:600 14px Poppins,sans-serif;padding:10px;border-radius:9px;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed=true]{background:#fff;color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;cursor:pointer}
+.chk input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--ac);flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;font:700 15px Poppins,sans-serif;padding:14px 22px;border-radius:12px;cursor:pointer;text-decoration:none}
+.btn.pri{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;width:100%}
+.btn.pri[disabled]{opacity:.55;cursor:wait}
+.btn.sec{background:#fff;border:1.5px solid var(--line);color:var(--fg)}
+.alert{border-radius:12px;padding:12px 14px;font-size:14px;margin:0 0 14px}
+.alert.bad{background:#FBE6E4;color:#8E1D1D}
+.alert.ok{background:#E3F4EA;color:#0F5E36}
+.sum{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#F7F4F2;border-radius:12px;padding:14px;margin:0 0 16px}
+.sum div span{display:block;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.sum div b{font-size:14.5px}
+@media (max-width:560px){.sum{grid-template-columns:1fr 1fr}}
+.doc{max-height:52vh;overflow:auto;border:1.5px solid var(--line);border-radius:12px;padding:18px 18px 8px;font-size:13.5px;line-height:1.6;background:#FFFDFC}
+.doc h3{font:700 14px Poppins,sans-serif;margin:16px 0 6px;padding-left:9px;border-left:3px solid var(--ac)}
+.doc ul{margin:4px 0 10px;padding-left:20px}
+.doc p{margin:0 0 8px}
+.pad-wrap{position:relative;border:1.5px dashed #CFC5BE;border-radius:12px;background:#fff;touch-action:none}
+canvas{display:block;width:100%;height:190px;border-radius:12px;cursor:crosshair}
+.pad-hint{position:absolute;left:0;right:0;bottom:40px;text-align:center;color:#B9AEA7;font-size:13px;pointer-events:none}
+.pad-line{position:absolute;left:24px;right:24px;bottom:34px;border-bottom:1px solid #E1D8D2;pointer-events:none}
+.pad-clear{position:absolute;top:8px;right:8px;border:0;background:#F1ECE8;color:var(--muted);font:600 12px Poppins,sans-serif;padding:6px 10px;border-radius:8px;cursor:pointer}
+.big-ok{width:62px;height:62px;border-radius:50%;background:#E3F4EA;display:grid;place-items:center;margin:0 0 14px}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:22px}
+.loading{padding:40px 0;text-align:center;color:var(--muted)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in"><img src="assets/marca/logo-metrica.png" alt="Métrica Digital"><div><b>Métrica Digital</b><small>Contrato de prestação de serviços</small></div></div></header>
+<main id="app"><div class="card loading">A carregar…</div></main>
+<p class="foot">Métrica Digital · Gestão de tráfego pago · Os seus dados são usados apenas para o contrato e faturação.</p>
+<script>
+(() => {
+  const FN = "https://ndftagksspolkvdxjrmo.supabase.co/functions/v1/metrica-contratos";
+  const PK = "sb_publishable_t4mFbZ-WwpeFT_emb41ICw_8EhGoUQg";
+  const token = new URLSearchParams(location.search).get("t") || "";
+  const app = document.getElementById("app");
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const eur = n => n == null || n === "" ? "—" : Number(n).toLocaleString("pt-PT", {style:"currency", currency:"EUR"});
+  const dpt = s => s ? String(s).slice(0,10).split("-").reverse().join("/") : "—";
+  let estado = null;
+
+  async function api(acao, extra = {}){
+    const r = await fetch(FN, {method:"POST", headers:{"Content-Type":"application/json", apikey: PK}, body: JSON.stringify({acao, token, ...extra})});
+    let j = {}; try { j = await r.json(); } catch(_){}
+    if (!r.ok) { const e = new Error(j.erro || "Não foi possível ligar ao servidor."); e.campos = j.campos || []; e.status = r.status; throw e; }
+    return j;
+  }
+  function passos(n){
+    const t = ["Os seus dados", "Revisão", "Assinatura"];
+    return `<div class="steps">${t.map((x, i) => `<span class="${i < n ? "done" : i === n ? "on" : ""}">${i < n ? "✓ " : ""}${i + 1}. ${x}</span>`).join("")}</div>`;
+  }
+  function erro(msg){ app.innerHTML = `<div class="card"><h1>Não foi possível abrir</h1><p class="muted">${esc(msg)}</p><p class="muted">Se precisar de ajuda, responda ao e-mail ou à mensagem que recebeu.</p></div>`; }
+
+  /* ---------- 1. dados ---------- */
+  function nifOk(n){ if (!/^\d{9}$/.test(n)) return false; let s = 0; for (let i = 0; i < 8; i++) s += +n[i] * (9 - i); const r = s % 11; return (r < 2 ? 0 : 11 - r) === +n[8]; }
+  function form(info){
+    const d = info.dados || {}, c = info.contacto || {};
+    let tipo = d.tipo || "empresa";
+    const v = (k, fb = "") => esc(d[k] ?? fb);
+    app.innerHTML = `<div class="card">${passos(0)}
+      <h1>Dados para o contrato</h1>
+      <p class="muted">Olá${c.nome ? " " + esc(c.nome.split(" ")[0]) : ""}! Preencha os dados de faturação. Com eles preparamos o contrato n.º ${esc(info.numero)} e enviamo-lo para assinar online.</p>
+      ${info.estado === "dados_recebidos" ? `<div class="alert ok">Já recebemos os seus dados. Se precisar de corrigir alguma coisa, altere e envie de novo.</div>` : ""}
+      <div id="fErr"></div>
+      <form id="f" novalidate>
+        <div class="grid">
+          <div class="full"><label>O contrato é em nome de</label><div class="seg" role="group" aria-label="Tipo"><button type="button" data-t="empresa">Empresa</button><button type="button" data-t="particular">Particular / ENI</button></div></div>
+          <div class="full" data-f="nome"><label for="nome" id="lNome">Nome da empresa (como na certidão)</label><input type="text" id="nome" autocomplete="organization" value="${v("nome", c.empresa || "")}" required><div class="fe">Indique o nome.</div></div>
+          <div data-f="nif"><label for="nif">NIF / NIPC</label><input type="text" id="nif" inputmode="numeric" maxlength="20" value="${v("nif")}" required><div class="fe">Este NIF não é válido. Confirme os 9 dígitos.</div></div>
+          <div style="display:flex;align-items:flex-end"><label class="chk" style="margin-bottom:12px"><input type="checkbox" id="estr" ${d.estrangeiro ? "checked" : ""}> Empresa ou pessoa fora de Portugal</label></div>
+          <div class="full" data-f="morada"><label for="morada">Morada fiscal (rua, número, andar)</label><input type="text" id="morada" autocomplete="street-address" value="${v("morada")}" required><div class="fe">Indique a morada.</div></div>
+          <div data-f="codigo_postal"><label for="cp">Código postal</label><input type="text" id="cp" inputmode="numeric" autocomplete="postal-code" placeholder="0000-000" maxlength="10" value="${v("codigo_postal")}" required><div class="fe">Use o formato 0000-000.</div></div>
+          <div data-f="localidade"><label for="loc">Localidade</label><input type="text" id="loc" autocomplete="address-level2" value="${v("localidade")}" required><div class="fe">Indique a localidade.</div></div>
+          <div class="full" id="paisBox" hidden><label for="pais">País</label><input type="text" id="pais" autocomplete="country-name" value="${v("pais", "Portugal")}"></div>
+          <div data-f="representante" class="emp"><label for="rep">Nome de quem assina pela empresa</label><input type="text" id="rep" autocomplete="name" value="${v("representante", c.nome || "")}"><div class="fe">Indique o nome completo.</div></div>
+          <div class="emp"><label for="cargo">Cargo</label><input type="text" id="cargo" placeholder="ex.: Gerente" value="${v("cargo")}"></div>
+          <div data-f="email"><label for="email">E-mail</label><input type="email" id="email" autocomplete="email" value="${v("email", c.email || "")}" required><div class="fe">Indique um e-mail válido.</div></div>
+          <div><label for="tel">Telemóvel</label><input type="tel" id="tel" autocomplete="tel" value="${v("telefone", c.telefone || "")}"></div>
+          <div class="full" data-f="consentimento"><label class="chk"><input type="checkbox" id="cons"> Autorizo o tratamento destes dados pela Métrica Digital para a preparação e gestão do contrato e para a faturação.</label><div class="fe">É necessário autorizar para continuar.</div></div>
+          <div class="full"><button class="btn pri" type="submit" id="go">Enviar dados</button></div>
+        </div>
+      </form></div>`;
+    const setTipo = t => { tipo = t; app.querySelectorAll("[data-t]").forEach(b => b.setAttribute("aria-pressed", b.dataset.t === t)); app.querySelectorAll(".emp").forEach(e => e.hidden = t !== "empresa"); document.getElementById("lNome").textContent = t === "empresa" ? "Nome da empresa (como na certidão)" : "Nome completo"; };
+    setTipo(tipo);
+    app.querySelectorAll("[data-t]").forEach(b => b.onclick = () => setTipo(b.dataset.t));
+    const estr = document.getElementById("estr"), paisBox = document.getElementById("paisBox");
+    const sync = () => { paisBox.hidden = !estr.checked; }; estr.onchange = sync; sync();
+    const cp = document.getElementById("cp");
+    cp.addEventListener("input", () => { if (estr.checked) return; const n = cp.value.replace(/\D/g, "").slice(0, 7); cp.value = n.length > 4 ? n.slice(0, 4) + "-" + n.slice(4) : n; });
+    document.getElementById("f").onsubmit = async e => {
+      e.preventDefault();
+      const g = id => document.getElementById(id).value.trim();
+      const dados = {tipo, nome: g("nome"), nif: g("nif").replace(/\s/g, ""), estrangeiro: estr.checked, morada: g("morada"), codigo_postal: g("cp"), localidade: g("loc"), pais: estr.checked ? g("pais") : "Portugal", representante: g("rep"), cargo: g("cargo"), email: g("email"), telefone: g("tel")};
+      const bad = [];
+      if (dados.nome.length < 2) bad.push("nome");
+      if (estr.checked ? dados.nif.length < 5 : !nifOk(dados.nif)) bad.push("nif");
+      if (dados.morada.length < 4) bad.push("morada");
+      if (!estr.checked && !/^\d{4}-\d{3}$/.test(dados.codigo_postal)) bad.push("codigo_postal");
+      if (dados.localidade.length < 2) bad.push("localidade");
+      if (tipo === "empresa" && dados.representante.length < 3) bad.push("representante");
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(dados.email)) bad.push("email");
+      if (!document.getElementById("cons").checked) bad.push("consentimento");
+      marcar(bad);
+      if (bad.length) return;
+      const b = document.getElementById("go"); b.disabled = true; b.textContent = "A enviar…";
+      try { await api("enviar_dados", {dados, consentimento: true}); obrigado(); }
+      catch(err){ marcar(err.campos); document.getElementById("fErr").innerHTML = `<div class="alert bad">${esc(err.message)}</div>`; b.disabled = false; b.textContent = "Enviar dados"; }
+    };
+  }
+  function marcar(campos){
+    app.querySelectorAll("[data-f]").forEach(el => el.classList.toggle("err", (campos || []).includes(el.dataset.f)));
+    const first = app.querySelector(".err input"); if (first) first.focus();
+  }
+  function obrigado(){
+    window.scrollTo(0, 0);
+    app.innerHTML = `<div class="card">${passos(1)}<div class="big-ok"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#13834B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h1>Obrigada! Dados recebidos.</h1><p class="muted">Vamos preparar o contrato e enviá-lo para assinar por e-mail e WhatsApp. Pode fechar esta página.</p></div>`;
+  }
+
+  /* ---------- 2. assinatura ---------- */
+  function corpoHTML(t){
+    let out = "", lista = false;
+    for (const raw of String(t || "").split("\n")) {
+      const l = raw.trim();
+      if (l.startsWith("- ")) { if (!lista) { out += "<ul>"; lista = true; } out += `<li>${esc(l.slice(2))}</li>`; continue; }
+      if (lista) { out += "</ul>"; lista = false; }
+      if (!l) continue;
+      if (l.startsWith("## ")) out += `<h3>${esc(l.slice(3))}</h3>`; else out += `<p>${esc(l)}</p>`;
+    }
+    return out + (lista ? "</ul>" : "");
+  }
+  function assinar(info){
+    const k = info.condicoes || {};
+    app.innerHTML = `<div class="card">${passos(2)}
+      <h1>Contrato n.º ${esc(info.numero)}</h1>
+      <p class="muted">Leia o contrato abaixo. Já está assinado pela ${esc(info.agencia_nome || "Métrica Digital")}; falta apenas a sua assinatura.</p>
+      <div class="sum"><div><span>Cliente</span><b>${esc(info.cliente)}</b></div><div><span>Valor mensal</span><b>${eur(k.valor_mensal)}</b></div><div><span>Início</span><b>${k.data_inicio ? dpt(k.data_inicio) : "Na assinatura"}</b></div><div><span>Período mínimo</span><b>${esc(k.duracao_meses || 3)} meses</b></div></div>
+      <div class="doc" tabindex="0" aria-label="Texto do contrato">${corpoHTML(info.texto)}</div>
+      ${info.pdf_url ? `<p style="margin:12px 0 0"><a class="btn sec" href="${esc(info.pdf_url)}" target="_blank" rel="noopener">Abrir o contrato em PDF</a></p>` : ""}
+    </div>
+    <div class="card"><h2>Assinar</h2><div id="sErr"></div>
+      <div data-f="nome" style="margin-bottom:14px"><label for="sn">Nome completo de quem assina</label><input type="text" id="sn" autocomplete="name" value="${esc(info.representante || "")}"><div class="fe">Escreva o seu nome completo.</div></div>
+      <div data-f="assinatura" style="margin-bottom:14px"><label>Desenhe a sua assinatura com o dedo ou o rato</label>
+        <div class="pad-wrap"><canvas id="pad" aria-label="Quadro para assinar"></canvas><div class="pad-line"></div><div class="pad-hint" id="hint">Assine aqui</div><button type="button" class="pad-clear" id="clr">Limpar</button></div>
+        <div class="fe">Desenhe a sua assinatura no quadro.</div></div>
+      <div data-f="aceito" style="margin-bottom:16px"><label class="chk"><input type="checkbox" id="ac"> Li e aceito os termos do contrato n.º ${esc(info.numero)} e concordo em assiná-lo eletronicamente.</label><div class="fe">Confirme que leu e aceita o contrato.</div></div>
+      <button class="btn pri" type="button" id="sg">Assinar contrato</button>
+      <p class="muted" style="font-size:12px;margin:12px 0 0">Ao assinar, ficam registados a data e hora, o seu endereço IP e o dispositivo, que constam do registo de assinatura anexo ao contrato.</p>
+    </div>`;
+    const cv = document.getElementById("pad"), ctx = cv.getContext("2d");
+    let tinta = false, desenhou = false, last = null;
+    const fit = () => { const r = cv.getBoundingClientRect(), dpr = Math.max(1, window.devicePixelRatio || 1); const img = desenhou ? cv.toDataURL() : null; cv.width = r.width * dpr; cv.height = r.height * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#16213E"; ctx.lineWidth = 2.6; if (img) { const i = new Image(); i.onload = () => ctx.drawImage(i, 0, 0, r.width, r.height); i.src = img; } };
+    fit(); window.addEventListener("resize", fit);
+    const pos = e => { const r = cv.getBoundingClientRect(); return {x: e.clientX - r.left, y: e.clientY - r.top}; };
+    cv.addEventListener("pointerdown", e => { cv.setPointerCapture(e.pointerId); tinta = true; last = pos(e); ctx.beginPath(); ctx.arc(last.x, last.y, 1.2, 0, Math.PI * 2); ctx.fillStyle = "#16213E"; ctx.fill(); document.getElementById("hint").hidden = true; });
+    cv.addEventListener("pointermove", e => { if (!tinta) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p; desenhou = true; });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(ev => cv.addEventListener(ev, () => { tinta = false; }));
+    document.getElementById("clr").onclick = () => { ctx.clearRect(0, 0, cv.width, cv.height); desenhou = false; document.getElementById("hint").hidden = false; };
+    function recorte(){
+      const w = cv.width, h = cv.height, data = ctx.getImageData(0, 0, w, h).data;
+      let x0 = w, y0 = h, x1 = 0, y1 = 0;
+      for (let y = 0; y < h; y += 2) for (let x = 0; x < w; x += 2) if (data[(y * w + x) * 4 + 3] > 10) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      if (x1 - x0 < 30 || y1 - y0 < 8) return null;
+      const p = 12; x0 = Math.max(0, x0 - p); y0 = Math.max(0, y0 - p); x1 = Math.min(w, x1 + p); y1 = Math.min(h, y1 + p);
+      const o = document.createElement("canvas"), sc = Math.min(1, 700 / (x1 - x0)); o.width = Math.round((x1 - x0) * sc); o.height = Math.round((y1 - y0) * sc);
+      o.getContext("2d").drawImage(cv, x0, y0, x1 - x0, y1 - y0, 0, 0, o.width, o.height); return o.toDataURL("image/png");
+    }
+    document.getElementById("sg").onclick = async () => {
+      const nome = document.getElementById("sn").value.trim(), aceito = document.getElementById("ac").checked, png = desenhou ? recorte() : null;
+      const bad = []; if (nome.length < 3) bad.push("nome"); if (!png) bad.push("assinatura"); if (!aceito) bad.push("aceito");
+      marcar(bad); if (bad.length) return;
+      const b = document.getElementById("sg"); b.disabled = true; b.textContent = "A assinar…";
+      try { await api("assinar", {nome, assinatura: png, aceito: true}); let v = {}; try { v = await api("ver"); } catch(_){} assinado({...info, ...v, assinado_em: v.assinado_em || new Date().toISOString()}); }
+      catch(err){ marcar(err.campos); document.getElementById("sErr").innerHTML = `<div class="alert bad">${esc(err.message)}</div>`; b.disabled = false; b.textContent = "Assinar contrato"; }
+    };
+  }
+  function assinado(info){
+    window.scrollTo(0, 0);
+    app.innerHTML = `<div class="card">${passos(3)}<div class="big-ok"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#13834B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h1>Contrato assinado</h1><p class="muted">O contrato n.º ${esc(info.numero)} está assinado pelas duas partes${info.assinado_em ? " desde " + new Date(info.assinado_em).toLocaleString("pt-PT", {dateStyle:"long", timeStyle:"short"}) : ""}. Enviámos uma cópia para o seu e-mail.</p>
+      ${info.pdf_url ? `<a class="btn pri" href="${esc(info.pdf_url)}" target="_blank" rel="noopener">Descarregar o contrato assinado</a>` : ""}
+      <p class="muted" style="margin-top:14px">Obrigada pela confiança. Vamos começar!</p></div>`;
+  }
+
+  /* ---------- arranque ---------- */
+  (async () => {
+    if (!/^[a-f0-9]{32,64}$/.test(token)) return erro("Este link não está completo. Abra-o de novo a partir do e-mail ou da mensagem.");
+    try {
+      const info = await api("ver"); estado = info.estado;
+      if (estado === "pedido" || estado === "dados_recebidos") form(info);
+      else if (estado === "para_assinar") assinar(info);
+      else if (estado === "assinado") assinado(info);
+      else erro("Este contrato não está disponível.");
+    } catch(e){ erro(e.message); }
+  })();
+})();
+</script>
+</body>
+</html>

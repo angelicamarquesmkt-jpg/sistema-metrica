@@ -425,6 +425,22 @@ button.li:hover .t{color:var(--accent)}
 .paid-chk{accent-color:var(--ok);width:17px;height:17px}
 
 
+/* contratos */
+.ct .ct-st{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12.5px;margin:0 0 12px;min-height:4px}
+.ct-h{margin-top:12px;font-size:12.5px}
+.ct-h summary{cursor:pointer;color:var(--muted);font-weight:600}
+.ct-h ul{margin:8px 0 0;padding-left:18px;display:grid;gap:4px}
+.ct-lead{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--accent-soft);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.ct-lead b{display:block;font-size:14.5px}
+.ct-lead span{font-size:12.5px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:13px;cursor:pointer;background:var(--surface)}
+.chip input{accent-color:var(--accent)}
+.sig-prev{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+.sig-prev img{max-width:260px;max-height:90px;object-fit:contain;align-self:flex-start}
+.sig-pad{position:relative;border:1.5px dashed var(--line);border-radius:12px;background:#fff;touch-action:none}
+.sig-pad canvas{display:block;width:100%;height:170px;border-radius:12px;cursor:crosshair}
+.sig-pad .mini{position:absolute;top:8px;right:8px}
+#viewCont .seg button{white-space:nowrap}
 /* relatórios */
 .rel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:14px;margin-bottom:28px}
 .rel{padding:16px}
@@ -750,6 +766,7 @@ textarea.field{resize:vertical;min-height:70px}
       <li><a href="#clientes" data-view="clientes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18.5 14.8c1.6.8 2.6 2.5 3 5.2"/></svg>Clientes<span class="count num" id="menuCli" hidden></span></a></li>
       <li><a href="#campanhas" data-view="campanhas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 15l3-3 2 2 4-4"/></svg>Campanhas<span class="badge num" id="menuCamp" hidden></span></a></li>
       <li><a href="#relatorios" data-view="relatorios"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Relatórios<span class="badge num" id="menuRel" hidden></span></a></li>
+      <li><a href="#contratos" data-view="contratos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8 17c1.5-2 3-2 4 0s2.5 1 4-1"/></svg>Contratos<span class="badge num" id="menuCont" hidden></span></a></li>
       <li><a href="#demandas" data-view="demandas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M9 2.5h6v3H9z"/><path d="M8 11l2 2 4-4"/><path d="M8 17h8"/></svg>Demandas<span class="count num" id="menuDem" hidden></span></a></li>
       <li><a href="#gestor" data-view="gestor"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20.5c.9-3.8 3.6-6 7-6s6.1 2.2 7 6"/><path d="M17.5 3.5l1.2 1.2 2.3-2.3"/></svg>Demandas do gestor<span class="count num" id="menuGes" hidden></span></a></li>
       <li><a href="#agenda" data-view="agenda"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3v3H8z"/></svg>Agenda<span class="count num" id="menuAg" hidden></span></a></li>
@@ -903,6 +920,11 @@ textarea.field{resize:vertical;min-height:70px}
     <div id="kTools" class="ag-opts"></div>
   </div>
   <div id="kBody"><div class="loading">A carregar…</div></div>
+</main>
+
+<main class="gut" id="viewCont" hidden>
+  <div id="ctBanner"></div>
+  <div id="ctBody"><div class="loading">A carregar contratos…</div></div>
 </main>
 
 <main class="gut" id="viewRel" hidden>
@@ -1251,6 +1273,7 @@ function checks(name, opts, sel){
   return `<div class="checks">${all.map((o,i) => `<label><input type="checkbox" name="${name}" value="${esc(o)}" ${(sel||[]).includes(o) ? "checked" : ""}>${esc(o)}</label>`).join("")}</div>`;
 }
 function openCliente(id, preset){
+  window.cliAbertoId = id || null;
   const c = id ? clientes.find(x => x.id === id) : {status:"ativo", servicos:[], plataformas:[], ...(preset||{})};
   if (!c) return;
   openId = null;
@@ -1281,7 +1304,7 @@ function openCliente(id, preset){
       ${isNew ? "" : (() => { const ab = demandas.filter(d => d.cliente_id === c.id && d.status !== "concluida");
         return `<div class="sec"><h4>Demandas em aberto · ${ab.length}</h4><div class="list">${ab.map(d => { const p = prazoInfo(d); return `<button class="li" type="button" data-dem="${d.id}"><div><div class="t">${esc(d.titulo)}</div><div class="s">${esc(DST.find(s => s.id === d.status).nome)} · ${esc(TIPOS_ALL[d.tipo])}</div></div>${p ? `<span class="r pill ${p.cls}">${esc(p.txt)}</span>` : ""}</button>`; }).join("") || `<div class="empty-p">Nenhuma demanda em aberto.</div>`}</div><button class="btn" type="button" style="margin-top:8px" data-newdem="${c.id}">+ Nova demanda para este cliente</button></div>`; })()}
       <div class="dr-f"><button class="btn primary" type="submit">${isNew ? "Criar cliente" : "Guardar alterações"}</button><button class="btn ghost" type="button" data-close>Cancelar</button></div>
-      ${isNew ? "" : `<div class="sec" id="cliMore"><h4>Mais ações</h4><button class="btn danger" type="button" id="cliDel">Apagar cliente</button></div>`}
+      ${isNew ? "" : `<div class="sec" id="cliMore"><h4>Mais ações</h4><div class="dr-f"><button class="btn" type="button" id="cliCont">${contLista.some(x => x.cliente_id === c.id && x.estado !== "cancelado") ? "Ver contrato" : "Pedir dados para contrato"}</button><button class="btn danger" type="button" id="cliDel">Apagar cliente</button></div></div>`}
     </form>
   </aside>`;
   const L = $("#layer");
@@ -2863,7 +2886,7 @@ function renderInt(cfg, lg, st){
 $("#iBody").addEventListener("click", async e => { const c = e.target.closest("[data-copytxt]"); if (!c) return; try { await navigator.clipboard.writeText(c.dataset.copytxt); toast("Copiado"); } catch(_){ toast("Selecione o texto e copie com Ctrl+C", true); } });
 
 /* ---------- routing ---------- */
-const VIEWS = {dashboard:{title:"Dashboard", el:"#viewDash", novo:"+ Novo lead"}, crm:{title:"CRM", el:"#viewCrm", novo:"+ Novo lead"}, clientes:{title:"Clientes ativos", el:"#viewCli", novo:"+ Novo cliente"}, demandas:{title:"Demandas operacionais", el:"#viewDem", novo:"+ Nova demanda"}, gestor:{title:"Demandas do gestor", el:"#viewGes", novo:"+ Nova tarefa"}, agenda:{title:"Agenda", el:"#viewAg", novo:"+ Novo evento"}, financeiro:{title:"Financeiro", el:"#viewFin", novo:"+ Nova despesa"}, campanhas:{title:"Campanhas dos clientes", el:"#viewCamp", novo:"+ Ligar conta"}, relatorios:{title:"Relatórios semanais", el:"#viewRel", novo:"+ Gerar relatórios"}, recargas:{title:"Recargas das contas de anúncios", el:"#viewRec", novo:"+ Nova conta"}, remarketing:{title:"Remarketing", el:"#viewRmk", novo:"+ Público"}, agentes:{title:"Agentes", el:"#viewAgt", novo:"+ Novo lead"}, whatsapp:{title:"Conversas WhatsApp", el:"#viewWa", novo:"+ Novo lead"}, integracao:{title:"Integração Meta e agente", el:"#viewInt", novo:"+ Novo lead"}};
+const VIEWS = {dashboard:{title:"Dashboard", el:"#viewDash", novo:"+ Novo lead"}, crm:{title:"CRM", el:"#viewCrm", novo:"+ Novo lead"}, clientes:{title:"Clientes ativos", el:"#viewCli", novo:"+ Novo cliente"}, demandas:{title:"Demandas operacionais", el:"#viewDem", novo:"+ Nova demanda"}, gestor:{title:"Demandas do gestor", el:"#viewGes", novo:"+ Nova tarefa"}, agenda:{title:"Agenda", el:"#viewAg", novo:"+ Novo evento"}, financeiro:{title:"Financeiro", el:"#viewFin", novo:"+ Nova despesa"}, campanhas:{title:"Campanhas dos clientes", el:"#viewCamp", novo:"+ Ligar conta"}, relatorios:{title:"Relatórios semanais", el:"#viewRel", novo:"+ Gerar relatórios"}, contratos:{title:"Contratos", el:"#viewCont", novo:"+ Novo contrato"}, recargas:{title:"Recargas das contas de anúncios", el:"#viewRec", novo:"+ Nova conta"}, remarketing:{title:"Remarketing", el:"#viewRmk", novo:"+ Público"}, agentes:{title:"Agentes", el:"#viewAgt", novo:"+ Novo lead"}, whatsapp:{title:"Conversas WhatsApp", el:"#viewWa", novo:"+ Novo lead"}, integracao:{title:"Integração Meta e agente", el:"#viewInt", novo:"+ Novo lead"}};
 let curView = "dashboard";
 function route(){
   const v = VIEWS[location.hash.slice(1)] ? location.hash.slice(1) : "dashboard";
@@ -2879,6 +2902,7 @@ function route(){
   if (v === "recargas") loadRec();
   if (v === "campanhas") { campSel = null; loadCamp(); }
   if (v === "relatorios") loadRel();
+  if (v === "contratos") loadCont();
   if (v === "remarketing") loadRmk();
   if (v === "agentes") enterAgentes();
   if (v === "whatsapp") enterWa(); else stopWaPoll();
@@ -2912,7 +2936,7 @@ async function moveStage(id, etapa){
   const l = leads.find(x => x.id === id); if (!l || l.etapa === etapa) return;
   if (etapa === "perdido") { openLead(id, {askLoss:true}); return; }
   const prev = l.etapa; l.etapa = etapa; render();
-  try { await updateLead(id, {etapa}); render(); toast("Movido para " + STAGES.find(s => s.id === etapa).nome); if (openId === id) openLead(id); }
+  try { await updateLead(id, {etapa}); render(); toast("Movido para " + STAGES.find(s => s.id === etapa).nome); if (openId === id || etapa === "fechado") openLead(id); }
   catch(e){ l.etapa = prev; render(); toast(errMsg(e), true); }
 }
 
@@ -2974,6 +2998,7 @@ async function openLead(id, opts={}){
         </div>
         <div class="timeline" id="timeline" style="margin-top:12px"><div style="color:var(--muted)">A carregar…</div></div>
       </div>
+      <div id="leadContrato">${contLeadBox(l)}</div>
       <div class="sec"><h4>Mais ações</h4><div class="dr-f" id="moreActs">
         ${["novo","contactado","reuniao"].includes(l.etapa) ? `<button class="btn" type="button" id="toAgenda">Marcar reunião na Google Agenda</button>` : ""}
         ${l.etapa === "fechado" ? (clientes.find(c => c.lead_id === l.id) ? `<button class="btn" type="button" id="toCliente">Ver ficha de cliente</button>` : `<button class="btn primary" type="button" id="toCliente">Passar a cliente ativo</button>`) : ""}
@@ -3068,6 +3093,7 @@ $("#btnNew").addEventListener("click", () => {
   if (curView === "recargas") { openConta(null); return; }
   if (curView === "campanhas") { openContaMeta(null); return; }
   if (curView === "relatorios") { relGerarTodos(); return; }
+  if (curView === "contratos") { openPedirDados({}); return; }
   if (curView === "remarketing") { openPublico(null, {}); return; }
   if (curView === "financeiro") { $("#fdDesc").focus(); $("#fDespForm").scrollIntoView({block:"center", behavior:"smooth"}); return; }
   const blank = {origem:"meta_form", campanha: leads.find(l => l.campanha && !l.exemplo)?.campanha || ""};
@@ -3607,6 +3633,292 @@ $("#viewRel").addEventListener("click", async e => {
 });
 $("#viewRel").addEventListener("change", e => { if (e.target.id === "rSem") { relSemana = e.target.value; renderRel(); } });
 
+/* ---------- contratos ---------- */
+var contLista = [], contCfg = {}, contBusy = false, contPollT = null, contFiltro = "";
+const CONT_SITE = "https://angelicamarquesmkt-jpg.github.io/sistema-metrica/contrato.html?t=";
+const CONT_EST = {pedido:["À espera dos dados","soon"], dados_recebidos:["Por assinar (você)","late"], para_assinar:["À espera do cliente","meta"], assinado:["Assinado","ok"], cancelado:["Cancelado",""]};
+const contLink = c => CONT_SITE + c.token;
+const contTok = () => Array.from(crypto.getRandomValues(new Uint8Array(24)), b => b.toString(16).padStart(2, "0")).join("");
+async function loadCont(silent){
+  if (!mcp) { if (mcpResolved && !silent) $("#ctBanner").innerHTML = `<div class="banner"><b>Sem ligação aos dados</b>Os contratos usam o seu Supabase.</div>`; return; }
+  if (contBusy) return; contBusy = true;
+  try {
+    const x = await sql(`select json_build_object(
+      'lista', coalesce((select json_agg(c order by c.created_at desc) from (select c.id, c.numero, c.token, c.estado, c.lead_id, c.cliente_id, c.contacto, c.condicoes, c.dados, c.pdf_url, c.pdf_url_expira, c.email_estado, c.email_erro, c.email_enviado_em, c.wa_enviado_em, c.dados_recebidos_em, c.agencia_assinou_em, c.cliente_assinou_em, c.cliente_assinatura, c.historico, c.expira_em, c.created_at, c.updated_at, cl.nome as cliente_nome
+        from public.contratos c left join public.clientes cl on cl.id = c.cliente_id order by c.created_at desc limit 200) c), '[]'),
+      'cfg', (select json_object_agg(chave, valor) from public.config where chave in ('agencia','assinatura_agencia','contrato_modelo'))
+    ) as d`);
+    const d = x[x.length - 1].d; contLista = d.lista || []; contCfg = d.cfg || {};
+    $("#ctBanner").innerHTML = "";
+  } catch(e){ if (!silent) $("#ctBanner").innerHTML = `<div class="banner"><b>Não consegui carregar os contratos</b>${esc(errMsg(e))}</div>`; }
+  finally { contBusy = false; }
+  contBadge();
+  if (curView === "contratos") renderCont();
+  if (openId) { const box = $("#leadContrato"); if (box) box.innerHTML = contLeadBox(leads.find(l => l.id === openId)); }
+}
+function contBadge(){
+  const n = contLista.filter(c => c.estado === "dados_recebidos").length, b = $("#menuCont");
+  if (!b) return; b.hidden = !n; b.textContent = n; b.title = n + " contratos à espera da sua assinatura";
+}
+function contFalta(){
+  const ag = contCfg.agencia || {}, f = [];
+  if (!ag.nif || !ag.morada) f.push("os seus dados (NIF e morada)");
+  if (!contCfg.assinatura_agencia?.png) f.push("a sua assinatura");
+  return f;
+}
+function contNome(c){ return c.dados?.nome || c.cliente_nome || c.contacto?.empresa || c.contacto?.nome || "—"; }
+function gmailLink(to, su, body){ return "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(to || "") + "&su=" + encodeURIComponent(su) + "&body=" + encodeURIComponent(body); }
+function contMsg(c, tipo){
+  const nome = String(c.dados?.representante || c.contacto?.nome || "").trim().split(/\s+/)[0];
+  if (tipo === "assinar") return `Olá${nome ? " " + nome : ""}! O contrato n.º ${c.numero} com a Métrica Digital está pronto e já assinado por mim. Pode lê-lo e assinar aqui, no telemóvel ou no computador:\n${contLink(c)}\n\nQualquer dúvida, diga-me.\nAngélica · Métrica Digital`;
+  return `Olá${nome ? " " + nome : ""}! Obrigada pela confiança na Métrica Digital. Para preparar o seu contrato, preciso dos dados de faturação (nome ou empresa, NIF e morada fiscal). Demora 2 minutos:\n${contLink(c)}\n\nDepois envio-lhe o contrato para assinar online.\nAngélica · Métrica Digital`;
+}
+function contWa(c, tipo){
+  const tel = normWa(c.dados?.telefone || c.contacto?.telefone); if (!tel) { toast("Sem telemóvel para o WhatsApp", true); return false; }
+  const a = document.createElement("a"); a.href = "https://wa.me/" + tel + "?text=" + encodeURIComponent(contMsg(c, tipo)); a.target = "_blank"; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove();
+  sql(`update public.contratos set wa_enviado_em = now() where id = ${lit(c.id)} returning id`).catch(() => {});
+  return true;
+}
+function contEmailEstado(c){
+  if (c.email_estado === "enviado") return `<span class="muted">E-mail enviado ${ago(c.email_enviado_em)}</span>`;
+  if (c.email_erro === "sem_gmail") return `<span class="pill soon" title="Falta ligar o Gmail ao servidor">E-mail não enviado (Gmail por ligar)</span>`;
+  if (c.email_estado === "erro" || c.email_erro) return `<span class="pill late" title="${esc(c.email_erro || "")}">Falhou o e-mail</span>`;
+  return "";
+}
+function contCard(c){
+  const e = CONT_EST[c.estado] || [c.estado, ""], k = c.condicoes || {};
+  const email = c.dados?.email || c.contacto?.email || "";
+  const emFalha = c.email_erro && c.estado !== "assinado" && c.estado !== "dados_recebidos";
+  const assunto = c.estado === "para_assinar" ? `Contrato ${c.numero} para assinar · Métrica Digital` : "Dados para o contrato · Métrica Digital";
+  const acoes = [];
+  if (c.estado === "dados_recebidos") { acoes.push(c.pdf_url ? `<a class="btn" href="${esc(c.pdf_url)}" target="_blank" rel="noopener">Rever PDF</a>` : `<button class="btn" type="button" data-ctger="${c.id}">Gerar PDF</button>`); acoes.push(`<button class="btn primary" type="button" data-ctsign="${c.id}">Assinar e enviar ao cliente</button>`); }
+  if (c.estado === "pedido") { acoes.push(`<button class="btn" type="button" data-ctwa="${c.id}|dados">WhatsApp</button>`, `<button class="btn ghost" type="button" data-ctmail="${c.id}">Reenviar e-mail</button>`, `<button class="btn ghost" type="button" data-ctcopy="${c.id}">Copiar link</button>`, `<button class="btn ghost" type="button" data-ctedit="${c.id}">Editar condições</button>`); }
+  if (c.estado === "para_assinar") { if (c.pdf_url) acoes.push(`<a class="btn" href="${esc(c.pdf_url)}" target="_blank" rel="noopener">Ver PDF</a>`); acoes.push(`<button class="btn" type="button" data-ctwa="${c.id}|assinar">WhatsApp</button>`, `<button class="btn ghost" type="button" data-ctmail="${c.id}">Reenviar e-mail</button>`, `<button class="btn ghost" type="button" data-ctcopy="${c.id}">Copiar link</button>`); }
+  if (c.estado === "assinado") acoes.push(`<button class="btn primary" type="button" data-ctpdf="${c.id}">Descarregar contrato assinado</button>`);
+  if (emFalha && email) acoes.push(`<a class="btn ghost" href="${esc(gmailLink(email, assunto, contMsg(c, c.estado === "para_assinar" ? "assinar" : "dados")))}" target="_blank" rel="noopener">Escrever no Gmail</a>`);
+  if (!["assinado", "cancelado"].includes(c.estado)) acoes.push(`<button class="btn ghost" type="button" data-ctcanc="${c.id}">Cancelar</button>`);
+  const hist = (c.historico || []).slice().reverse();
+  return `<article class="panel ct" data-ct="${c.id}">
+    <div class="rel-h"><div class="av fold-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M8 17c1.5-2 3-2 4 0s2.5 1 4-1"/></svg></div>
+      <div style="min-width:0"><div class="t">${esc(contNome(c))}</div><div class="s">Contrato ${esc(c.numero)} · criado ${fmtDate(c.created_at, false)}</div></div>
+      <span class="pill ${e[1]}" style="margin-left:auto">${e[0]}</span></div>
+    <div class="cli-n cn4"><div><span>Valor mensal</span><b class="num">${k.valor_mensal ? eur(Number(k.valor_mensal)) : "—"}</b></div><div><span>Início</span><b class="num">${k.data_inicio ? fmtDate(k.data_inicio + "T12:00:00", false) : "—"}</b></div><div><span>Mínimo</span><b class="num">${esc(k.duracao_meses || 3)} meses</b></div><div><span>NIF</span><b class="num">${esc(c.dados?.nif || "—")}</b></div></div>
+    <div class="ct-st">${contEmailEstado(c)}${c.wa_enviado_em ? ` <span class="muted">· WhatsApp aberto ${ago(c.wa_enviado_em)}</span>` : ""}${c.estado === "dados_recebidos" ? ` <span class="muted">Dados recebidos ${ago(c.dados_recebidos_em)}</span>` : ""}${c.estado === "assinado" ? ` <span class="muted">Assinado por ${esc(c.cliente_assinatura?.nome || "")} ${ago(c.cliente_assinou_em)}</span>` : ""}</div>
+    <div class="rel-f">${acoes.join("")}</div>
+    ${hist.length ? `<details class="ct-h"><summary>Histórico (${hist.length})</summary><ul>${hist.map(h => `<li><b>${esc(h.evento)}</b> <span class="muted">${fmtDate(h.em)}</span>${h.erro ? ` <span class="muted">· ${esc(h.erro)}</span>` : ""}</li>`).join("")}</ul></details>` : ""}
+  </article>`;
+}
+function renderCont(){
+  const W = $("#ctBody"); if (!W) return;
+  const falta = contFalta(), n = s => contLista.filter(c => c.estado === s).length;
+  const lista = contLista.filter(c => !contFiltro || c.estado === contFiltro);
+  W.innerHTML = `${falta.length ? `<div class="banner"><b>Antes do primeiro contrato</b>Falta configurar ${falta.join(" e ")}. <button class="btn" type="button" id="ctCfg2" style="margin-left:8px">Configurar agora</button></div>` : ""}
+    <div class="ag-bar"><div class="seg" id="ctF" role="group" aria-label="Filtro">${[["","Todos"],["pedido","À espera dos dados"],["dados_recebidos","Por assinar"],["para_assinar","Com o cliente"],["assinado","Assinados"]].map(([v,t]) => `<button type="button" data-f="${v}" aria-pressed="${contFiltro === v}">${t}</button>`).join("")}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="button" id="ctCfg">Definições dos contratos</button></div></div>
+    <section class="kpis">
+      <div class="kpi hot"><div class="lbl">Por assinar (você)</div><div class="val num">${n("dados_recebidos")}</div><div class="sub">O cliente já enviou os dados</div></div>
+      <div class="kpi"><div class="lbl">À espera dos dados</div><div class="val num">${n("pedido")}</div><div class="sub">Link enviado ao cliente</div></div>
+      <div class="kpi"><div class="lbl">Com o cliente</div><div class="val num">${n("para_assinar")}</div><div class="sub">Falta a assinatura dele</div></div>
+      <div class="kpi"><div class="lbl">Assinados</div><div class="val num">${n("assinado")}</div><div class="sub">no total</div></div>
+    </section>
+    <p class="muted" style="margin:0 0 14px">Quando marca um lead como <b>Fechado</b> no CRM aparece o botão <b>Pedir dados para contrato</b>. O cliente preenche NIF e morada num link, o contrato é criado sozinho e só leva a sua assinatura quando carregar em <b>Assinar e enviar ao cliente</b>.</p>
+    <div class="rel-grid">${lista.map(contCard).join("") || `<div class="empty-p">${contFiltro ? "Nenhum contrato neste estado." : "Ainda não há contratos. Marque um lead como Fechado no CRM ou use “+ Novo contrato”."}</div>`}</div>`;
+}
+function contPoll(id, campo, msgOk){
+  let n = 0; clearInterval(contPollT);
+  contPollT = setInterval(async () => {
+    n++;
+    try {
+      const r = await sql(`select estado, email_estado, email_erro, ${campo} as v from public.contratos where id = ${lit(id)}`);
+      const x = r[0] || {};
+      if (x.v || x.email_erro || n > 15) {
+        clearInterval(contPollT); await loadCont();
+        if (x.email_erro === "sem_gmail") toast("Falta ligar o Gmail ao servidor: o e-mail não saiu. Use o WhatsApp ou “Escrever no Gmail”.", true);
+        else if (x.email_erro) toast("O e-mail falhou: " + x.email_erro, true);
+        else if (x.v) toast(msgOk);
+      }
+    } catch(_){ if (n > 15) clearInterval(contPollT); }
+  }, 3000);
+}
+
+/* pedir dados (novo contrato) */
+function openPedirDados(preset){
+  preset = preset || {};
+  const ag = contCfg.agencia || {};
+  const k = preset.condicoes || {};
+  const serv = k.servicos || preset.servicos || ["Gestão de tráfego"], plat = k.plataformas || preset.plataformas || ["Meta Ads"];
+  const iva = k.iva_texto || ag.iva_texto || "ao qual acresce IVA à taxa legal em vigor";
+  const edit = !!preset.id;
+  modal(edit ? "Condições do contrato " + esc(preset.numero) : "Pedir dados para contrato", edit ? "As condições entram no contrato quando o cliente enviar os dados." : "O cliente recebe por e-mail e WhatsApp um link para preencher nome, NIF e morada fiscal. O contrato é criado com estas condições.", `<form id="pdForm">
+    <h4 class="sec-t" style="margin:0 0 8px">Contacto</h4>
+    <div class="grid2">
+      <div class="fl"><label for="pd_n">Nome do contacto</label><input class="field" id="pd_n" required value="${esc(preset.nome || "")}"></div>
+      <div class="fl"><label for="pd_e">Empresa</label><input class="field" id="pd_e" value="${esc(preset.empresa || "")}"></div>
+      <div class="fl"><label for="pd_m">E-mail</label><input class="field" id="pd_m" type="email" value="${esc(preset.email || "")}"></div>
+      <div class="fl"><label for="pd_t">Telemóvel (WhatsApp)</label><input class="field" id="pd_t" type="tel" value="${esc(preset.telefone || "")}"></div>
+    </div>
+    <h4 class="sec-t" style="margin:16px 0 8px">Condições</h4>
+    <div class="grid2">
+      <div class="fl"><label for="pd_v">Valor mensal (€)</label><input class="field" id="pd_v" type="number" step="0.01" min="0" required value="${esc(k.valor_mensal ?? preset.valor ?? "")}"></div>
+      <div class="fl"><label for="pd_i">Início</label><input class="field" id="pd_i" type="date" value="${esc(k.data_inicio || preset.inicio || ymd(addDays(new Date(), 3)))}"></div>
+      <div class="fl"><label for="pd_d">Dia de pagamento</label><input class="field" id="pd_d" type="number" min="1" max="28" value="${esc(k.dia_pagamento || preset.dia || 8)}"></div>
+      <div class="fl"><label for="pd_p">Período mínimo (meses)</label><input class="field" id="pd_p" type="number" min="1" max="36" value="${esc(k.duracao_meses || 3)}"></div>
+      <div class="fl"><label for="pd_a">Aviso prévio para cancelar (dias)</label><input class="field" id="pd_a" type="number" min="0" max="120" value="${esc(k.aviso_previo_dias || 30)}"></div>
+      <div class="fl"><label for="pd_inv">Investimento mensal em anúncios (€)</label><input class="field" id="pd_inv" type="number" step="1" min="0" value="${esc(k.investimento ?? preset.investimento ?? "")}"></div>
+      <div class="fl" style="grid-column:1/-1"><label for="pd_iva">IVA</label><select class="field" id="pd_iva">${["ao qual acresce IVA à taxa legal em vigor", "isento de IVA ao abrigo do artigo 53.º do Código do IVA", "com IVA incluído à taxa legal em vigor"].map(t => `<option ${t === iva ? "selected" : ""}>${t}</option>`).join("")}</select></div>
+    </div>
+    <div class="fl"><label>Serviços incluídos</label><div class="chips">${SERVICOS.map(s => `<label class="chip"><input type="checkbox" name="pd_s" value="${esc(s)}" ${serv.includes(s) ? "checked" : ""}> ${esc(s)}</label>`).join("")}</div></div>
+    <div class="fl"><label>Plataformas</label><div class="chips">${PLATAFORMAS.map(s => `<label class="chip"><input type="checkbox" name="pd_pl" value="${esc(s)}" ${plat.includes(s) ? "checked" : ""}> ${esc(s)}</label>`).join("")}</div></div>
+    <div class="dr-f"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn primary" type="submit">${edit ? "Guardar condições" : "Enviar pedido por e-mail e WhatsApp"}</button></div>
+  </form>`);
+  $("#pdForm").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const g = id => $("#" + id).value.trim(), num = v => v === "" ? null : Number(v);
+    const contacto = {nome: g("pd_n"), empresa: g("pd_e"), email: g("pd_m").toLowerCase(), telefone: g("pd_t")};
+    const condicoes = {valor_mensal: num(g("pd_v")), data_inicio: g("pd_i") || null, dia_pagamento: num(g("pd_d")) || 8, duracao_meses: num(g("pd_p")) || 3, aviso_previo_dias: num(g("pd_a")) ?? 30, investimento: num(g("pd_inv")), iva_texto: $("#pd_iva").value,
+      servicos: [...document.querySelectorAll("[name=pd_s]:checked")].map(x => x.value), plataformas: [...document.querySelectorAll("[name=pd_pl]:checked")].map(x => x.value)};
+    if (!contacto.email && !normWa(contacto.telefone)) { toast("Indique o e-mail ou o telemóvel do cliente", true); return; }
+    const b = ev.target.querySelector("[type=submit]"); b.disabled = true;
+    try {
+      if (edit) {
+        await sql(`update public.contratos set contacto = ${jsonRec(contacto)}, condicoes = ${jsonRec(condicoes)}, updated_at = now() where id = ${lit(preset.id)} returning id`);
+        closeLayer(); toast("Condições guardadas"); await loadCont(); return;
+      }
+      const token = contTok(), novo = {token, contacto, condicoes, numero: "…"};
+      if (normWa(contacto.telefone)) contWa({...novo, id: null}, "dados");
+      const row = (await sql(`insert into public.contratos (token, lead_id, cliente_id, contacto, condicoes, historico) values (${lit(token)}, ${lit(preset.lead_id)}, ${lit(preset.cliente_id)}, ${jsonRec(contacto)}, ${jsonRec(condicoes)}, ${jsonRec([{em: new Date().toISOString(), evento: "Pedido de dados criado no sistema"}])}) returning id, numero`))[0];
+      if (normWa(contacto.telefone)) sql(`update public.contratos set wa_enviado_em = now() where id = ${lit(row.id)} returning id`).catch(() => {});
+      if (contacto.email) { await sql(`select public.contrato_acao(${lit(row.id)}, 'pedir_dados') as req`); contPoll(row.id, "email_enviado_em", "Pedido enviado por e-mail"); }
+      closeLayer(); toast(`Contrato ${row.numero} criado. ${normWa(contacto.telefone) ? "Confirme o envio no WhatsApp." : ""}`);
+      await loadCont();
+    } catch(err){ toast(errMsg(err), true); b.disabled = false; }
+  });
+}
+function contDeLead(l){
+  const c = clientes.find(x => x.lead_id === l.id);
+  openPedirDados({lead_id: l.id, cliente_id: c?.id || null, nome: c?.responsavel || l.nome, empresa: c?.nome || l.empresa || "", email: c?.email || l.email || "", telefone: c?.telefone || l.telefone || "", valor: c?.fee_mensal ?? l.valor_proposta ?? "", servicos: c?.servicos, plataformas: c?.plataformas, dia: c?.dia_pagamento, investimento: c?.investimento_ads, inicio: c?.data_inicio});
+}
+function contDeCliente(c){
+  openPedirDados({cliente_id: c.id, lead_id: c.lead_id || null, nome: c.responsavel || c.nome, empresa: c.responsavel ? c.nome : "", email: c.email || "", telefone: c.telefone || "", valor: c.fee_mensal ?? "", servicos: c.servicos, plataformas: c.plataformas, dia: c.dia_pagamento, investimento: c.investimento_ads, inicio: c.data_inicio});
+}
+function contLeadBox(l){
+  if (!l || l.etapa !== "fechado") return "";
+  const cl = clientes.find(x => x.lead_id === l.id);
+  const c = contLista.find(x => x.lead_id === l.id || (cl && x.cliente_id === cl.id));
+  if (!c) return `<div class="ct-lead"><div><b>Lead ganho!</b><span class="muted">Peça os dados de faturação para fazer o contrato.</span></div><button class="btn primary" type="button" id="ctPedir">Pedir dados para contrato</button></div>`;
+  const e = CONT_EST[c.estado] || [c.estado, ""];
+  return `<div class="ct-lead"><div><b>Contrato ${esc(c.numero)}</b><span class="pill ${e[1]}">${e[0]}</span></div><a class="btn" href="#contratos">Abrir contratos</a></div>`;
+}
+
+/* assinar e enviar */
+function contAssinar(id){
+  const c = contLista.find(x => x.id === id); if (!c) return;
+  const falta = contFalta(); if (falta.length) { toast("Falta configurar " + falta.join(" e "), true); openContCfg(); return; }
+  const sig = contCfg.assinatura_agencia?.png;
+  modal("Assinar e enviar · " + esc(contNome(c)), `Contrato ${esc(c.numero)}. A sua assinatura é aplicada ao contrato e o cliente recebe-o por e-mail${normWa(c.dados?.telefone || c.contacto?.telefone) ? " e WhatsApp" : ""} para assinar.`, `<form id="asForm">
+    ${c.pdf_url ? `<p><a class="btn" href="${esc(c.pdf_url)}" target="_blank" rel="noopener">Rever o contrato (PDF)</a></p>` : ""}
+    <div class="sig-prev"><span class="muted">A sua assinatura</span><img src="${esc(sig)}" alt="Assinatura"></div>
+    <label class="chk" style="display:flex;gap:10px;align-items:flex-start;margin:14px 0"><input type="checkbox" id="asOk" required> Autorizo a aplicação da minha assinatura eletrónica neste contrato e o envio ao cliente.</label>
+    <div class="dr-f"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn primary" type="submit">Assinar e enviar</button></div></form>`);
+  $("#asForm").addEventListener("submit", async ev => {
+    ev.preventDefault(); if (!$("#asOk").checked) return;
+    const b = ev.target.querySelector("[type=submit]"); b.disabled = true;
+    if (normWa(c.dados?.telefone || c.contacto?.telefone)) contWa(c, "assinar");
+    try { await sql(`select public.contrato_acao(${lit(c.id)}, 'assinar_agencia') as req`); closeLayer(); toast("A assinar e a enviar…"); contPoll(c.id, "agencia_assinou_em", "Contrato assinado por si e enviado ao cliente"); }
+    catch(err){ toast(errMsg(err), true); b.disabled = false; }
+  });
+}
+
+/* definições */
+function openContCfg(aba){
+  const ag = contCfg.agencia || {}, sig = contCfg.assinatura_agencia?.png, mod = contCfg.contrato_modelo?.texto || "";
+  aba = aba || (!ag.nif || !ag.morada ? "ag" : !sig ? "sig" : "ag");
+  modal("Definições dos contratos", "Dados que entram em todos os contratos, a sua assinatura e o texto do modelo.", `
+    <div class="seg" id="cfT" role="group" style="margin-bottom:14px">${[["ag","Os seus dados"],["sig","Assinatura"],["mod","Modelo do contrato"]].map(([v,t]) => `<button type="button" data-a="${v}" aria-pressed="${aba === v}">${t}</button>`).join("")}</div>
+    <div data-p="ag" ${aba !== "ag" ? "hidden" : ""}><form id="cfAg"><div class="grid2">
+      <div class="fl"><label for="ag_n">Nome completo</label><input class="field" id="ag_n" required value="${esc(ag.nome || "")}"></div>
+      <div class="fl"><label for="ag_c">Nome comercial</label><input class="field" id="ag_c" value="${esc(ag.nome_comercial || "Métrica Digital")}"></div>
+      <div class="fl"><label for="ag_nif">NIF</label><input class="field" id="ag_nif" inputmode="numeric" required value="${esc(ag.nif || "")}"></div>
+      <div class="fl"><label for="ag_e">E-mail</label><input class="field" id="ag_e" type="email" value="${esc(ag.email || "")}"></div>
+      <div class="fl" style="grid-column:1/-1"><label for="ag_m">Morada completa (domicílio profissional)</label><input class="field" id="ag_m" required placeholder="Rua, n.º, código postal e localidade" value="${esc(ag.morada || "")}"></div>
+      <div class="fl"><label for="ag_t">Telemóvel</label><input class="field" id="ag_t" value="${esc(ag.telefone || "")}"></div>
+      <div class="fl"><label for="ag_f">Foro (comarca)</label><input class="field" id="ag_f" placeholder="ex.: Lisboa" value="${esc(ag.foro || "")}"></div>
+      <div class="fl" style="grid-column:1/-1"><label for="ag_iva">IVA por defeito</label><select class="field" id="ag_iva">${["ao qual acresce IVA à taxa legal em vigor", "isento de IVA ao abrigo do artigo 53.º do Código do IVA", "com IVA incluído à taxa legal em vigor"].map(t => `<option ${t === (ag.iva_texto || "") ? "selected" : ""}>${t}</option>`).join("")}</select></div>
+    </div><div class="dr-f"><button class="btn primary" type="submit">Guardar os meus dados</button></div></form></div>
+    <div data-p="sig" ${aba !== "sig" ? "hidden" : ""}>
+      ${sig ? `<div class="sig-prev"><span class="muted">Assinatura guardada</span><img src="${esc(sig)}" alt="Assinatura guardada"></div>` : ""}
+      <p class="muted" style="margin:10px 0 8px">Desenhe a sua assinatura com o rato, o dedo ou uma caneta. Só é aplicada a um contrato quando carregar em “Assinar e enviar ao cliente”.</p>
+      <div class="sig-pad"><canvas id="sigCv" aria-label="Quadro para assinar"></canvas><button class="mini" type="button" id="sigClr">Limpar</button></div>
+      <div class="dr-f"><button class="btn primary" type="button" id="sigSave">Guardar assinatura</button></div>
+    </div>
+    <div data-p="mod" ${aba !== "mod" ? "hidden" : ""}>
+      <p class="muted" style="margin:0 0 8px">Linhas com <code>## </code> são títulos de cláusulas; linhas com <code>- </code> são listas. Campos automáticos: ${["cliente_nome","cliente_nif","cliente_morada","cliente_email","servicos_lista","plataformas","valor_mensal","iva_texto","dia_pagamento","data_inicio","duracao_meses","aviso_previo_dias","investimento","agencia_nome","agencia_nif","agencia_morada","foro","data_hoje"].map(v => `<code>{{${v}}}</code>`).join(" ")}</p>
+      <textarea class="field" id="modTx" rows="18" style="font:12.5px/1.5 ui-monospace,Menlo,monospace">${esc(mod)}</textarea>
+      <div class="dr-f"><button class="btn ghost" type="button" id="modReset">Repor modelo original</button><button class="btn primary" type="button" id="modSave">Guardar modelo</button></div>
+      <p class="muted" style="font-size:12px">As alterações aplicam-se aos contratos cujos dados chegarem a partir de agora.</p>
+    </div>`);
+  const L = $("#layer");
+  L.querySelectorAll("#cfT [data-a]").forEach(bt => bt.onclick = () => { L.querySelectorAll("#cfT [data-a]").forEach(x => x.setAttribute("aria-pressed", x === bt)); L.querySelectorAll("[data-p]").forEach(p => p.hidden = p.dataset.p !== bt.dataset.a); if (bt.dataset.a === "sig") sigFit(); });
+  const saveCfg = async (chave, valor) => sql(`insert into public.config (chave, valor, updated_at) values (${lit(chave)}, ${jsonRec(valor)}, now()) on conflict (chave) do update set valor = excluded.valor, updated_at = now() returning chave`);
+  $("#cfAg").addEventListener("submit", async ev => {
+    ev.preventDefault(); const g = id => $("#" + id).value.trim();
+    const nif = g("ag_nif").replace(/\s/g, "");
+    const v = {...ag, nome: g("ag_n"), nome_comercial: g("ag_c") || "Métrica Digital", nif, email: g("ag_e"), morada: g("ag_m"), telefone: g("ag_t"), foro: g("ag_f") || "Lisboa", iva_texto: $("#ag_iva").value};
+    try { await saveCfg("agencia", v); contCfg.agencia = v; toast("Dados guardados"); renderCont(); for (const c of contLista.filter(x => x.estado === "dados_recebidos")) sql(`select public.contrato_acao(${lit(c.id)}, 'gerar') as req`).catch(() => {}); } catch(e){ toast(errMsg(e), true); }
+  });
+  // assinatura
+  const cv = $("#sigCv"), ctx = cv.getContext("2d"); let tinta = false, fez = false, last = null;
+  function sigFit(){ const r = cv.getBoundingClientRect(); if (!r.width) return; const dpr = Math.max(1, window.devicePixelRatio || 1); cv.width = r.width * dpr; cv.height = r.height * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineCap = ctx.lineJoin = "round"; ctx.strokeStyle = "#16213E"; ctx.lineWidth = 2.6; fez = false; }
+  if (aba === "sig") requestAnimationFrame(sigFit);
+  const pos = e => { const r = cv.getBoundingClientRect(); return {x: e.clientX - r.left, y: e.clientY - r.top}; };
+  cv.addEventListener("pointerdown", e => { cv.setPointerCapture(e.pointerId); tinta = true; last = pos(e); });
+  cv.addEventListener("pointermove", e => { if (!tinta) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p; fez = true; });
+  ["pointerup","pointercancel","pointerleave"].forEach(t => cv.addEventListener(t, () => tinta = false));
+  $("#sigClr").onclick = () => { ctx.clearRect(0, 0, cv.width, cv.height); fez = false; };
+  $("#sigSave").onclick = async () => {
+    if (!fez) { toast("Desenhe a assinatura primeiro", true); return; }
+    const w = cv.width, h = cv.height, d = ctx.getImageData(0, 0, w, h).data; let x0 = w, y0 = h, x1 = 0, y1 = 0;
+    for (let y = 0; y < h; y += 2) for (let x = 0; x < w; x += 2) if (d[(y * w + x) * 4 + 3] > 10) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+    const p = 10; x0 = Math.max(0, x0 - p); y0 = Math.max(0, y0 - p); x1 = Math.min(w, x1 + p); y1 = Math.min(h, y1 + p);
+    const o = document.createElement("canvas"), sc = Math.min(1, 700 / (x1 - x0)); o.width = Math.round((x1 - x0) * sc); o.height = Math.round((y1 - y0) * sc);
+    o.getContext("2d").drawImage(cv, x0, y0, x1 - x0, y1 - y0, 0, 0, o.width, o.height);
+    const png = o.toDataURL("image/png");
+    try { await saveCfg("assinatura_agencia", {png, atualizado: new Date().toISOString()}); contCfg.assinatura_agencia = {png}; toast("Assinatura guardada"); closeLayer(); renderCont(); } catch(e){ toast(errMsg(e), true); }
+  };
+  // modelo
+  $("#modSave").onclick = async () => { const t = $("#modTx").value; if (t.trim().length < 200) { toast("O modelo parece incompleto", true); return; } try { await saveCfg("contrato_modelo", {texto: t, padrao: false}); contCfg.contrato_modelo = {texto: t}; toast("Modelo guardado"); } catch(e){ toast(errMsg(e), true); } };
+  $("#modReset").onclick = async () => { try { await sql(`select public.contrato_acao(gen_random_uuid(), 'modelo_padrao') as req`); setTimeout(async () => { await loadCont(true); const tx = $("#modTx"); if (tx) tx.value = contCfg.contrato_modelo?.texto || ""; toast("Modelo original reposto"); }, 2500); } catch(e){ toast(errMsg(e), true); } };
+}
+
+$("#viewCont").addEventListener("click", async e => {
+  const t = e.target;
+  if (t.closest("#ctCfg") || t.closest("#ctCfg2")) { openContCfg(); return; }
+  const f = t.closest("#ctF [data-f]"); if (f) { contFiltro = f.dataset.f; renderCont(); return; }
+  const b = t.closest("[data-ctsign],[data-ctwa],[data-ctmail],[data-ctcopy],[data-ctcanc],[data-ctpdf],[data-ctger],[data-ctedit]"); if (!b) return;
+  const d = b.dataset, id = d.ctsign || (d.ctwa || "").split("|")[0] || d.ctmail || d.ctcopy || d.ctcanc || d.ctpdf || d.ctger || d.ctedit, c = contLista.find(x => x.id === id); if (!c) return;
+  if (d.ctsign) contAssinar(id);
+  else if (d.ctedit) openPedirDados({...c.contacto, id: c.id, numero: c.numero, condicoes: c.condicoes});
+  else if (d.ctwa) { if (contWa(c, d.ctwa.split("|")[1])) setTimeout(() => loadCont(true), 1500); }
+  else if (d.ctcopy) { try { await navigator.clipboard.writeText(contLink(c)); toast("Link copiado"); } catch(_){ modal("Link do cliente", "Copie o endereço:", `<input class="field" readonly value="${esc(contLink(c))}" onfocus="this.select()">`); } }
+  else if (d.ctmail) { b.disabled = true; try { await sql(`update public.contratos set email_erro = null where id = ${lit(id)} returning id`); await sql(`select public.contrato_acao(${lit(id)}, 'reenviar') as req`); contPoll(id, "case when email_erro is null and email_enviado_em > now() - interval '2 minutes' then true end", "E-mail reenviado"); } catch(err){ toast(errMsg(err), true); b.disabled = false; } }
+  else if (d.ctger) { b.disabled = true; try { await sql(`select public.contrato_acao(${lit(id)}, 'gerar') as req`); contPoll(id, "pdf_url", "PDF criado"); } catch(err){ toast(errMsg(err), true); } }
+  else if (d.ctpdf) {
+    if (c.pdf_url && c.pdf_url_expira && new Date(c.pdf_url_expira) > new Date()) { const a = document.createElement("a"); a.href = c.pdf_url; a.target = "_blank"; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove(); return; }
+    b.disabled = true; try { await sql(`update public.contratos set pdf_url = null where id = ${lit(id)} returning id`); await sql(`select public.contrato_acao(${lit(id)}, 'url') as req`); contPoll(id, "pdf_url", "Link do PDF atualizado: carregue de novo para abrir"); } catch(err){ toast(errMsg(err), true); }
+  }
+  else if (d.ctcanc) {
+    b.outerHTML = `<span class="confirm"><span>Cancelar o contrato ${esc(c.numero)}? O link deixa de funcionar.</span><button class="btn danger" type="button" data-ctcyes="${id}">Cancelar contrato</button></span>`;
+  }
+});
+$("#viewCont").addEventListener("click", async e => {
+  const y = e.target.closest("[data-ctcyes]"); if (!y) return;
+  try { await sql(`update public.contratos set estado = 'cancelado', updated_at = now(), historico = historico || ${jsonRec([{em: new Date().toISOString(), evento: "Cancelado no sistema"}])} where id = ${lit(y.dataset.ctcyes)} returning id`); toast("Contrato cancelado"); await loadCont(); } catch(err){ toast(errMsg(err), true); }
+});
+
+document.addEventListener("click", e => {
+  if (e.target.closest("#ctPedir")) { const l = leads.find(x => x.id === openId); if (l) contDeLead(l); return; }
+  const cc = e.target.closest("#cliCont"); if (cc) { const c = clientes.find(x => x.id === window.cliAbertoId); if (!c) return; if (contLista.some(x => x.cliente_id === c.id && x.estado !== "cancelado")) { closeLayer(); location.hash = "contratos"; } else contDeCliente(c); }
+});
 /* ---------- boot ---------- */
 function showBanner(title, text){ $("#banner").innerHTML = $("#dBanner").innerHTML = `<div class="banner"><b>${esc(title)}</b>${esc(text)}</div>`; }
 renderMetrics(); renderDash();
@@ -3618,6 +3930,7 @@ renderMetrics(); renderDash();
   if (curView === "remarketing") loadRmk();
   if (curView === "campanhas") loadCamp(); else if (mcp) loadCamp(true);
   if (curView === "relatorios") loadRel(); else if (mcp) loadRel(true);
+  if (curView === "contratos") loadCont(); else if (mcp) loadCont(true);
   if (curView === "agentes") enterAgentes();
   if (curView === "whatsapp") enterWa();
   if (curView === "integracao") loadInt();
