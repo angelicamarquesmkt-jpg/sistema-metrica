@@ -4036,7 +4036,7 @@ function propParaContrato(p){
   openPedirDados({cliente_id: p.cliente_id || null, nome: p.nome_cliente, empresa: p.empresa || "", telefone: p.telefone || "", email: p.email || "", valor: p.valor});
 }
 function openPropCfg(){
-  const m = JSON.parse(JSON.stringify(propModelo || {})), itens = m.itens || [], res = m.resultados || [];
+  const m = JSON.parse(JSON.stringify(propModelo || {})), itens = m.itens || [];
   const linhas = a => (a || []).join("\n");
   modal("Conteúdo da proposta", "O que muda aqui aparece em todas as propostas, incluindo as já enviadas.", `<form id="pcF">
     <div class="grid2">
@@ -4052,15 +4052,15 @@ function openPropCfg(){
       <div class="fl"><label for="pi_v${i}">Valor de mercado (€)</label><input class="field" id="pi_v${i}" type="number" value="${esc(it.valor)}"></div>
       <div class="fl" style="grid-column:1/-1"><label for="pi_s${i}">Subtítulo</label><input class="field" id="pi_s${i}" value="${esc(it.sub || "")}"></div>
       <div class="fl" style="grid-column:1/-1"><label for="pi_p${i}">O que inclui (uma linha por ponto)</label><textarea class="field" id="pi_p${i}" rows="4">${esc(linhas(it.pontos))}</textarea></div></div></div>`).join("")}
-    <h4 class="sec-t">Resultados mostrados</h4>
-    <p class="muted" style="margin:0 0 8px">Uma linha por resultado: segmento | número | legenda | detalhe. Use só números reais.</p>
-    <textarea class="field" id="pc_r" rows="3">${esc(res.map(r => [r.segmento, r.valor, r.legenda, r.detalhe].join(" | ")).join("\n"))}</textarea>
+    <h4 class="sec-t">Resultados reais mostrados</h4>
+    <p class="muted" style="margin:0 0 8px">O gráfico usa os números reais das campanhas dos seus clientes destes segmentos (sem nomes), semana a semana. Separe por vírgulas; tem de ser igual ao segmento na ficha do cliente.</p>
+    <input class="field" id="pc_r" value="${esc((m.casos_segmentos || ["Piscinas"]).join(", "))}">
     <div class="dr-f"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn primary" type="submit">Guardar conteúdo</button></div></form>`);
   $("#pcF").addEventListener("submit", async ev => {
     ev.preventDefault(); const g = id => $("#" + id).value; const ls = v => v.split("\n").map(s => s.trim()).filter(Boolean);
     const novo = {...m, preco_padrao: Number(g("pc_p")) || 300, validade_dias: Number(g("pc_d")) || 7, verba_minima: Number(g("pc_vm")) || 0, canais: g("pc_cn").trim(), condicoes: ls(g("pc_c")),
       itens: itens.map((it, i) => ({titulo: g("pi_t" + i).trim(), sub: g("pi_s" + i).trim(), valor: Number(g("pi_v" + i)) || 0, pontos: ls(g("pi_p" + i))})),
-      resultados: ls(g("pc_r")).map(l => { const [segmento, valor, legenda, detalhe] = l.split("|").map(s => (s || "").trim()); return {segmento, valor, legenda, detalhe}; }).filter(r => r.segmento && r.valor)};
+      casos_segmentos: g("pc_r").split(",").map(x => x.trim()).filter(Boolean)};
     try { await sql(`update public.config set valor = ${jsonRec(novo)}, updated_at = now() where chave = 'proposta_modelo' returning chave`); propModelo = novo; closeLayer(); toast("Conteúdo guardado"); renderProp(); } catch(e){ toast(errMsg(e), true); }
   });
 }
