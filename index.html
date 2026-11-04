@@ -766,6 +766,7 @@ textarea.field{resize:vertical;min-height:70px}
       <li><a href="#clientes" data-view="clientes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18.5 14.8c1.6.8 2.6 2.5 3 5.2"/></svg>Clientes<span class="count num" id="menuCli" hidden></span></a></li>
       <li><a href="#campanhas" data-view="campanhas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 15l3-3 2 2 4-4"/></svg>Campanhas<span class="badge num" id="menuCamp" hidden></span></a></li>
       <li><a href="#relatorios" data-view="relatorios"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Relatórios<span class="badge num" id="menuRel" hidden></span></a></li>
+      <li><a href="#propostas" data-view="propostas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v13H3z"/><path d="M8 7V4h8v3M3 12h18"/></svg>Propostas<span class="badge num" id="menuProp" hidden></span></a></li>
       <li><a href="#contratos" data-view="contratos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8 17c1.5-2 3-2 4 0s2.5 1 4-1"/></svg>Contratos<span class="badge num" id="menuCont" hidden></span></a></li>
       <li><a href="#demandas" data-view="demandas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M9 2.5h6v3H9z"/><path d="M8 11l2 2 4-4"/><path d="M8 17h8"/></svg>Demandas<span class="count num" id="menuDem" hidden></span></a></li>
       <li><a href="#gestor" data-view="gestor"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20.5c.9-3.8 3.6-6 7-6s6.1 2.2 7 6"/><path d="M17.5 3.5l1.2 1.2 2.3-2.3"/></svg>Demandas do gestor<span class="count num" id="menuGes" hidden></span></a></li>
@@ -920,6 +921,11 @@ textarea.field{resize:vertical;min-height:70px}
     <div id="kTools" class="ag-opts"></div>
   </div>
   <div id="kBody"><div class="loading">A carregar…</div></div>
+</main>
+
+<main class="gut" id="viewProp" hidden>
+  <div id="ppBanner"></div>
+  <div id="ppBody"><div class="loading">A carregar propostas…</div></div>
 </main>
 
 <main class="gut" id="viewCont" hidden>
@@ -2886,7 +2892,7 @@ function renderInt(cfg, lg, st){
 $("#iBody").addEventListener("click", async e => { const c = e.target.closest("[data-copytxt]"); if (!c) return; try { await navigator.clipboard.writeText(c.dataset.copytxt); toast("Copiado"); } catch(_){ toast("Selecione o texto e copie com Ctrl+C", true); } });
 
 /* ---------- routing ---------- */
-const VIEWS = {dashboard:{title:"Dashboard", el:"#viewDash", novo:"+ Novo lead"}, crm:{title:"CRM", el:"#viewCrm", novo:"+ Novo lead"}, clientes:{title:"Clientes ativos", el:"#viewCli", novo:"+ Novo cliente"}, demandas:{title:"Demandas operacionais", el:"#viewDem", novo:"+ Nova demanda"}, gestor:{title:"Demandas do gestor", el:"#viewGes", novo:"+ Nova tarefa"}, agenda:{title:"Agenda", el:"#viewAg", novo:"+ Novo evento"}, financeiro:{title:"Financeiro", el:"#viewFin", novo:"+ Nova despesa"}, campanhas:{title:"Campanhas dos clientes", el:"#viewCamp", novo:"+ Ligar conta"}, relatorios:{title:"Relatórios semanais", el:"#viewRel", novo:"+ Gerar relatórios"}, contratos:{title:"Contratos", el:"#viewCont", novo:"+ Novo contrato"}, recargas:{title:"Recargas das contas de anúncios", el:"#viewRec", novo:"+ Nova conta"}, remarketing:{title:"Remarketing", el:"#viewRmk", novo:"+ Público"}, agentes:{title:"Agentes", el:"#viewAgt", novo:"+ Novo lead"}, whatsapp:{title:"Conversas WhatsApp", el:"#viewWa", novo:"+ Novo lead"}, integracao:{title:"Integração Meta e agente", el:"#viewInt", novo:"+ Novo lead"}};
+const VIEWS = {dashboard:{title:"Dashboard", el:"#viewDash", novo:"+ Novo lead"}, crm:{title:"CRM", el:"#viewCrm", novo:"+ Novo lead"}, clientes:{title:"Clientes ativos", el:"#viewCli", novo:"+ Novo cliente"}, demandas:{title:"Demandas operacionais", el:"#viewDem", novo:"+ Nova demanda"}, gestor:{title:"Demandas do gestor", el:"#viewGes", novo:"+ Nova tarefa"}, agenda:{title:"Agenda", el:"#viewAg", novo:"+ Novo evento"}, financeiro:{title:"Financeiro", el:"#viewFin", novo:"+ Nova despesa"}, campanhas:{title:"Campanhas dos clientes", el:"#viewCamp", novo:"+ Ligar conta"}, relatorios:{title:"Relatórios semanais", el:"#viewRel", novo:"+ Gerar relatórios"}, propostas:{title:"Propostas", el:"#viewProp", novo:"+ Nova proposta"}, contratos:{title:"Contratos", el:"#viewCont", novo:"+ Novo contrato"}, recargas:{title:"Recargas das contas de anúncios", el:"#viewRec", novo:"+ Nova conta"}, remarketing:{title:"Remarketing", el:"#viewRmk", novo:"+ Público"}, agentes:{title:"Agentes", el:"#viewAgt", novo:"+ Novo lead"}, whatsapp:{title:"Conversas WhatsApp", el:"#viewWa", novo:"+ Novo lead"}, integracao:{title:"Integração Meta e agente", el:"#viewInt", novo:"+ Novo lead"}};
 let curView = "dashboard";
 function route(){
   const v = VIEWS[location.hash.slice(1)] ? location.hash.slice(1) : "dashboard";
@@ -2903,6 +2909,7 @@ function route(){
   if (v === "campanhas") { campSel = null; loadCamp(); }
   if (v === "relatorios") loadRel();
   if (v === "contratos") loadCont();
+  if (v === "propostas") loadProp();
   if (v === "remarketing") loadRmk();
   if (v === "agentes") enterAgentes();
   if (v === "whatsapp") enterWa(); else stopWaPoll();
@@ -3001,6 +3008,7 @@ async function openLead(id, opts={}){
       <div id="leadContrato">${contLeadBox(l)}</div>
       <div class="sec"><h4>Mais ações</h4><div class="dr-f" id="moreActs">
         ${["novo","contactado","reuniao"].includes(l.etapa) ? `<button class="btn" type="button" id="toAgenda">Marcar reunião na Google Agenda</button>` : ""}
+        ${["contactado","reuniao","proposta"].includes(l.etapa) ? `<button class="btn ${l.etapa !== "contactado" ? "primary" : ""}" type="button" id="ppLead">${propLista.some(x => x.lead_id === l.id && x.estado !== "cancelada") ? "Criar nova proposta" : "Criar proposta"}</button>` : ""}
         ${l.etapa === "fechado" ? (clientes.find(c => c.lead_id === l.id) ? `<button class="btn" type="button" id="toCliente">Ver ficha de cliente</button>` : `<button class="btn primary" type="button" id="toCliente">Passar a cliente ativo</button>`) : ""}
         <button class="btn" type="button" id="archive">Arquivar lead</button>
         <button class="btn danger" type="button" id="delete">Apagar lead</button>
@@ -3094,6 +3102,7 @@ $("#btnNew").addEventListener("click", () => {
   if (curView === "campanhas") { openContaMeta(null); return; }
   if (curView === "relatorios") { relGerarTodos(); return; }
   if (curView === "contratos") { openPedirDados({}); return; }
+  if (curView === "propostas") { openProposta({}); return; }
   if (curView === "remarketing") { openPublico(null, {}); return; }
   if (curView === "financeiro") { $("#fdDesc").focus(); $("#fDespForm").scrollIntoView({block:"center", behavior:"smooth"}); return; }
   const blank = {origem:"meta_form", campanha: leads.find(l => l.campanha && !l.exemplo)?.campanha || ""};
@@ -3652,7 +3661,7 @@ async function loadCont(silent){
     $("#ctBanner").innerHTML = "";
   } catch(e){ if (!silent) $("#ctBanner").innerHTML = `<div class="banner"><b>Não consegui carregar os contratos</b>${esc(errMsg(e))}</div>`; }
   finally { contBusy = false; }
-  contBadge();
+  contBadge(); if (typeof propBadge === "function") propBadge();
   if (curView === "contratos") renderCont();
   if (openId) { const box = $("#leadContrato"); if (box) box.innerHTML = contLeadBox(leads.find(l => l.id === openId)); }
 }
@@ -3915,7 +3924,162 @@ $("#viewCont").addEventListener("click", async e => {
   try { await sql(`update public.contratos set estado = 'cancelado', updated_at = now(), historico = historico || ${jsonRec([{em: new Date().toISOString(), evento: "Cancelado no sistema"}])} where id = ${lit(y.dataset.ctcyes)} returning id`); toast("Contrato cancelado"); await loadCont(); } catch(err){ toast(errMsg(err), true); }
 });
 
+/* ---------- propostas ---------- */
+var propLista = [], propModelo = {}, propBusy = false, propFiltro = "";
+const PROP_SITE = "https://angelicamarquesmkt-jpg.github.io/sistema-metrica/proposta.html?t=";
+const propLink = p => PROP_SITE + p.token;
+const propTok = () => Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, "0")).join("");
+function propExpirada(p){ return p.validade && p.validade < ymd(new Date()) && !["aceite","cancelada"].includes(p.estado); }
+function propEstado(p){
+  if (p.estado === "aceite") return ["Aceite", "ok"];
+  if (p.estado === "cancelada") return ["Cancelada", ""];
+  if (propExpirada(p)) return ["Expirada", ""];
+  if (p.estado === "vista") return [`Vista ${p.vezes_vista}×`, "meta"];
+  if (p.estado === "enviada") return ["Enviada", "soon"];
+  return ["Por enviar", "soon"];
+}
+async function loadProp(silent){
+  if (!mcp) { if (mcpResolved && !silent) $("#ppBanner").innerHTML = `<div class="banner"><b>Sem ligação aos dados</b>As propostas usam o seu Supabase.</div>`; return; }
+  if (propBusy) return; propBusy = true;
+  try {
+    const x = await sql(`select json_build_object(
+      'lista', coalesce((select json_agg(p order by p.created_at desc) from (select * from public.propostas order by created_at desc limit 300) p), '[]'),
+      'modelo', (select valor from public.config where chave = 'proposta_modelo')) as d`);
+    const d = x[x.length - 1].d; propLista = d.lista || []; propModelo = d.modelo || {};
+    $("#ppBanner").innerHTML = "";
+  } catch(e){ if (!silent) $("#ppBanner").innerHTML = `<div class="banner"><b>Não consegui carregar as propostas</b>${esc(errMsg(e))}</div>`; }
+  finally { propBusy = false; }
+  propBadge();
+  if (curView === "propostas") renderProp();
+}
+function propSemContrato(p){ return p.estado === "aceite" && !contLista.some(c => c.estado !== "cancelado" && ((p.lead_id && c.lead_id === p.lead_id) || (p.cliente_id && c.cliente_id === p.cliente_id) || c.contacto?.nome === p.nome_cliente)); }
+function propBadge(){
+  const n = propLista.filter(propSemContrato).length, b = $("#menuProp");
+  if (!b) return; b.hidden = !n; b.textContent = n; b.title = n + " propostas aceites à espera do contrato";
+}
+function propMsg(p){ return `Olá ${String(p.nome_cliente).trim().split(/\s+/)[0]}! Como combinado, aqui está a proposta da Métrica Digital preparada para si${p.empresa ? " e para a " + p.empresa : ""}:\n${propLink(p)}\n\nQualquer dúvida, estou por aqui.\nAngélica · Métrica Digital`; }
+function propWa(p){
+  const tel = normWa(p.telefone);
+  const a = document.createElement("a"); a.href = (tel ? "https://wa.me/" + tel : "https://wa.me/") + "?text=" + encodeURIComponent(propMsg(p)); a.target = "_blank"; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove();
+  if (["criada"].includes(p.estado)) sql(`update public.propostas set estado = 'enviada', enviada_em = now(), updated_at = now() where id = ${lit(p.id)} and estado = 'criada' returning id`).then(() => loadProp(true)).catch(() => {});
+}
+function propCard(p){
+  const e = propEstado(p), mercado = p.valor_mercado || (propModelo.itens || []).reduce((s, i) => s + Number(i.valor || 0), 0);
+  const acoes = [];
+  if (p.estado === "aceite") acoes.push(propSemContrato(p) ? `<button class="btn primary" type="button" data-ppct="${p.id}">Pedir dados para contrato</button>` : `<a class="btn" href="#contratos">Ver contrato</a>`);
+  if (!["cancelada"].includes(p.estado)) acoes.push(`<button class="btn ${p.estado === "criada" ? "primary" : ""}" type="button" data-ppwa="${p.id}">${p.estado === "criada" ? "Enviar no WhatsApp" : "WhatsApp"}</button>`, `<button class="btn ghost" type="button" data-ppcopy="${p.id}">Copiar link</button>`);
+  acoes.push(`<a class="btn ghost" href="${esc(propLink(p))}" target="_blank" rel="noopener">Ver proposta</a>`);
+  if (!["aceite","cancelada"].includes(p.estado)) acoes.push(`<button class="btn ghost" type="button" data-ppedit="${p.id}">Editar</button>`, `<button class="btn ghost" type="button" data-ppcanc="${p.id}">Cancelar</button>`);
+  return `<article class="panel ct" data-pp="${p.id}">
+    <div class="rel-h"><div class="av fold-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v13H3z"/><path d="M8 7V4h8v3M3 12h18"/></svg></div>
+      <div style="min-width:0"><div class="t">${esc(p.nome_cliente)}${p.empresa ? ` <span class="muted" style="font-weight:500">· ${esc(p.empresa)}</span>` : ""}</div><div class="s">Criada ${fmtDate(p.created_at, false)}${p.segmento ? " · " + esc(p.segmento) : ""}</div></div>
+      <span class="pill ${e[1]}" style="margin-left:auto">${e[0]}</span></div>
+    <div class="cli-n cn4"><div><span>Valor</span><b class="num">${eur(Number(p.valor))}/mês</b></div><div><span>Mercado</span><b class="num">${eur(Number(mercado))}</b></div><div><span>Válida até</span><b class="num">${p.validade ? fmtDate(p.validade + "T12:00:00", false) : "—"}</b></div><div><span>Vista</span><b class="num">${p.vezes_vista || 0}×</b></div></div>
+    <div class="ct-st">${p.ultima_vista_em ? `<span class="muted">Última visita ${ago(p.ultima_vista_em)}</span>` : p.enviada_em ? `<span class="muted">Enviada ${ago(p.enviada_em)} · ainda não abriu</span>` : ""}${p.estado === "aceite" ? ` <span class="muted">Aceite por ${esc(p.aceite_por || p.nome_cliente)} ${ago(p.aceite_em)}</span>` : ""}</div>
+    <div class="rel-f">${acoes.join("")}</div>
+  </article>`;
+}
+function renderProp(){
+  const W = $("#ppBody"); if (!W) return;
+  const n = f => propLista.filter(f).length;
+  const filtros = {"": () => true, abertas: p => ["criada","enviada","vista"].includes(p.estado) && !propExpirada(p), vistas: p => p.estado === "vista", aceites: p => p.estado === "aceite"};
+  const lista = propLista.filter(filtros[propFiltro] || filtros[""]).filter(p => propFiltro || p.estado !== "cancelada");
+  W.innerHTML = `<div class="ag-bar"><div class="seg" id="ppF" role="group" aria-label="Filtro">${[["","Todas"],["abertas","Em aberto"],["vistas","Vistas"],["aceites","Aceites"]].map(([v,t]) => `<button type="button" data-f="${v}" aria-pressed="${propFiltro === v}">${t}</button>`).join("")}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="button" id="ppCfg">Conteúdo da proposta</button></div></div>
+    <section class="kpis">
+      <div class="kpi hot"><div class="lbl">Aceites</div><div class="val num">${n(p => p.estado === "aceite")}</div><div class="sub">${n(propSemContrato) ? n(propSemContrato) + " à espera do contrato" : "Tudo tratado"}</div></div>
+      <div class="kpi"><div class="lbl">Em aberto</div><div class="val num">${n(filtros.abertas)}</div><div class="sub">Enviadas e por decidir</div></div>
+      <div class="kpi"><div class="lbl">Já vistas</div><div class="val num">${n(p => p.vezes_vista > 0)}</div><div class="sub">O cliente abriu o link</div></div>
+      <div class="kpi"><div class="lbl">Taxa de aceitação</div><div class="val num">${(() => { const t = n(p => p.estado !== "cancelada" && (p.estado === "aceite" || propExpirada(p) || p.estado === "recusada")); return t ? Math.round(n(p => p.estado === "aceite") / t * 100) + "%" : "—"; })()}</div><div class="sub">aceites vs. decididas</div></div>
+    </section>
+    <p class="muted" style="margin:0 0 14px">Cada proposta tem um link só desse cliente, com o nome dele no fim: “Proposta exclusiva para…”. Quando o cliente abre ou aceita, fica registado aqui.</p>
+    <div class="rel-grid">${lista.map(propCard).join("") || `<div class="empty-p">${propFiltro ? "Nenhuma proposta aqui." : "Ainda não há propostas. Use “+ Nova proposta” ou o botão Criar proposta na ficha do lead."}</div>`}</div>`;
+}
+function openProposta(preset){
+  preset = preset || {};
+  const edit = !!preset.id, m = propModelo || {};
+  const val = preset.valor ?? m.preco_padrao ?? 300;
+  const validade = preset.validade || ymd(addDays(new Date(), Number(m.validade_dias || 7)));
+  modal(edit ? "Editar proposta" : "Nova proposta", "O nome do cliente aparece na proposta, no fim: “Proposta exclusiva para…”.", `<form id="ppForm"><div class="grid2">
+    <div class="fl"><label for="pp_n">Nome do cliente *</label><input class="field" id="pp_n" required value="${esc(preset.nome_cliente || "")}" placeholder="ex.: João"></div>
+    <div class="fl"><label for="pp_e">Empresa</label><input class="field" id="pp_e" value="${esc(preset.empresa || "")}"></div>
+    <div class="fl"><label for="pp_s">Segmento</label><input class="field" id="pp_s" value="${esc(preset.segmento || "")}" placeholder="ex.: Remodelações"></div>
+    <div class="fl"><label for="pp_t">Telemóvel (WhatsApp)</label><input class="field" id="pp_t" type="tel" value="${esc(preset.telefone || "")}"></div>
+    <div class="fl"><label for="pp_v">Valor mensal (€) *</label><input class="field" id="pp_v" type="number" step="0.01" min="0" required value="${esc(val)}"></div>
+    <div class="fl"><label for="pp_d">Válida até</label><input class="field" id="pp_d" type="date" value="${esc(validade)}"></div>
+  </div><div class="dr-f"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn primary" type="submit">${edit ? "Guardar" : "Criar proposta"}</button></div></form>`);
+  $("#ppForm").addEventListener("submit", async ev => {
+    ev.preventDefault(); const g = id => $("#" + id).value.trim(); const b = ev.target.querySelector("[type=submit]"); b.disabled = true;
+    const o = {nome_cliente: g("pp_n"), empresa: g("pp_e") || null, segmento: g("pp_s") || null, telefone: g("pp_t") || null, valor: Number(g("pp_v")), validade: g("pp_d") || null};
+    try {
+      if (edit) { await updateRow("propostas", preset.id, {...o, updated_at: new Date().toISOString()}); closeLayer(); toast("Proposta guardada"); await loadProp(); return; }
+      const row = await insertRow("propostas", {...o, token: propTok(), lead_id: preset.lead_id || null, cliente_id: preset.cliente_id || null});
+      if (preset.lead_id) { const l = leads.find(x => x.id === preset.lead_id); if (l && ["novo","contactado","reuniao"].includes(l.etapa)) { try { await updateLead(l.id, {etapa: "proposta"}); l.etapa = "proposta"; render(); } catch(_){} } }
+      await loadProp(true); propPronta(row);
+    } catch(err){ toast(errMsg(err), true); b.disabled = false; }
+  });
+}
+function propPronta(p){
+  modal("Proposta criada · " + esc(p.nome_cliente), "Envie o link ao cliente. Quando ele abrir ou aceitar, aparece na aba Propostas.", `
+    <div class="fl"><label for="pp_l">Link da proposta</label><input class="field" id="pp_l" readonly value="${esc(propLink(p))}" onfocus="this.select()"></div>
+    <div class="dr-f"><a class="btn ghost" href="${esc(propLink(p))}" target="_blank" rel="noopener">Ver proposta</a><button class="btn" type="button" id="pp_c">Copiar link</button><button class="btn primary" type="button" id="pp_w">Enviar no WhatsApp</button></div>`);
+  $("#pp_c").onclick = async () => { try { await navigator.clipboard.writeText(propLink(p)); toast("Link copiado"); } catch(_){ $("#pp_l").select(); } sql(`update public.propostas set estado = 'enviada', enviada_em = now() where id = ${lit(p.id)} and estado = 'criada' returning id`).then(() => loadProp(true)).catch(() => {}); };
+  $("#pp_w").onclick = () => { propWa(p); closeLayer(); };
+}
+function propDeLead(l){
+  const c = clientes.find(x => x.lead_id === l.id);
+  openProposta({lead_id: l.id, cliente_id: c?.id || null, nome_cliente: String(l.nome || "").trim().split(/\s+/)[0], empresa: l.empresa || "", segmento: l.segmento || "", telefone: l.telefone || "", valor: l.valor_proposta || undefined});
+}
+function propParaContrato(p){
+  const l = p.lead_id ? leads.find(x => x.id === p.lead_id) : null;
+  if (l) { if (l.etapa !== "fechado") updateLead(l.id, {etapa: "fechado"}).then(() => { l.etapa = "fechado"; render(); }).catch(() => {}); contDeLead({...l, valor_proposta: p.valor}); return; }
+  openPedirDados({cliente_id: p.cliente_id || null, nome: p.nome_cliente, empresa: p.empresa || "", telefone: p.telefone || "", email: p.email || "", valor: p.valor});
+}
+function openPropCfg(){
+  const m = JSON.parse(JSON.stringify(propModelo || {})), itens = m.itens || [], res = m.resultados || [];
+  const linhas = a => (a || []).join("\n");
+  modal("Conteúdo da proposta", "O que muda aqui aparece em todas as propostas, incluindo as já enviadas.", `<form id="pcF">
+    <div class="grid2">
+      <div class="fl"><label for="pc_p">Preço habitual (€/mês)</label><input class="field" id="pc_p" type="number" step="1" value="${esc(m.preco_padrao ?? 300)}"></div>
+      <div class="fl"><label for="pc_d">Validade (dias)</label><input class="field" id="pc_d" type="number" min="1" value="${esc(m.validade_dias ?? 7)}"></div>
+      <div class="fl"><label for="pc_vm">Investimento mínimo em anúncios (€)</label><input class="field" id="pc_vm" type="number" value="${esc(m.verba_minima ?? 200)}"></div>
+      <div class="fl"><label for="pc_cn">Canais</label><input class="field" id="pc_cn" value="${esc(m.canais || "")}"></div>
+    </div>
+    <div class="fl"><label for="pc_c">Condições da oferta (uma por linha)</label><textarea class="field" id="pc_c" rows="4">${esc(linhas(m.condicoes))}</textarea></div>
+    <h4 class="sec-t">Serviços incluídos e valor de mercado</h4>
+    ${itens.map((it, i) => `<div class="panel" style="padding:12px;margin-bottom:10px"><div class="grid2">
+      <div class="fl"><label for="pi_t${i}">Título</label><input class="field" id="pi_t${i}" value="${esc(it.titulo)}"></div>
+      <div class="fl"><label for="pi_v${i}">Valor de mercado (€)</label><input class="field" id="pi_v${i}" type="number" value="${esc(it.valor)}"></div>
+      <div class="fl" style="grid-column:1/-1"><label for="pi_s${i}">Subtítulo</label><input class="field" id="pi_s${i}" value="${esc(it.sub || "")}"></div>
+      <div class="fl" style="grid-column:1/-1"><label for="pi_p${i}">O que inclui (uma linha por ponto)</label><textarea class="field" id="pi_p${i}" rows="4">${esc(linhas(it.pontos))}</textarea></div></div></div>`).join("")}
+    <h4 class="sec-t">Resultados mostrados</h4>
+    <p class="muted" style="margin:0 0 8px">Uma linha por resultado: segmento | número | legenda | detalhe. Use só números reais.</p>
+    <textarea class="field" id="pc_r" rows="3">${esc(res.map(r => [r.segmento, r.valor, r.legenda, r.detalhe].join(" | ")).join("\n"))}</textarea>
+    <div class="dr-f"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn primary" type="submit">Guardar conteúdo</button></div></form>`);
+  $("#pcF").addEventListener("submit", async ev => {
+    ev.preventDefault(); const g = id => $("#" + id).value; const ls = v => v.split("\n").map(s => s.trim()).filter(Boolean);
+    const novo = {...m, preco_padrao: Number(g("pc_p")) || 300, validade_dias: Number(g("pc_d")) || 7, verba_minima: Number(g("pc_vm")) || 0, canais: g("pc_cn").trim(), condicoes: ls(g("pc_c")),
+      itens: itens.map((it, i) => ({titulo: g("pi_t" + i).trim(), sub: g("pi_s" + i).trim(), valor: Number(g("pi_v" + i)) || 0, pontos: ls(g("pi_p" + i))})),
+      resultados: ls(g("pc_r")).map(l => { const [segmento, valor, legenda, detalhe] = l.split("|").map(s => (s || "").trim()); return {segmento, valor, legenda, detalhe}; }).filter(r => r.segmento && r.valor)};
+    try { await sql(`update public.config set valor = ${jsonRec(novo)}, updated_at = now() where chave = 'proposta_modelo' returning chave`); propModelo = novo; closeLayer(); toast("Conteúdo guardado"); renderProp(); } catch(e){ toast(errMsg(e), true); }
+  });
+}
+$("#viewProp").addEventListener("click", async e => {
+  const t = e.target;
+  if (t.closest("#ppCfg")) { openPropCfg(); return; }
+  const f = t.closest("#ppF [data-f]"); if (f) { propFiltro = f.dataset.f; renderProp(); return; }
+  const b = t.closest("[data-ppwa],[data-ppcopy],[data-ppedit],[data-ppcanc],[data-ppct],[data-ppcyes]"); if (!b) return;
+  const d = b.dataset, id = d.ppwa || d.ppcopy || d.ppedit || d.ppcanc || d.ppct || d.ppcyes, p = propLista.find(x => x.id === id); if (!p) return;
+  if (d.ppwa) propWa(p);
+  else if (d.ppcopy) { try { await navigator.clipboard.writeText(propLink(p)); toast("Link copiado"); } catch(_){ propPronta(p); } }
+  else if (d.ppedit) openProposta(p);
+  else if (d.ppct) propParaContrato(p);
+  else if (d.ppcanc) b.outerHTML = `<span class="confirm"><span>Cancelar a proposta de ${esc(p.nome_cliente)}? O link deixa de funcionar.</span><button class="btn danger" type="button" data-ppcyes="${id}">Cancelar proposta</button></span>`;
+  else if (d.ppcyes) { try { await sql(`update public.propostas set estado = 'cancelada', updated_at = now() where id = ${lit(id)} returning id`); toast("Proposta cancelada"); await loadProp(); } catch(err){ toast(errMsg(err), true); } }
+});
+
 document.addEventListener("click", e => {
+  if (e.target.closest("#ppLead")) { const l = leads.find(x => x.id === openId); if (l) propDeLead(l); return; }
   if (e.target.closest("#ctPedir")) { const l = leads.find(x => x.id === openId); if (l) contDeLead(l); return; }
   const cc = e.target.closest("#cliCont"); if (cc) { const c = clientes.find(x => x.id === window.cliAbertoId); if (!c) return; if (contLista.some(x => x.cliente_id === c.id && x.estado !== "cancelado")) { closeLayer(); location.hash = "contratos"; } else contDeCliente(c); }
 });
@@ -3931,6 +4095,7 @@ renderMetrics(); renderDash();
   if (curView === "campanhas") loadCamp(); else if (mcp) loadCamp(true);
   if (curView === "relatorios") loadRel(); else if (mcp) loadRel(true);
   if (curView === "contratos") loadCont(); else if (mcp) loadCont(true);
+  if (curView === "propostas") loadProp(); else if (mcp) loadProp(true);
   if (curView === "agentes") enterAgentes();
   if (curView === "whatsapp") enterWa();
   if (curView === "integracao") loadInt();

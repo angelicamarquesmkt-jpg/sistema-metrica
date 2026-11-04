@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Proposta · Métrica Digital</title>
+<link rel="icon" type="image/png" href="assets/marca/icone-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#FF5A1F;--ac2:#E8251F;--amb:#FF8A1F;--ink:#15110F;--ink2:#211A17;--ink3:#2C2420;--cream:#FBF6F1;--fg:#1C1714;--muted:#7A6F69;--sub:#BFB3AC;--line:#E9E1DB;--ok:#13834B}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--ink);color:#fff;font:16px/1.55 Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+button{font:inherit;cursor:pointer}
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .45s ease,transform .45s ease,visibility .45s;-webkit-overflow-scrolling:touch}
+.slide.on{opacity:1;visibility:visible;transform:none}
+.slide.prev{transform:translateX(-40px)}
+.slide.light{background:var(--cream);color:var(--fg)}
+.slide.dark{background:var(--ink)}
+.in{min-height:100%;max-width:1180px;margin:0 auto;padding:72px 28px 110px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+@media (max-width:700px){.in{padding:64px 18px 120px;justify-content:flex-start}}
+.kick{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin:0 0 14px}
+h1,h2{font-weight:800;letter-spacing:-.02em;margin:0 0 18px;line-height:1.08}
+h1{font-size:clamp(36px,5.6vw,68px)}
+h2{font-size:clamp(30px,4.2vw,52px)}
+h3{font-size:19px;font-weight:700;margin:0 0 6px;line-height:1.3}
+.lead{font-size:clamp(17px,1.8vw,21px);color:var(--sub);max-width:640px;margin:0 0 10px}
+.light .lead{color:var(--muted)}
+.hl{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.diag{position:absolute;pointer-events:none;z-index:0}
+@media (max-width:700px){.diag{opacity:.28}}
+.logo{width:92px;height:auto;display:block;margin:0 0 34px}
+.top-logo{position:fixed;top:18px;left:22px;z-index:20;display:flex;align-items:center;gap:10px;opacity:.95;transition:opacity .3s}
+.top-logo img{width:30px}
+.top-logo span{font-weight:700;font-size:13.5px;letter-spacing:.01em}
+.top-logo.hide{opacity:0}
+body.lt .top-logo span{color:var(--fg)}
+.nav{position:fixed;right:20px;bottom:20px;z-index:20;display:flex;align-items:center;gap:10px}
+.nav button{width:50px;height:50px;border-radius:50%;border:0;background:#fff;color:var(--ink);display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.nav button.go{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff}
+.nav button[disabled]{opacity:.35;cursor:default}
+.count{font-size:13px;font-weight:600;color:var(--sub);min-width:46px;text-align:center}
+body.lt .count{color:var(--muted)}
+.bar{position:fixed;left:0;top:0;height:3px;background:linear-gradient(90deg,var(--ac),var(--ac2));z-index:30;transition:width .45s ease}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:1fr}}
+@media (max-width:600px){.g2,.g4{grid-template-columns:1fr}}
+.card{background:var(--ink2);border:1px solid #33292400;border-radius:20px;padding:24px}
+.light .card{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(28,23,20,.06)}
+.card p{margin:0;color:var(--sub);font-size:14.5px}
+.light .card p{color:var(--muted)}
+.num{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;font-weight:800;color:#fff;margin:0 0 14px}
+.note{display:inline-flex;gap:8px;align-items:center;font-size:13.5px;font-weight:600;padding:9px 14px;border-radius:999px;background:rgba(255,90,31,.12);color:var(--ac);margin:6px 0 26px}
+.card .big,.big{font-size:clamp(28px,3vw,38px);color:inherit;font-weight:800;line-height:1;letter-spacing:-.02em;margin:0 0 10px}
+.plus{color:var(--ac)}
+/* resultados */
+.res{background:linear-gradient(160deg,var(--ink2),#1A1412);border-radius:22px;padding:26px;position:relative;overflow:hidden}
+.res::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;background:linear-gradient(135deg,var(--ac),var(--ac2));transform:rotate(30deg);opacity:.18}
+.res .seg{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sub)}
+.res .v{font-size:clamp(44px,5vw,64px);font-weight:800;margin:10px 0 2px;letter-spacing:-.02em}
+.res .l{font-weight:600}
+.res .d{font-size:12.5px;color:var(--sub);margin-top:10px}
+/* método */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:8px 0 18px}
+@media (max-width:700px){.steps{grid-template-columns:1fr 1fr}}
+.steps button{text-align:left;border:1.5px solid #3A302B;background:transparent;color:#fff;border-radius:16px;padding:16px;transition:.2s}
+.steps button b{display:block;font-size:12px;color:var(--sub);font-weight:600;margin-bottom:4px}
+.steps button span{font-weight:700;font-size:16px}
+.steps button[aria-pressed=true]{background:linear-gradient(135deg,var(--ac),var(--ac2));border-color:transparent}
+.steps button[aria-pressed=true] b{color:#FFE3D6}
+.step-det{background:var(--ink2);border-radius:20px;padding:24px;min-height:150px}
+.step-det ul{margin:10px 0 0;padding-left:20px;color:var(--sub)}
+.step-det li{margin:4px 0}
+/* acompanhamento */
+.feat{display:grid;gap:14px}
+.feat div{display:flex;gap:14px;align-items:flex-start}
+.feat i{flex:none;width:40px;height:40px;border-radius:12px;background:rgba(255,90,31,.12);display:grid;place-items:center;color:var(--ac);font-style:normal;font-weight:800}
+.phone{background:#0E0B0A;border-radius:32px;padding:14px;max-width:330px;margin:0 auto;box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid #2A221F}
+.phone .scr{background:#ECE5DD;border-radius:22px;padding:14px;color:#111;font-size:13px;min-height:360px;display:flex;flex-direction:column;gap:10px}
+.phone .hd{background:#075E54;color:#fff;margin:-14px -14px 4px;padding:12px 14px;border-radius:22px 22px 0 0;font-weight:600;font-size:13px}
+.msg{background:#fff;border-radius:10px;padding:9px 11px;max-width:88%;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.msg.me{background:#DCF8C6;align-self:flex-end}
+.msg .pdf{display:flex;gap:8px;align-items:center;background:#F3F3F3;border-radius:8px;padding:8px;margin-bottom:6px;font-weight:600}
+.msg .pdf i{width:28px;height:34px;background:var(--ac2);border-radius:4px;color:#fff;font-size:9px;font-style:normal;display:grid;place-items:center}
+.msg small{display:block;text-align:right;color:#888;font-size:10.5px;margin-top:3px}
+/* comparação */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.vs{grid-template-columns:1fr}}
+.vs .card ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.vs li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.vs li b{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px}
+.vs .no b{background:#3A2A26;color:#FF8A80}
+.vs .yes{background:linear-gradient(160deg,#2A1A12,#1F1511);border:1.5px solid var(--ac)}
+.vs .yes b{background:var(--ac);color:#fff}
+/* incluído */
+.inc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:800px){.inc{grid-template-columns:1fr}}
+.inc .card{display:flex;flex-direction:column}
+.inc ul{margin:12px 0 16px;padding-left:18px;font-size:14px;color:var(--muted)}
+.inc li{margin:4px 0}
+.inc .pr{margin-top:auto;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:12px;font-size:13px;color:var(--muted)}
+.inc .pr b{font-size:20px;color:var(--fg)}
+/* valor de mercado */
+.recibo{background:#fff;color:var(--fg);border-radius:22px;padding:26px;max-width:520px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.recibo .ln{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.recibo .tot{display:flex;justify-content:space-between;align-items:flex-end;padding-top:16px}
+.recibo .tot b{font-size:38px;font-weight:800}
+.two{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+@media (max-width:900px){.two{grid-template-columns:1fr;gap:28px}}
+/* oferta */
+.oferta{background:linear-gradient(150deg,var(--ac) 0%,var(--ac2) 100%);border-radius:28px;padding:34px;color:#fff;position:relative;overflow:hidden;max-width:620px}
+.oferta::after{content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:40px;background:rgba(255,255,255,.08);transform:rotate(25deg)}
+.oferta .para{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.92}
+.oferta .nome{font-size:clamp(28px,4vw,44px);font-weight:800;line-height:1.1;margin:6px 0 18px;word-break:break-word}
+.oferta s{opacity:.75;font-size:22px;font-weight:600}
+.oferta .pre{font-size:clamp(56px,8vw,88px);font-weight:800;line-height:1;letter-spacing:-.03em}
+.oferta .pre small{font-size:22px;font-weight:600}
+.oferta ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:8px;position:relative;z-index:1}
+.oferta li::before{content:"✓";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.22);font-size:11px;margin-right:10px}
+.val{margin-top:16px;font-size:13.5px;opacity:.9;position:relative;z-index:1}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:14px;padding:16px 26px;font-weight:700;font-size:16px;text-decoration:none}
+.cta.w{background:#fff;color:var(--ac2)}
+.cta.o{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff}
+.cta.g{background:transparent;border:1.5px solid #4A3D37;color:#fff}
+.light .cta.g{border-color:var(--line);color:var(--fg)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.aceite{display:inline-flex;gap:10px;align-items:center;background:#E3F4EA;color:var(--ok);font-weight:700;padding:12px 16px;border-radius:14px}
+/* passos finais */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:22px 0 28px}
+@media (max-width:800px){.flow{grid-template-columns:1fr}}
+.flow div{background:var(--ink2);border-radius:16px;padding:16px}
+.flow b{display:block;color:var(--ac);font-size:13px}
+.compromisso{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:8px}
+@media (max-width:800px){.compromisso{grid-template-columns:1fr}}
+.compromisso div{border:1px solid #3A302B;border-radius:16px;padding:16px;font-size:14px;color:var(--sub)}
+.compromisso b{display:block;color:#fff;font-size:15px;margin-bottom:4px}
+/* modal */
+.scrim{position:fixed;inset:0;background:rgba(10,8,7,.7);z-index:50;display:grid;place-items:center;padding:16px}
+.modal{background:#fff;color:var(--fg);border-radius:22px;padding:26px;max-width:440px;width:100%}
+.modal h3{font-size:22px}
+.modal label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}
+.modal input{width:100%;font:inherit;padding:12px 13px;border:1.5px solid var(--line);border-radius:12px}
+.modal input:focus{outline:none;border-color:var(--ac)}
+.err{color:#C62828;font-size:13.5px;margin-top:10px}
+.loading{display:grid;place-items:center;height:100%;color:var(--sub)}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar" style="width:0"></div>
+<div class="top-logo hide" id="topLogo"><img src="assets/marca/icone-64.png" alt=""><span>Métrica Digital</span></div>
+<main class="deck" id="deck"><div class="loading">A carregar a proposta…</div></main>
+<nav class="nav" id="nav" hidden aria-label="Navegação da proposta">
+  <button type="button" id="prev" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <span class="count" id="count">1 / 11</span>
+  <button type="button" class="go" id="next" aria-label="Seguinte"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+</nav>
+<script>
+(() => {
+  const SB = "https://ndftagksspolkvdxjrmo.supabase.co/rest/v1/rpc/";
+  const PK = "sb_publishable_t4mFbZ-WwpeFT_emb41ICw_8EhGoUQg";
+  const token = new URLSearchParams(location.search).get("t") || "";
+  const deck = document.getElementById("deck");
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const eur = n => Number(n || 0).toLocaleString("pt-PT", {minimumFractionDigits: Number(n) % 1 ? 2 : 0, maximumFractionDigits: 2}) + " €";
+  const dpt = s => s ? new Date(s + "T12:00:00").toLocaleDateString("pt-PT", {day:"numeric", month:"long", year:"numeric"}) : "";
+  async function rpc(fn, body){
+    const r = await fetch(SB + fn, {method:"POST", headers:{"Content-Type":"application/json", apikey: PK}, body: JSON.stringify(body)});
+    if (!r.ok) throw new Error("rede"); return r.json();
+  }
+  const DIAG = (h, w, x, y) => `<svg class="diag" style="right:${x};top:${y}" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="M${w*0.35} 0 L${w} 0 L${w} ${h} Z" fill="#FF5A1F"/><path d="M${w*0.62} 0 L${w} 0 L${w} ${h*0.55} Z" fill="#E8251F" opacity=".9"/><path d="M${w*0.22} 0 L${w*0.35} 0 L${w} ${h} L${w} ${h*1.12} Z" fill="#FF8A1F" opacity=".9"/></svg>`;
+
+  function slides(d){
+    const m = d.modelo || {}, itens = m.itens || [], res = m.resultados || [];
+    const mercado = d.valor_mercado || itens.reduce((s, i) => s + Number(i.valor || 0), 0);
+    const nome = d.nome || "";
+    const S = [];
+    // 1 capa
+    S.push({cls:"dark", lt:false, html:`${DIAG(window.innerHeight * 0.9, Math.min(560, window.innerWidth * 0.5), "0", "0")}<div class="in">
+      <img class="logo" src="assets/marca/logo-metrica.png" alt="Métrica Digital">
+      <p class="kick">Proposta preparada para ${esc(nome)}${d.empresa ? " · " + esc(d.empresa) : ""}</p>
+      <h1>Marketing digital para<br><span class="hl">empresas de prestação<br>de serviços</span></h1>
+      <p class="lead">O seu trabalho fala por si quando chega à pessoa certa.<br>Nós tratamos de fazer os pedidos de orçamento chegarem todos os dias.</p>
+      <div class="row" style="margin-top:22px"><button class="cta o" type="button" data-go="1">Ver a proposta →</button></div></div>`});
+    // 2 diagnóstico
+    S.push({cls:"light", lt:true, html:`<div class="in"><p class="kick">Diagnóstico</p><h2>Primeiro, perceber.<br>Depois, propor.</h2>
+      <p class="lead">Na nossa conversa ouvimos o momento da sua empresa. Só avançamos se tivermos a certeza de que conseguimos ajudar.</p>
+      <span class="note">Sem compromisso · se não fizer sentido para o seu caso, dizemos com toda a franqueza</span>
+      <div class="grid g4">${[["Como chegam hoje os clientes?","Indicação, redes sociais, Google, plataformas de orçamentos."],["Quantos pedidos recebe por mês?","E quantos acabam em obra ou serviço fechado."],["O que já tentou?","Anúncios, impulsionar publicações, plataformas — o que resultou e o que não."],["Onde quer chegar?","O que seria um bom resultado nos próximos 90 dias."]].map((x, i) => `<div class="card"><div class="num">${i + 1}</div><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join("")}</div></div>`});
+    // 3 objetivos
+    S.push({cls:"dark", lt:false, html:`<div class="in"><p class="kick">O nosso foco</p><h2>Três objetivos,<br>todos os meses.</h2>
+      <div class="grid g3" style="margin-top:14px">${[["+ Pedidos de orçamento","Pessoas da sua zona, interessadas no seu serviço, a pedir orçamento todos os dias."],["+ Clientes fechados","Contactos de qualidade e seguimento rápido, para transformar pedidos em trabalhos."],["+ Previsibilidade","Saber quanto investe, quantos pedidos recebe e quanto custa cada um."]].map(x => `<div class="card"><p class="big"><span class="plus">+</span> ${x[0].slice(2)}</p><p>${x[1]}</p></div>`).join("")}</div>
+      <p class="lead" style="margin-top:30px">O seu serviço é bom. <b style="color:#fff">O que falta é chegar a quem precisa dele, na altura certa.</b></p></div>`});
+    // 4 resultados
+    if (res.length) S.push({cls:"dark", lt:false, html:`<div class="in"><p class="kick">Resultados reais</p><h2>Clientes atuais<br>da Métrica Digital.</h2>
+      <p class="lead">Números das campanhas de empresas de serviços que acompanhamos hoje.</p>
+      <div class="grid ${res.length > 2 ? "g3" : "g2"}" style="margin-top:12px">${res.map(r => `<div class="res"><div class="seg">Segmento · ${esc(r.segmento)}</div><div class="v">${esc(r.valor)}</div><div class="l">${esc(r.legenda)}</div>${r.detalhe ? `<div class="d">${esc(r.detalhe)}</div>` : ""}</div>`).join("")}</div></div>`});
+    // 5 método
+    S.push({cls:"dark", lt:false, metodo:true, html:`<div class="in"><p class="kick">O método</p><h2>Do anúncio ao<br><span class="hl">pedido de orçamento.</span></h2>
+      <p class="lead">Quatro etapas a trabalhar em conjunto. Toque numa etapa para ver o que fazemos.</p>
+      <div class="steps" id="steps">${["Atração","Confiança","Pedido de orçamento","Remarketing"].map((t, i) => `<button type="button" data-st="${i}" aria-pressed="${i === 0}"><b>Etapa ${i + 1}</b><span>${t}</span></button>`).join("")}</div>
+      <div class="step-det" id="stepDet"></div></div>`});
+    // 6 acompanhamento
+    S.push({cls:"dark", lt:false, html:`<div class="in"><div class="two"><div><p class="kick">Acompanhamento</p><h2>Os seus resultados<br>na palma da mão.</h2>
+      <p class="lead">Sabe sempre quanto investiu e quantos pedidos recebeu, sem ter de perguntar.</p>
+      <div class="feat" style="margin-top:20px">
+        <div><i>1</i><p><b>Relatório semanal no WhatsApp</b><br><span style="color:var(--sub)">Todas as segundas-feiras, um PDF com os números da semana e os criativos, explicados em linguagem simples.</span></p></div>
+        <div><i>2</i><p><b>Otimização todas as segundas</b><br><span style="color:var(--sub)">Revemos cada campanha, cada anúncio e cada custo por pedido de orçamento.</span></p></div>
+        <div><i>3</i><p><b>Aviso se algo parar</b><br><span style="color:var(--sub)">Saldo, cartão ou anúncio em revisão: sabemos logo e tratamos.</span></p></div>
+        <div><i>4</i><p><b>Contacto direto</b><br><span style="color:var(--sub)">Dúvidas, ideias e ajustes pelo WhatsApp, com resposta no mesmo dia.</span></p></div>
+      </div></div>
+      <div class="phone" aria-hidden="true"><div class="scr"><div class="hd">Métrica Digital</div>
+        <div class="msg"><div class="pdf"><i>PDF</i>Relatório semanal.pdf</div>Bom dia! Esta semana: <b>14 pedidos de orçamento</b>, cada um a <b>4,90 €</b>. O anúncio do antes e depois foi o melhor. 🚀<small>09:02</small></div>
+        <div class="msg me">Ótimo! Já liguei a 6 deles 👍<small>09:15</small></div>
+        <div class="msg">⚠️ O cartão da conta de anúncios foi recusado — já lhe enviámos o passo a passo para atualizar.<small>11:40</small></div>
+      </div></div></div></div>`});
+    // 7 comparação
+    S.push({cls:"dark", lt:false, html:`<div class="in"><p class="kick">Porque não depender de plataformas</p><h2>Pedidos de orçamento<br><span class="hl">que são só seus.</span></h2>
+      <p class="lead">As plataformas de orçamentos cobram por cada contacto e enviam o mesmo pedido a vários concorrentes. Com campanhas próprias, o cliente procura-o a si.</p>
+      <div class="vs" style="margin-top:16px">
+        <div class="card no"><h3>Plataformas de orçamentos</h3><ul>${["Paga por cada contacto, mesmo os que não respondem","O mesmo pedido vai para vários concorrentes","Compete pelo preço mais baixo","Os contactos ficam na plataforma, não na sua empresa"].map(t => `<li><b>✕</b>${t}</li>`).join("")}</ul></div>
+        <div class="card yes"><h3>Com a Métrica Digital</h3><ul>${["Sem pagar por contacto: o investimento vai para os anúncios","O pedido chega só a si, com nome, telefone e serviço","Clientes da sua zona que já viram os seus trabalhos","Sabe de que anúncio veio cada pedido de orçamento"].map(t => `<li><b>✓</b>${t}</li>`).join("")}</ul></div>
+      </div></div>`});
+    // 8 incluído
+    S.push({cls:"light", lt:true, html:`<div class="in"><p class="kick">O que está incluído</p><h2>Tudo o que a sua empresa<br>precisa para crescer online.</h2>
+      <div class="inc" style="margin-top:10px">${itens.map(i => `<div class="card"><h3>${esc(i.titulo)}</h3><p>${esc(i.sub || "")}</p><ul>${(i.pontos || []).map(p => `<li>${esc(p)}</li>`).join("")}</ul><div class="pr"><span>Valor de mercado</span><b>${eur(i.valor)}</b></div></div>`).join("")}</div>
+      <div class="row" style="margin-top:22px"><button class="cta o" type="button" data-go="+1">Somar o valor de mercado →</button></div></div>`});
+    // 9 valor de mercado
+    S.push({cls:"dark", lt:false, html:`<div class="in"><div class="two"><div><p class="kick">Quanto custa no mercado</p><h2>${itens.length} serviços,<br>${itens.length} fornecedores.</h2>
+      <p class="lead">Contratados em separado — designer, gestor de tráfego, consultor e ferramentas — estes serviços custam isto todos os meses.</p></div>
+      <div class="recibo"><p class="kick" style="margin-bottom:6px">Orçamento · valor de mercado</p>${itens.map(i => `<div class="ln"><span>${esc(i.titulo)}</span><b>${eur(i.valor)}</b></div>`).join("")}
+        <div class="tot"><span style="color:var(--muted)">Valor de mercado<br>por mês</span><b>${eur(mercado)}</b></div></div></div></div>`});
+    // 10 oferta
+    const venc = d.validade && d.validade < new Date().toISOString().slice(0, 10);
+    S.push({cls:"dark", lt:false, oferta:true, html:`${DIAG(window.innerHeight, Math.min(520, window.innerWidth * 0.5), "0", "0")}<div class="in"><div class="oferta">
+      <div class="para">Proposta exclusiva para</div><div class="nome">${esc(nome)}${d.empresa ? `<br><span style="font-size:.55em;opacity:.9">${esc(d.empresa)}</span>` : ""}</div>
+      <s>${eur(mercado)}</s><div class="pre">${eur(d.valor)}<small> / mês</small></div>
+      <ul>${(m.condicoes || []).map(c => `<li>${esc(c)}</li>`).join("")}</ul>
+      ${d.validade ? `<div class="val">${venc ? "Esta condição terminou a " : "Condição válida até "}${dpt(d.validade)}.</div>` : ""}
+      </div>
+      <div class="row" style="margin-top:22px" id="ctaBox"></div></div>`});
+    // 11 compromisso e próximos passos
+    S.push({cls:"dark", lt:false, html:`<div class="in"><p class="kick">O nosso compromisso</p><h2>Não prometemos milagres.<br><span class="hl">Prometemos trabalho.</span></h2>
+      <div class="compromisso"><div><b>Relatório semanal</b>Números reais, todas as semanas, sem esperar pelo fim do mês.</div><div><b>Contacto direto</b>Fala sempre com quem gere as suas campanhas.</div><div><b>Investimento em anúncios</b>A partir de ${eur(m.verba_minima || 200)} por mês, pago diretamente à ${esc(m.canais || "Meta")}.</div></div>
+      <h3 style="margin-top:34px;font-size:22px">Os próximos passos</h3>
+      <div class="flow">${["Aceitar a proposta","Contrato online","Grupo no WhatsApp","Reunião de arranque","Campanhas no ar"].map((t, i) => `<div><b>${i + 1}</b>${t}</div>`).join("")}</div>
+      <div class="row" id="ctaBox2"></div></div>`});
+    return S;
+  }
+
+  const METODO = [
+    ["Atração", "Anúncios no Facebook e no Instagram para pessoas da sua zona que precisam do seu serviço.", ["Públicos por zona, idade e interesses", "Criativos com os seus trabalhos reais", "Testes contínuos para baixar o custo por contacto"]],
+    ["Confiança", "Quem vê o anúncio visita o seu perfil: mostramos provas de que faz um bom trabalho.", ["Antes e depois, obras feitas e testemunhos", "Perfil organizado com destaques e avaliações", "Vídeos curtos que respondem às dúvidas mais comuns"]],
+    ["Pedido de orçamento", "Tornamos fácil pedir orçamento, no formulário ou no WhatsApp.", ["Formulário com as perguntas certas (serviço, zona, prazo)", "Cada pedido chega na hora, com nome e telefone", "Lembretes para nenhum contacto ficar sem resposta"]],
+    ["Remarketing", "Quem viu e ainda não pediu volta a ver os seus anúncios.", ["Anúncios para quem visitou o perfil ou viu vídeos", "Ofertas e prazos para decidir mais depressa", "Reativação de pedidos antigos que não avançaram"]],
+  ];
+
+  function iniciar(d){
+    const S = slides(d);
+    deck.innerHTML = S.map((s, i) => `<section class="slide ${s.cls}" data-i="${i}" aria-label="Diapositivo ${i + 1} de ${S.length}">${s.html}</section>`).join("");
+    const els = [...deck.querySelectorAll(".slide")], nav = document.getElementById("nav"), bar = document.getElementById("bar"), count = document.getElementById("count"), top = document.getElementById("topLogo");
+    nav.hidden = false;
+    let cur = 0;
+    const ir = n => {
+      n = Math.max(0, Math.min(els.length - 1, n)); if (n === cur && els[n].classList.contains("on")) return;
+      els.forEach((e, i) => { e.classList.toggle("on", i === n); e.classList.toggle("prev", i < n); });
+      cur = n; els[n].scrollTop = 0;
+      count.textContent = `${n + 1} / ${els.length}`; bar.style.width = ((n + 1) / els.length * 100) + "%";
+      document.getElementById("prev").disabled = n === 0; document.getElementById("next").disabled = n === els.length - 1;
+      document.body.classList.toggle("lt", !!S[n].lt); top.classList.toggle("hide", n === 0);
+      try { history.replaceState(null, "", "#" + (n + 1)); } catch(_){}
+    };
+    document.getElementById("prev").onclick = () => ir(cur - 1);
+    document.getElementById("next").onclick = () => ir(cur + 1);
+    document.addEventListener("keydown", e => { if (document.querySelector(".scrim")) return; if (["ArrowRight","PageDown"," "].includes(e.key)) { e.preventDefault(); ir(cur + 1); } if (["ArrowLeft","PageUp"].includes(e.key)) { e.preventDefault(); ir(cur - 1); } });
+    let x0 = null, y0 = null;
+    deck.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, {passive:true});
+    deck.addEventListener("touchend", e => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4) ir(cur + (dx < 0 ? 1 : -1)); x0 = null; }, {passive:true});
+    deck.addEventListener("click", e => { const g = e.target.closest("[data-go]"); if (g) ir(g.dataset.go.startsWith("+") ? cur + 1 : Number(g.dataset.go)); });
+    // método
+    const det = document.getElementById("stepDet");
+    const st = i => { document.querySelectorAll("#steps [data-st]").forEach(b => b.setAttribute("aria-pressed", b.dataset.st == i)); const [t, p, l] = METODO[i]; det.innerHTML = `<h3>${t}</h3><p style="color:var(--sub);margin:0">${p}</p><ul>${l.map(x => `<li>${x}</li>`).join("")}</ul>`; };
+    document.getElementById("steps").addEventListener("click", e => { const b = e.target.closest("[data-st]"); if (b) st(Number(b.dataset.st)); }); st(0);
+    ctas(d);
+    const h = parseInt(location.hash.slice(1)); ir(isFinite(h) ? h - 1 : 0);
+  }
+  function ctas(d){
+    const tel = String(d.agencia?.telefone || "").replace(/\D/g, ""), wa = tel ? "https://wa.me/" + (tel.length === 9 ? "351" + tel : tel) + "?text=" + encodeURIComponent(`Olá Angélica! Vi a proposta da Métrica Digital e tenho uma dúvida.`) : "";
+    const venc = d.validade && d.validade < new Date().toISOString().slice(0, 10);
+    const html = d.estado === "aceite"
+      ? `<span class="aceite">✓ Proposta aceite${d.aceite_em ? " a " + new Date(d.aceite_em).toLocaleDateString("pt-PT") : ""}. Vai receber o contrato em breve.</span>`
+      : venc ? `<span class="note" style="margin:0">Esta condição já terminou. Fale connosco para uma nova proposta.</span>${wa ? `<a class="cta g" href="${wa}" target="_blank" rel="noopener">Falar no WhatsApp</a>` : ""}`
+      : `<button class="cta w" type="button" data-aceitar>Aceitar a proposta</button>${wa ? `<a class="cta g" href="${wa}" target="_blank" rel="noopener">Tenho uma dúvida</a>` : ""}`;
+    ["ctaBox", "ctaBox2"].forEach(id => { const b = document.getElementById(id); if (b) b.innerHTML = html.replace('cta w', id === "ctaBox2" ? "cta o" : "cta w"); });
+    document.querySelectorAll("[data-aceitar]").forEach(b => b.onclick = () => aceitar(d));
+  }
+  function aceitar(d){
+    const sc = document.createElement("div"); sc.className = "scrim";
+    sc.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mt"><h3 id="mt">Aceitar a proposta</h3>
+      <p style="color:var(--muted);margin:0">${eur(d.valor)} por mês · ${esc(d.empresa || d.nome)}. A seguir enviamos-lhe o contrato para assinar online.</p>
+      <label for="an">O seu nome</label><input id="an" value="${esc(d.nome)}" autocomplete="name">
+      <div class="err" id="ae" hidden></div>
+      <div class="row" style="margin-top:18px;justify-content:flex-end"><button class="cta g" style="color:var(--fg);border-color:var(--line)" type="button" id="ac">Cancelar</button><button class="cta o" type="button" id="ao">Confirmar</button></div></div>`;
+    document.body.appendChild(sc);
+    const fechar = () => sc.remove();
+    sc.addEventListener("click", e => { if (e.target === sc) fechar(); });
+    document.getElementById("ac").onclick = fechar;
+    document.getElementById("an").focus();
+    document.getElementById("ao").onclick = async () => {
+      const b = document.getElementById("ao"), nm = document.getElementById("an").value.trim();
+      if (nm.length < 2) { const e = document.getElementById("ae"); e.hidden = false; e.textContent = "Escreva o seu nome."; return; }
+      b.disabled = true; b.textContent = "A confirmar…";
+      try {
+        const r = await rpc("proposta_aceitar", {p_token: token, p_nome: nm});
+        if (r.erro) throw new Error(r.erro === "expirada" ? "Esta condição já terminou. Fale connosco para uma nova proposta." : "Não foi possível confirmar.");
+        fechar(); d.estado = "aceite"; d.aceite_em = r.aceite_em; ctas(d);
+      } catch(err){ const e = document.getElementById("ae"); e.hidden = false; e.textContent = err.message === "rede" ? "Sem ligação. Tente de novo." : err.message; b.disabled = false; b.textContent = "Confirmar"; }
+    };
+  }
+  (async () => {
+    if (!/^[a-f0-9]{24,64}$/.test(token)) { deck.innerHTML = `<div class="loading" style="padding:24px;text-align:center">Este link de proposta não está completo.</div>`; return; }
+    try {
+      const d = await rpc("proposta_ver", {p_token: token});
+      if (d.erro) { deck.innerHTML = `<div class="loading" style="padding:24px;text-align:center">Esta proposta já não está disponível.<br>Fale com a Métrica Digital.</div>`; return; }
+      iniciar(d);
+    } catch(_){ deck.innerHTML = `<div class="loading" style="padding:24px;text-align:center">Não foi possível carregar a proposta. Tente de novo.</div>`; }
+  })();
+})();
+</script>
+</body>
+</html>
