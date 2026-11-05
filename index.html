@@ -3258,7 +3258,7 @@ async function loadCamp(silent){
   try {
     const x = await sql(`select json_build_object(
       'contas', coalesce((select json_agg(c order by c.cliente nulls first, c.nome) from (
-        select a.id, a.nome, a.conta_ref, a.cliente_id, a.ativa, a.sincronizado_em, a.sync_erro, a.metas, a.moeda, a.quem_paga, cl.nome as cliente,
+        select a.id, a.nome, a.conta_ref, a.cliente_id, a.ativa, a.sincronizado_em, a.sync_erro, a.metas, a.moeda, a.quem_paga, a.painel_token, a.painel_ativo, a.painel_vistas, a.painel_visto_em, cl.nome as cliente, cl.telefone, cl.responsavel,
           (select row_to_json(s) from (select ${SUMS} from public.ads_metricas m where m.conta_id = a.id and m.data >= ${lit(r.ini)} and m.data < ${lit(r.fim)}) s) as atual,
           (select row_to_json(s) from (select ${SUMS} from public.ads_metricas m where m.conta_id = a.id and m.data >= ${lit(r.pini)} and m.data < ${lit(r.pfim)}) s) as antes,
           (select json_agg(d order by d.data) from (select m.data, ${SUMS} from public.ads_metricas m where m.conta_id = a.id and m.data >= current_date - 30 group by m.data) d) as serie,
@@ -3394,7 +3394,7 @@ function renderCampDet(){
     ${serie.map((s, i) => i % Math.ceil(serie.length/6) === 0 ? `<text x="${(i*bw+bw/2).toFixed(1)}" y="${Hc+15}" text-anchor="middle">${s.data.slice(8,10)}/${s.data.slice(5,7)}</text>` : "").join("")}</svg>
     <div class="lgd"><span><i class="b-g"></i>Gasto</span><span><i class="l-r"></i>Leads</span></div>` : `<div class="empty-p">Sem dados ainda.</div>`;
   $("#pBody").innerHTML = `<div class="ag-bar"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn" type="button" id="pBack">‹ Todos os clientes</button><h2 class="p-t">${esc(c.cliente || c.nome)}</h2>${syncTxt(c)}</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">${campPeriodo()}<button class="btn" type="button" id="pSync">Atualizar</button><button class="btn" type="button" id="pCfg">Metas e conta</button></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">${campPeriodo()}<button class="btn" type="button" id="pSync">Atualizar</button><button class="btn primary" type="button" id="pPainel">Painel do cliente</button><button class="btn" type="button" id="pCfg">Metas e conta</button></div></div>
     ${c.sync_erro ? `<div class="banner"><b>A Meta não deixou ler esta conta</b>${esc(c.sync_erro)}</div>` : ""}
     <section class="kpis k5">
       <div class="kpi hot"><div class="lbl">Investido</div><div class="val num">${eur(k.g)}</div><div class="sub">${delta(k.g, ka.g)} vs anterior</div></div>
@@ -3454,6 +3454,28 @@ function openContaMeta(id){
     } catch(err){ toast(errMsg(err), true); b.disabled = false; }
   });
 }
+
+/* painel do cliente (link público em tempo real) */
+const PAINEL_SITE = "https://angelicamarquesmkt-jpg.github.io/sistema-metrica/painel.html?t=";
+function openPainel(id){
+  const c = campContas.find(x => x.id === id); if (!c) return;
+  const link = c.painel_token ? PAINEL_SITE + c.painel_token : "";
+  const nome = String(c.responsavel || "").trim().split(/\s+/)[0];
+  const msg = `Olá${nome ? " " + nome : ""}! A partir de agora pode acompanhar as suas campanhas em tempo real neste painel:\n${link}\n\nMostra o investimento, os pedidos de orçamento e o custo de cada um, e atualiza-se ao longo do dia. Guarde o link nos favoritos.\nAngélica · Métrica Digital`;
+  modal("Painel do cliente · " + esc(c.cliente || c.nome), "Um link só deste cliente, com os números das campanhas atualizados ao longo do dia. Não mostra os avisos internos nem as outras contas.", `
+    <div class="fl"><label class="chk" style="display:flex;gap:10px;align-items:center"><input type="checkbox" id="pnOn" ${c.painel_ativo ? "checked" : ""}> Painel ativo (o link funciona)</label></div>
+    ${link ? `<div class="fl"><label for="pnL">Link do painel</label><input class="field" id="pnL" readonly value="${esc(link)}" onfocus="this.select()"></div>` : ""}
+    <p class="muted" style="margin:6px 0 0">${c.painel_vistas ? `Aberto ${c.painel_vistas} ${c.painel_vistas === 1 ? "vez" : "vezes"} · última ${ago(c.painel_visto_em)}` : "Ainda não foi aberto."}</p>
+    <div class="dr-f">${link ? `<a class="btn ghost" href="${esc(link)}" target="_blank" rel="noopener">Abrir painel</a><button class="btn" type="button" id="pnC">Copiar link</button><button class="btn primary" type="button" id="pnW">Enviar no WhatsApp</button>` : ""}<button class="btn ghost" type="button" id="pnN">${link ? "Criar link novo" : "Criar link"}</button></div>
+    ${link ? `<p class="muted" style="font-size:12px">“Criar link novo” desativa o anterior (use se o link foi partilhado com quem não devia).</p>` : ""}`);
+  const salvar = async (sqlx, okMsg) => { try { await sql(sqlx); toast(okMsg); await loadCamp(true); closeLayer(); openPainel(id); } catch(e){ toast(errMsg(e), true); } };
+  $("#pnOn").onchange = e => salvar(`update public.contas_anuncios set painel_ativo = ${e.target.checked}, painel_token = coalesce(painel_token, encode(extensions.gen_random_bytes(16), 'hex')) where id = ${lit(id)} returning id`, e.target.checked ? "Painel ativado" : "Painel desativado");
+  $("#pnN").onclick = () => salvar(`update public.contas_anuncios set painel_token = encode(extensions.gen_random_bytes(16), 'hex'), painel_ativo = true, painel_vistas = 0, painel_visto_em = null where id = ${lit(id)} returning id`, "Link novo criado");
+  if (link) {
+    $("#pnC").onclick = async () => { try { await navigator.clipboard.writeText(link); toast("Link copiado"); } catch(_){ $("#pnL").select(); } if (!c.painel_ativo) $("#pnOn").click(); };
+    $("#pnW").onclick = () => { const tel = normWa(c.telefone); const a = document.createElement("a"); a.href = (tel ? "https://wa.me/" + tel : "https://wa.me/") + "?text=" + encodeURIComponent(msg); a.target = "_blank"; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove(); if (!c.painel_ativo) $("#pnOn").click(); };
+  }
+}
 $("#viewCamp").addEventListener("click", async e => {
   const t = e.target;
   const pc = t.closest("[data-pc]"); if (pc) { campSel = pc.dataset.pc; campOpen = new Set(); window.scrollTo(0,0); loadCampDet(); return; }
@@ -3462,6 +3484,7 @@ $("#viewCamp").addEventListener("click", async e => {
   const sv = t.closest("#pSev [data-s]"); if (sv) { campSevF = sv.dataset.s; renderCamp(); return; }
   if (t.closest("#pSync")) { campSync(campSel); return; }
   if (t.closest("#pCfg")) { openContaMeta(campSel); return; }
+  if (t.closest("#pPainel")) { openPainel(campSel); return; }
   const tg = t.closest("[data-tg]"); if (tg) { const id = tg.dataset.tg; campOpen.has(id) ? campOpen.delete(id) : campOpen.add(id); renderCampDet(); return; }
   const ok = t.closest("[data-alrok],[data-alrign]");
   if (ok) {

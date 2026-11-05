@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#15110F">
+<title>Painel de campanhas · Métrica Digital</title>
+<link rel="icon" type="image/png" href="assets/marca/icone-64.png">
+<link rel="apple-touch-icon" href="assets/marca/icone-metrica.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#FF5A1F;--ac2:#E8251F;--amb:#FF8A1F;--ink:#15110F;--ink2:#211A17;--bg:#F5F1ED;--card:#fff;--fg:#1C1714;--muted:#7A6F69;--line:#ECE5E0;--ok:#13834B;--okb:#E3F4EA;--bad:#C62828;--badb:#FBE6E4;--r:20px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;color:inherit}
+.top{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.top::after{content:"";position:absolute;right:-80px;top:-60px;width:360px;height:260px;background:linear-gradient(135deg,var(--ac),var(--ac2));transform:skewX(-28deg);opacity:.95}
+.top-in{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:18px 20px 74px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand img{width:34px}
+.brand b{font-size:14px;display:block;line-height:1.1}
+.brand small{font-size:11px;color:#CFC4BD;letter-spacing:.06em;text-transform:uppercase}
+.live{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);padding:6px 11px;border-radius:999px}
+.live i{width:8px;height:8px;border-radius:50%;background:#5FD69A;box-shadow:0 0 0 0 rgba(95,214,154,.6);animation:pulse 1.8s infinite}
+.live.off i{background:#F5A623;animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(95,214,154,0)}100%{box-shadow:0 0 0 0 rgba(95,214,154,0)}}
+main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-index:2}
+.head{background:var(--card);border-radius:var(--r);padding:20px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:0 10px 30px rgba(28,23,20,.08)}
+.head .lg{width:64px;height:64px;border-radius:16px;border:1px solid var(--line);display:grid;place-items:center;background:#fff;flex:none}
+.head .lg img{max-width:82%;max-height:72%;object-fit:contain}
+.head h1{font-size:22px;margin:0;font-weight:800;letter-spacing:-.01em}
+.head .sub{font-size:13px;color:var(--muted)}
+.per{display:flex;gap:4px;background:#F1ECE8;border-radius:12px;padding:4px;margin-left:auto;flex-wrap:wrap}
+.per button{border:0;background:none;padding:8px 12px;border-radius:9px;font-size:13px;font-weight:600;color:var(--muted)}
+.per button[aria-pressed=true]{background:#fff;color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+@media (max-width:700px){.per{margin-left:0;width:100%;justify-content:space-between}.per button{flex:1;padding:8px 4px}}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:16px 0}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.k{background:var(--card);border-radius:var(--r);padding:18px;box-shadow:0 6px 20px rgba(28,23,20,.05);position:relative;overflow:hidden}
+.k.hot{background:linear-gradient(150deg,var(--ac),var(--ac2));color:#fff}
+.k .l{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.k.hot .l{color:#FFE3D6}
+.k .v{font-size:clamp(24px,3vw,32px);font-weight:800;letter-spacing:-.02em;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.k .d{display:inline-flex;font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:999px;background:#F1ECE8;color:var(--muted)}
+.k .d.up{background:var(--okb);color:var(--ok)}.k .d.dn{background:var(--badb);color:var(--bad)}
+.k.hot .d{background:rgba(255,255,255,.2);color:#fff}
+.k .h{font-size:12px;color:var(--muted);margin-top:6px}
+.k.hot .h{color:#FFE3D6}
+.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:14px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:0 6px 20px rgba(28,23,20,.05);margin-bottom:14px}
+.card h2{font-size:16px;margin:0;font-weight:700}
+.ch{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.ch span{font-size:12px;color:var(--muted)}
+.chart{position:relative;height:250px}
+.chart svg{width:100%;height:100%;overflow:visible}
+.chart .bar{fill:#FFD9C8;transition:fill .2s}
+.chart .bar.in{fill:var(--ac)}
+.chart .bar:hover{fill:var(--ac2)}
+.chart .ln{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.chart .pt{fill:#fff;stroke:var(--ink);stroke-width:2}
+.chart .ax{font-size:10px;fill:var(--muted)}
+.chart .gl{stroke:var(--line);stroke-width:1}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;border-radius:10px;padding:8px 10px;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .15s;z-index:3}
+.tip b{display:block;font-size:11px;color:#CFC4BD;font-weight:600}
+.lgd{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+.lgd i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.funil{display:grid;gap:10px}
+.fr{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center}
+.fr .t{font-size:13px;font-weight:600}
+.fr .n{font-size:15px;font-weight:800;text-align:right;font-variant-numeric:tabular-nums}
+.fr .bw{grid-column:1/-1;height:12px;background:#F1ECE8;border-radius:999px;overflow:hidden}
+.fr .bw i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--amb),var(--ac2));transition:width 1s cubic-bezier(.2,.7,.2,1)}
+.fr .p{grid-column:1/-1;font-size:11.5px;color:var(--muted)}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;padding:8px 8px;font-weight:600;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl td{padding:12px 8px;border-top:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl td:first-child{white-space:normal;min-width:200px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;margin-top:4px}
+.st.on{background:var(--okb);color:var(--ok)}.st.on::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.st.off{background:#F1ECE8;color:var(--muted)}
+.ads{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.ad{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.ad .im{aspect-ratio:1;background:#1C1714;display:grid;place-items:center;position:relative}
+.ad .im img{width:100%;height:100%;object-fit:contain}
+.ad .im .best{position:absolute;left:10px;top:10px;background:var(--ac);color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 9px;border-radius:999px}
+.ad .bd{padding:12px 14px}
+.ad .nm{font-size:13px;font-weight:700;margin:0 0 8px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ad .ms{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.ad .ms span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block}
+.ad .ms b{font-size:13.5px}
+.empty{color:var(--muted);font-size:14px;padding:16px;text-align:center}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin:26px 0 10px}
+.foot img{width:60px;display:block;margin:0 auto 8px}
+.loading{padding:80px 20px;text-align:center;color:var(--muted)}
+.skel{background:linear-gradient(90deg,#EFE9E4,#F7F3F0,#EFE9E4);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:12px}
+@keyframes sk{to{background-position:-200% 0}}
+.fade{animation:fd .4s ease}
+@keyframes fd{from{opacity:.4}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <div class="brand"><img src="assets/marca/icone-metrica.png" alt=""><div><b>Métrica Digital</b><small>Painel de campanhas</small></div></div>
+  <span class="live" id="live"><i></i><span id="liveTx">A ligar…</span></span>
+</div></header>
+<main id="app"><div class="card loading">A carregar o painel…</div></main>
+<script>
+(() => {
+  const SB = "https://ndftagksspolkvdxjrmo.supabase.co/rest/v1/rpc/painel_ver";
+  const PK = "sb_publishable_t4mFbZ-WwpeFT_emb41ICw_8EhGoUQg";
+  const token = new URLSearchParams(location.search).get("t") || "";
+  const app = document.getElementById("app");
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const nf = (n, d = 0) => Number(n || 0).toLocaleString("pt-PT", {minimumFractionDigits: d, maximumFractionDigits: d});
+  const eur = n => n == null || !isFinite(n) ? "—" : nf(n, 2) + " €";
+  const pct = n => n == null || !isFinite(n) ? "—" : nf(n * 100, 2) + "%";
+  const dm = s => s.slice(8, 10) + "/" + s.slice(5, 7);
+  const PER = [["hoje","Hoje"],["ontem","Ontem"],["7d","7 dias"],["30d","30 dias"],["mes","Este mês"]];
+  let periodo = "7d", dados = null, timer = null;
+  try { const p = localStorage.getItem("mdPainelPer"); if (PER.some(x => x[0] === p)) periodo = p; } catch(_){}
+  const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function contar(el, alvo, fmt){ if (reduz) { el.textContent = fmt(alvo); return; } const t0 = performance.now(), de = Number(el.dataset.v || 0); el.dataset.v = alvo; const f = t => { const p = Math.min(1, (t - t0) / 900), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(de + (alvo - de) * e); if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }
+
+  async function carregar(silencioso){
+    try {
+      const r = await fetch(SB, {method:"POST", headers:{"Content-Type":"application/json", apikey: PK}, body: JSON.stringify({p_token: token, p_periodo: periodo})});
+      if (!r.ok) throw new Error("rede");
+      const d = await r.json();
+      if (d.erro) { app.innerHTML = `<div class="card loading">Este painel não está disponível.<br>Fale com a Métrica Digital.</div>`; setLive(false, "Indisponível"); return; }
+      const novo = !dados; dados = d; render(novo); if (!silencioso) window.scrollTo({top: 0});
+    } catch(_){ setLive(false, "Sem ligação"); if (!dados) app.innerHTML = `<div class="card loading">Não foi possível carregar o painel. Tente de novo.</div>`; }
+  }
+  function setLive(ok, tx){ const l = document.getElementById("live"); l.classList.toggle("off", !ok); document.getElementById("liveTx").textContent = tx; }
+  function atualizadoTx(){
+    const s = dados?.conta?.sincronizado_em; if (!s) return "A aguardar dados";
+    const m = Math.round((Date.now() - new Date(s)) / 60000);
+    return m < 1 ? "Atualizado agora" : m < 60 ? `Atualizado há ${m} min` : m < 1440 ? `Atualizado há ${Math.round(m / 60)} h` : `Atualizado a ${new Date(s).toLocaleDateString("pt-PT")}`;
+  }
+  function kz(k){ k = k || {}; const g = +k.g || 0, imp = +k.imp || 0, cll = +k.cll || 0, res = +k.res || 0; return {g, imp, cll, res, alc: +k.alc || 0, ctr: imp ? cll / imp : null, cpl: res ? g / res : null, cpc: cll ? g / cll : null}; }
+  function delta(a, b, inv){ if (a == null || b == null || !isFinite(a) || !isFinite(b) || b === 0) return `<span class="d">—</span>`; const d = (a - b) / Math.abs(b); if (Math.abs(d) < .02) return `<span class="d">= igual</span>`; const bom = inv ? d < 0 : d > 0; return `<span class="d ${bom ? "up" : "dn"}">${d > 0 ? "▲" : "▼"} ${Math.round(Math.abs(d) * 100)}%</span>`; }
+
+  function render(primeiro){
+    const d = dados, c = d.conta || {}, k = kz(d.k), k0 = kz(d.k0), p = d.periodo || {};
+    const ativo = c.campanhas_ativas > 0;
+    setLive(ativo, (ativo ? "Campanhas ativas · " : "Campanhas em pausa · ") + atualizadoTx());
+    const perTx = p.ini === p.fim ? (p.ini === p.hoje ? "hoje" : dm(p.ini)) : `${dm(p.ini)} a ${dm(p.fim)}`;
+    app.innerHTML = `
+      <section class="head"><div class="lg">${c.logo ? `<img src="${esc(c.logo)}" alt="">` : `<b>${esc((c.cliente || "").slice(0, 2))}</b>`}</div>
+        <div><h1>${esc(c.cliente)}</h1><div class="sub">${c.campanhas_ativas} campanha${c.campanhas_ativas === 1 ? "" : "s"} ativa${c.campanhas_ativas === 1 ? "" : "s"} · ${c.anuncios_ativos} anúncio${c.anuncios_ativos === 1 ? "" : "s"} no ar · ${perTx}</div></div>
+        <div class="per" role="group" aria-label="Período">${PER.map(([v, t]) => `<button type="button" data-p="${v}" aria-pressed="${v === periodo}">${t}</button>`).join("")}</div></section>
+      <section class="kpis">
+        <div class="k hot"><div class="l">Pedidos de orçamento</div><div class="v" id="kRes">0</div>${delta(k.res, k0.res)}<div class="h">vs. período anterior</div></div>
+        <div class="k"><div class="l">Investido</div><div class="v" id="kG">0 €</div>${delta(k.g, k0.g)}<div class="h">pago diretamente à Meta</div></div>
+        <div class="k"><div class="l">Custo por pedido</div><div class="v" id="kCpl">—</div>${delta(k.cpl, k0.cpl, true)}<div class="h">quanto custa cada contacto</div></div>
+        <div class="k"><div class="l">Pessoas alcançadas</div><div class="v" id="kAlc">0</div>${delta(k.alc, k0.alc)}<div class="h">${nf(k.imp)} visualizações dos anúncios</div></div>
+      </section>
+      <div class="grid">
+        <section class="card"><div class="ch"><h2>Últimos 30 dias</h2><span>a laranja: o período escolhido</span></div><div class="chart" id="chart"><div class="tip" id="tip"></div></div>
+          <div class="lgd"><span><i style="background:var(--ac)"></i>Investimento por dia</span><span><i style="background:var(--ink)"></i>Pedidos de orçamento</span></div></section>
+        <section class="card"><div class="ch"><h2>Do anúncio ao pedido</h2><span>${perTx}</span></div><div class="funil" id="funil"></div></section>
+      </div>
+      <section class="card"><div class="ch"><h2>Campanhas</h2><span>${perTx}</span></div>
+        ${(d.campanhas || []).length ? `<div class="tw"><table class="tbl"><thead><tr><th>Campanha</th><th>Investido</th><th>Visualizações</th><th>Cliques</th><th>CTR</th><th>Pedidos</th><th>Custo/pedido</th></tr></thead><tbody>
+          ${d.campanhas.map(x => { const m = kz(x); return `<tr><td><b>${esc(x.nome)}</b><br><span class="st ${x.estado === "ACTIVE" ? "on" : "off"}">${x.estado === "ACTIVE" ? "Ativa" : "Em pausa"}</span>${x.orcamento_diario ? ` <span style="font-size:11.5px;color:var(--muted)">${eur(x.orcamento_diario)}/dia</span>` : ""}</td><td>${eur(m.g)}</td><td>${nf(m.imp)}</td><td>${nf(m.cll)}</td><td>${pct(m.ctr)}</td><td><b>${m.res}</b></td><td><b>${eur(m.cpl)}</b></td></tr>`; }).join("")}</tbody></table></div>` : `<div class="empty">Sem campanhas com atividade neste período.</div>`}</section>
+      <section class="card"><div class="ch"><h2>Os seus anúncios</h2><span>ordenados por pedidos de orçamento</span></div>
+        ${(d.anuncios || []).length ? `<div class="ads">${d.anuncios.map((x, i) => { const m = kz(x); return `<article class="ad"><div class="im">${x.img ? `<img src="${esc(x.img)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<span style="color:#7A6F69;font-size:12px">Sem pré-visualização</span>`}${i === 0 && m.res ? `<span class="best">MELHOR RESULTADO</span>` : ""}</div>
+          <div class="bd"><p class="nm">${esc(x.titulo || x.nome)}</p><div class="ms"><div><span>Pedidos</span><b>${m.res}</b></div><div><span>Custo/ped.</span><b>${eur(m.cpl)}</b></div><div><span>Cliques</span><b>${nf(m.cll)}</b></div></div></div></article>`; }).join("")}</div>` : `<div class="empty">Sem anúncios com atividade neste período.</div>`}</section>
+      <div class="foot"><img src="assets/marca/logo-metrica.png" alt="Métrica Digital">Gerido pela Métrica Digital · Os números vêm diretamente da Meta (Facebook e Instagram) e atualizam-se ao longo do dia.<br>Os valores do dia atual podem ainda ser ajustados pela Meta.</div>`;
+    contar(document.getElementById("kRes"), k.res, v => nf(v));
+    contar(document.getElementById("kG"), k.g, v => eur(v));
+    if (k.cpl != null) contar(document.getElementById("kCpl"), k.cpl, v => eur(v));
+    contar(document.getElementById("kAlc"), k.alc, v => nf(v));
+    grafico(d.serie || [], p);
+    funil(k);
+    if (primeiro) app.classList.add("fade");
+  }
+  function funil(k){
+    const etapas = [["Viram os anúncios", k.imp, "visualizações"], ["Clicaram", k.cll, "cliques no link"], ["Pediram orçamento", k.res, "pedidos"]];
+    const max = Math.max(1, etapas[0][1]);
+    document.getElementById("funil").innerHTML = etapas.map(([t, v, u], i) => `<div class="fr"><span class="t">${t}</span><span class="n">${nf(v)}</span><div class="bw"><i data-w="${Math.max(2, Math.sqrt(v / max) * 100)}"></i></div><span class="p">${u}${i ? ` · ${etapas[i - 1][1] ? nf(v / etapas[i - 1][1] * 100, 1) + "% da etapa anterior" : "—"}` : ""}</span></div>`).join("")
+      + `<div class="fr" style="margin-top:6px"><span class="t">Custo por clique</span><span class="n">${eur(k.cpc)}</span></div>`;
+    requestAnimationFrame(() => document.querySelectorAll("#funil i").forEach(i => i.style.width = i.dataset.w + "%"));
+  }
+  function grafico(serie, p){
+    const el = document.getElementById("chart"), tip = document.getElementById("tip");
+    const hoje = new Date((p.hoje || new Date().toISOString().slice(0, 10)) + "T12:00:00Z"), dias = [];
+    for (let i = 29; i >= 0; i--) { const d = new Date(hoje - i * 864e5).toISOString().slice(0, 10); const s = serie.find(x => x.data === d) || {}; dias.push({d, g: +s.g || 0, r: +s.res || 0}); }
+    const W = 600, H = 220, pb = 22, pt = 10, mg = Math.max(1, ...dias.map(x => x.g)), mr = Math.max(1, ...dias.map(x => x.r)), bw = W / dias.length;
+    const y = v => H - pb - v / mg * (H - pb - pt), yr = v => H - pb - v / mr * (H - pb - pt - 14);
+    let svg = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Investimento e pedidos de orçamento nos últimos 30 dias">`;
+    for (let i = 0; i <= 3; i++) { const yy = pt + (H - pb - pt) * i / 3; svg += `<line class="gl" x1="0" x2="${W}" y1="${yy}" y2="${yy}"/>`; }
+    dias.forEach((x, i) => { const dentro = x.d >= p.ini && x.d <= p.fim; svg += `<rect class="bar ${dentro ? "in" : ""}" data-i="${i}" x="${i * bw + bw * .18}" width="${bw * .64}" y="${y(x.g)}" height="${Math.max(0, H - pb - y(x.g))}" rx="3"/>`; if (i % 5 === 0 || i === dias.length - 1) svg += `<text class="ax" x="${i * bw + bw / 2}" y="${H - 6}" text-anchor="middle">${dm(x.d)}</text>`; });
+    svg += `<path class="ln" d="${dias.map((x, i) => `${i ? "L" : "M"}${(i * bw + bw / 2).toFixed(1)},${yr(x.r).toFixed(1)}`).join("")}"/>`;
+    dias.forEach((x, i) => { if (x.r) svg += `<circle class="pt" cx="${i * bw + bw / 2}" cy="${yr(x.r)}" r="3.2"/>`; });
+    svg += `</svg>`;
+    el.insertAdjacentHTML("beforeend", svg);
+    const sv = el.querySelector("svg");
+    const mostra = ev => { const r = sv.getBoundingClientRect(), x = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left, i = Math.max(0, Math.min(dias.length - 1, Math.floor(x / r.width * dias.length))), dd = dias[i];
+      tip.innerHTML = `<b>${new Date(dd.d + "T12:00:00").toLocaleDateString("pt-PT", {weekday:"short", day:"numeric", month:"short"})}</b>${eur(dd.g)} · ${dd.r} pedido${dd.r === 1 ? "" : "s"}`;
+      tip.style.left = ((i + .5) / dias.length * r.width) + "px"; tip.style.top = (y(dd.g) / H * r.height) + "px"; tip.style.opacity = 1; };
+    sv.addEventListener("mousemove", mostra); sv.addEventListener("touchstart", mostra, {passive:true});
+    sv.addEventListener("mouseleave", () => tip.style.opacity = 0);
+  }
+  app.addEventListener("click", e => { const b = e.target.closest("[data-p]"); if (!b || b.dataset.p === periodo) return; periodo = b.dataset.p; try { localStorage.setItem("mdPainelPer", periodo); } catch(_){} document.querySelectorAll("[data-p]").forEach(x => x.setAttribute("aria-pressed", x === b)); carregar(true); });
+  if (!/^[a-f0-9]{24,64}$/.test(token)) { app.innerHTML = `<div class="card loading">Este link do painel não está completo.</div>`; setLive(false, "Link incompleto"); return; }
+  carregar();
+  timer = setInterval(() => { if (!document.hidden) carregar(true); }, 120000);
+  setInterval(() => { if (dados) { const c = dados.conta || {}; setLive(c.campanhas_ativas > 0, (c.campanhas_ativas > 0 ? "Campanhas ativas · " : "Campanhas em pausa · ") + atualizadoTx()); } }, 30000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && dados) carregar(true); });
+})();
+</script>
+</body>
+</html>
