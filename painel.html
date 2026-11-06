@@ -117,7 +117,11 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
 .pill-bad{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--badb);color:var(--bad)}
 .rels{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
 .rel{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:14px;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s,box-shadow .2s;background:#fff}
-.rel:hover{border-color:var(--ac);transform:translateY(-2px);box-shadow:0 10px 24px rgba(28,23,20,.08)}
+.rel:hover{border-color:var(--ac);box-shadow:0 10px 24px rgba(28,23,20,.08)}
+.rel-b{display:flex;gap:8px;margin-top:10px}
+.rel-b a{font-size:12.5px;font-weight:700;text-decoration:none;border-radius:10px;padding:7px 12px}
+.rel-b .dl{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff}
+.rel-b .vw{border:1.5px solid var(--line);color:var(--fg)}
 .rel .ic{flex:none;width:44px;height:52px;border-radius:8px;background:linear-gradient(150deg,var(--ac),var(--ac2));color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800;letter-spacing:.05em}
 .rel b{display:block;font-size:14px}
 .rel small{display:block;font-size:12px;color:var(--muted)}
@@ -147,6 +151,7 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
   const eur = n => n == null || !isFinite(n) ? "—" : nf(n, 2) + " €";
   const pct = n => n == null || !isFinite(n) ? "—" : nf(n * 100, 2) + "%";
   const dm = s => s.slice(8, 10) + "/" + s.slice(5, 7);
+  const slug = s => String(s || "cliente").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const PER = [["hoje","Hoje"],["ontem","Ontem"],["7d","7 dias"],["30d","30 dias"],["mes","Este mês"]];
   let periodo = "7d", dados = null, timer = null;
   try { const p = localStorage.getItem("mdPainelPer"); if (PER.some(x => x[0] === p)) periodo = p; } catch(_){}
@@ -199,8 +204,10 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
       <section class="card"><div class="ch"><h2>Anúncios no ar</h2><span>ordenados por pedidos de orçamento</span></div>
         ${(d.anuncios || []).length ? `<div class="ads">${d.anuncios.map((x, i) => { const m = kz(x); return `<article class="ad"><div class="im">${x.img ? `<img src="${esc(x.img)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<span style="color:#7A6F69;font-size:12px">Sem pré-visualização</span>`}${i === 0 && m.res ? `<span class="best">MELHOR RESULTADO</span>` : ""}</div>
           <div class="bd"><p class="nm">${esc(x.titulo || x.nome)}</p><div class="ms"><div><span>Pedidos</span><b>${m.res}</b></div><div><span>Custo/ped.</span><b>${eur(m.cpl)}</b></div><div><span>Cliques</span><b>${nf(m.cll)}</b></div></div></div></article>`; }).join("")}</div>` : `<div class="empty">De momento não há anúncios no ar.</div>`}</section>
-      <section class="card"><div class="ch"><h2>Relatórios semanais</h2><span>PDF com a semana explicada · toque para abrir</span></div>
-        ${(d.relatorios || []).length ? `<div class="rels">${d.relatorios.map((r, i) => `<a class="rel" href="${esc(r.pdf)}" target="_blank" rel="noopener"><span class="ic">PDF</span><span><b>Semana de ${dm(r.ini)} a ${dm(r.fim)}${i === 0 ? '<span class="nov">MAIS RECENTE</span>' : ""}</b><small>${r.pedidos != null ? `${nf(r.pedidos)} pedido${Number(r.pedidos) === 1 ? "" : "s"} · ` : ""}${r.gasto != null ? eur(r.gasto) + " investidos" : ""}</small></span></a>`).join("")}</div>` : `<div class="empty">O primeiro relatório semanal aparece aqui na próxima segunda-feira.</div>`}</section>
+      <section class="card"><div class="ch"><h2>Relatórios semanais</h2><span>PDF com a semana explicada · pode ver ou descarregar</span></div>
+        ${(d.relatorios || []).length ? `<div class="rels">${d.relatorios.map((r, i) => { const fn = `Relatorio-${slug(c.cliente)}-${r.ini}.pdf`, dl = r.pdf + (r.pdf.includes("?") ? "&" : "?") + "download=" + encodeURIComponent(fn);
+          return `<div class="rel"><span class="ic">PDF</span><span style="flex:1;min-width:0"><b>Semana de ${dm(r.ini)} a ${dm(r.fim)}${i === 0 ? '<span class="nov">MAIS RECENTE</span>' : ""}</b><small>${r.pedidos != null ? `${nf(r.pedidos)} pedido${Number(r.pedidos) === 1 ? "" : "s"} · ` : ""}${r.gasto != null ? eur(r.gasto) + " investidos" : ""}</small>
+            <span class="rel-b"><a class="dl" href="${esc(dl)}" download="${esc(fn)}">⬇ Descarregar</a><a class="vw" href="${esc(r.pdf)}" target="_blank" rel="noopener">Ver</a></span></span></div>`; }).join("")}</div>` : `<div class="empty">O primeiro relatório semanal aparece aqui na próxima segunda-feira.</div>`}</section>
       <div class="foot"><img src="assets/marca/logo-metrica.png" alt="Métrica Digital">Gerido pela Métrica Digital · Mostra apenas as campanhas que estão no ar. Os números vêm diretamente da Meta (Facebook e Instagram) e atualizam-se ao longo do dia.<br>Os valores do dia atual podem ainda ser ajustados pela Meta.</div>`;
     contar(document.getElementById("kRes"), k.res, v => nf(v));
     contar(document.getElementById("kG"), k.g, v => eur(v));
