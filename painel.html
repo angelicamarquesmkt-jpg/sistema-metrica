@@ -233,9 +233,9 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
     }
     return `<section class="conta">${saldoCard}
       <div class="card"><div class="l">Investido em campanhas anteriores</div><div class="v">${eur(an.total)}</div>
-        <div class="h">${an.n ? `${an.n} campanha${an.n === 1 ? "" : "s"} que já não estão no ar` : "Ainda não há campanhas anteriores."}</div>
-        ${an.n ? `<details><summary>Ver campanhas</summary><ul>${an.campanhas.map(x => `<li><span>${esc(x.nome)}</span><b>${eur(x.gasto)}</b></li>`).join("")}</ul></details>` : ""}</div>
-      <div class="card"><div class="l">Investimento total</div><div class="v">${eur(c.gasto_total)}</div><div class="h">desde a criação da conta de anúncios, incluindo as campanhas no ar</div></div>
+        <div class="h">${an.n ? `<b style="color:var(--ok,#22c55e)">${Number(an.leads) || 0} pedido${Number(an.leads) === 1 ? "" : "s"} de orçamento</b>${Number(an.leads) ? ` · ${eur(an.total / an.leads)} por pedido` : ""}<br>${an.n} campanha${an.n === 1 ? "" : "s"} que já não estão no ar` : "Ainda não há campanhas anteriores."}</div>
+        ${an.n ? `<details><summary>Ver campanhas</summary><ul>${an.campanhas.map(x => `<li><span>${esc(x.nome)}${x.leads != null ? `<br><small style="opacity:.7">${Number(x.leads)} pedido${Number(x.leads) === 1 ? "" : "s"}${Number(x.leads) ? ` · ${eur(x.gasto / x.leads)}/pedido` : ""}</small>` : ""}</span><b>${eur(x.gasto)}</b></li>`).join("")}</ul></details>` : ""}</div>
+      <div class="card"><div class="l">Investimento total</div><div class="v">${eur(c.gasto_total)}</div><div class="h">${c.leads_total != null ? `<b style="color:var(--ok,#22c55e)">${Number(c.leads_total)} pedidos de orçamento no total</b>${Number(c.leads_total) ? ` · ${eur(c.gasto_total / c.leads_total)} por pedido` : ""}<br>` : ""}desde a criação da conta de anúncios, incluindo as campanhas no ar</div></div>
     </section>`;
   }
   function funil(k){
