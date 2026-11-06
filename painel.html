@@ -98,6 +98,23 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
 .empty{color:var(--muted);font-size:14px;padding:16px;text-align:center}
 .foot{text-align:center;color:var(--muted);font-size:12px;margin:26px 0 10px}
 .foot img{width:60px;display:block;margin:0 auto 8px}
+.conta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 14px}
+@media (max-width:900px){.conta{grid-template-columns:1fr}}
+.conta .card{margin:0}
+.conta .l{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.conta .v{font-size:clamp(22px,2.6vw,28px);font-weight:800;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.conta .h{font-size:12.5px;color:var(--muted)}
+.saldo-bar{height:8px;border-radius:999px;background:#F1ECE8;overflow:hidden;margin:10px 0 6px}
+.saldo-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ok),#5FD69A)}
+.saldo-bar.low i{background:linear-gradient(90deg,var(--amb),var(--ac2))}
+.conta details{margin-top:8px;font-size:13px}
+.conta summary{cursor:pointer;color:var(--ac2);font-weight:600}
+.conta details ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+.conta details li{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:6px}
+.conta details li span{color:var(--muted);overflow:hidden;text-overflow:ellipsis}
+.conta details li b{white-space:nowrap}
+.pill-ok{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--okb);color:var(--ok)}
+.pill-bad{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--badb);color:var(--bad)}
 .loading{padding:80px 20px;text-align:center;color:var(--muted)}
 .skel{background:linear-gradient(90deg,#EFE9E4,#F7F3F0,#EFE9E4);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:12px}
 @keyframes sk{to{background-position:-200% 0}}
@@ -163,6 +180,7 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
         <div class="k"><div class="l">Custo por pedido</div><div class="v" id="kCpl">—</div>${delta(k.cpl, k0.cpl, true)}<div class="h">quanto custa cada contacto</div></div>
         <div class="k"><div class="l">Pessoas alcançadas</div><div class="v" id="kAlc">0</div>${delta(k.alc, k0.alc)}<div class="h">${nf(k.imp)} visualizações dos anúncios</div></div>
       </section>
+      ${contaHTML(d)}
       <div class="grid">
         <section class="card"><div class="ch"><h2>Últimos 30 dias</h2><span>só campanhas no ar · a laranja: o período escolhido</span></div><div class="chart" id="chart"><div class="tip" id="tip"></div></div>
           <div class="lgd"><span><i style="background:var(--ac)"></i>Investimento por dia</span><span><i style="background:var(--ink)"></i>Pedidos de orçamento</span></div></section>
@@ -182,6 +200,27 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
     grafico(d.serie || [], p);
     funil(k);
     if (primeiro) app.classList.add("fade");
+  }
+  function contaHTML(d){
+    const c = d.conta || {}, an = d.anteriores || {n: 0, total: 0, campanhas: []};
+    const diario = (d.campanhas || []).reduce((s, x) => s + (Number(x.orcamento_diario) || 0), 0);
+    let saldoCard;
+    if (c.pagamento === "pre_pago" && c.saldo != null) {
+      const diasR = diario > 0 ? Math.floor(c.saldo / diario) : null, low = diasR != null && diasR <= 5;
+      saldoCard = `<div class="card"><div class="l">Saldo disponível na Meta</div><div class="v">${eur(c.saldo)}</div>
+        <div class="saldo-bar ${low ? "low" : ""}"><i style="width:${diasR == null ? 100 : Math.min(100, Math.max(4, diasR / 30 * 100))}%"></i></div>
+        <div class="h">${diasR == null ? "sem campanhas a gastar neste momento" : `${low ? '<span class="pill-bad">A acabar</span> ' : '<span class="pill-ok">OK</span> '}dá para cerca de <b>${diasR} dia${diasR === 1 ? "" : "s"}</b> ao ritmo atual (${eur(diario)}/dia)`}</div></div>`;
+    } else if (c.pagamento === "cartao") {
+      saldoCard = `<div class="card"><div class="l">Pagamento dos anúncios</div><div class="v" style="font-size:20px">Cartão associado</div><div class="h">A Meta cobra automaticamente no cartão — não há saldo pré-pago para carregar.${diario ? ` Orçamento atual: ${eur(diario)}/dia.` : ""}</div></div>`;
+    } else {
+      saldoCard = `<div class="card"><div class="l">Saldo disponível na Meta</div><div class="v">—</div><div class="h">Ainda sem informação de saldo.</div></div>`;
+    }
+    return `<section class="conta">${saldoCard}
+      <div class="card"><div class="l">Investido em campanhas anteriores</div><div class="v">${eur(an.total)}</div>
+        <div class="h">${an.n ? `${an.n} campanha${an.n === 1 ? "" : "s"} que já não estão no ar` : "Ainda não há campanhas anteriores."}</div>
+        ${an.n ? `<details><summary>Ver campanhas</summary><ul>${an.campanhas.map(x => `<li><span>${esc(x.nome)}</span><b>${eur(x.gasto)}</b></li>`).join("")}</ul></details>` : ""}</div>
+      <div class="card"><div class="l">Investimento total</div><div class="v">${eur(c.gasto_total)}</div><div class="h">desde a criação da conta de anúncios, incluindo as campanhas no ar</div></div>
+    </section>`;
   }
   function funil(k){
     const etapas = [["Viram os anúncios", k.imp, "visualizações"], ["Clicaram", k.cll, "cliques no link"], ["Pediram orçamento", k.res, "pedidos"]];
