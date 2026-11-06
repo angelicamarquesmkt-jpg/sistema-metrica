@@ -132,6 +132,32 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
 @keyframes sk{to{background-position:-200% 0}}
 .fade{animation:fd .4s ease}
 @keyframes fd{from{opacity:.4}to{opacity:1}}
+
+/* ---------- animações ---------- */
+.anim .head,.anim .kpis .k,.anim .conta .card,.anim .grid>.card,.anim #app>.card,.anim .ad,.anim .rel{opacity:0;animation:sobe .7s cubic-bezier(.2,.75,.25,1) forwards;animation-delay:calc(var(--i,0) * 70ms)}
+@keyframes sobe{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.anim .head .lg{animation:pop .8s cubic-bezier(.3,1.5,.5,1) .15s both}
+@keyframes pop{from{transform:scale(.5) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+.anim .chart .bar{transform-box:fill-box;transform-origin:50% 100%;animation:cresce .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(300ms + var(--b,0) * 22ms)}
+@keyframes cresce{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.anim .chart .ln{stroke-dasharray:1;stroke-dashoffset:1;animation:traco 1.4s ease-out 1s forwards}
+@keyframes traco{to{stroke-dashoffset:0}}
+.anim .chart .pt{transform-box:fill-box;transform-origin:center;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(1.2s + var(--b,0) * 40ms)}
+.anim .saldo-bar i{animation:enche 1.4s cubic-bezier(.2,.8,.2,1) .5s both}
+@keyframes enche{from{width:0}}
+.k.hot{position:relative;overflow:hidden}
+.k.hot::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);animation:brilho 4.5s ease-in-out 1.6s infinite;pointer-events:none}
+@keyframes brilho{0%{transform:translateX(-120%)}30%,100%{transform:translateX(120%)}}
+.k,.conta .card{transition:transform .25s ease,box-shadow .25s ease}
+.k:hover,.conta .card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(28,23,20,.10)}
+.ad{transition:transform .25s ease,box-shadow .25s ease}
+.ad:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(28,23,20,.14)}
+.ad .im img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.ad:hover .im img{transform:scale(1.05)}
+.ad .im .best{animation:pulsa 2.2s ease-in-out infinite}
+@keyframes pulsa{50%{box-shadow:0 0 0 6px rgba(240,80,30,.0),0 0 18px rgba(240,80,30,.55)}}
+.k .v.flash{animation:flash .9s ease}
+@keyframes flash{30%{color:var(--ac);transform:scale(1.06)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -216,7 +242,14 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
     contar(document.getElementById("kAlc"), k.alc, v => nf(v));
     grafico(d.serie || [], p);
     funil(k);
-    if (primeiro) app.classList.add("fade");
+    if (primeiro && !reduz) {
+      app.classList.remove("anim"); void app.offsetWidth; app.classList.add("anim");
+      [".head", ".kpis .k", ".conta .card", ".grid>.card", "#app>.card", ".ad", ".rel"].forEach((q, g) => app.querySelectorAll(q).forEach((el, i) => el.style.setProperty("--i", g * 2 + i)));
+      app.querySelectorAll(".chart .bar").forEach((el, i) => el.style.setProperty("--b", i));
+      app.querySelectorAll(".chart .pt").forEach((el, i) => el.style.setProperty("--b", i));
+      clearTimeout(render.t); render.t = setTimeout(() => app.classList.remove("anim"), 4000);
+    } else if (!primeiro && render.ult != null && render.ult !== k.res) { const v = document.getElementById("kRes"); v && v.classList.add("flash"); }
+    render.ult = k.res;
   }
   function contaHTML(d){
     const c = d.conta || {}, an = d.anteriores || {n: 0, total: 0, campanhas: []};
@@ -253,7 +286,7 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
     let svg = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Investimento e pedidos de orçamento nos últimos 30 dias">`;
     for (let i = 0; i <= 3; i++) { const yy = pt + (H - pb - pt) * i / 3; svg += `<line class="gl" x1="0" x2="${W}" y1="${yy}" y2="${yy}"/>`; }
     dias.forEach((x, i) => { const dentro = x.d >= p.ini && x.d <= p.fim; svg += `<rect class="bar ${dentro ? "in" : ""}" data-i="${i}" x="${i * bw + bw * .18}" width="${bw * .64}" y="${y(x.g)}" height="${Math.max(0, H - pb - y(x.g))}" rx="3"/>`; if (i % 5 === 0 || i === dias.length - 1) svg += `<text class="ax" x="${i * bw + bw / 2}" y="${H - 6}" text-anchor="middle">${dm(x.d)}</text>`; });
-    svg += `<path class="ln" d="${dias.map((x, i) => `${i ? "L" : "M"}${(i * bw + bw / 2).toFixed(1)},${yr(x.r).toFixed(1)}`).join("")}"/>`;
+    svg += `<path class="ln" pathLength="1" d="${dias.map((x, i) => `${i ? "L" : "M"}${(i * bw + bw / 2).toFixed(1)},${yr(x.r).toFixed(1)}`).join("")}"/>`;
     dias.forEach((x, i) => { if (x.r) svg += `<circle class="pt" cx="${i * bw + bw / 2}" cy="${yr(x.r)}" r="3.2"/>`; });
     svg += `</svg>`;
     el.insertAdjacentHTML("beforeend", svg);
