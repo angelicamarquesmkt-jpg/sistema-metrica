@@ -98,7 +98,7 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
 .empty{color:var(--muted);font-size:14px;padding:16px;text-align:center}
 .foot{text-align:center;color:var(--muted);font-size:12px;margin:26px 0 10px}
 .foot img{width:60px;display:block;margin:0 auto 8px}
-.conta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 14px}
+.conta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 14px}
 @media (max-width:900px){.conta{grid-template-columns:1fr}}
 .conta .card{margin:0}
 .conta .l{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
@@ -233,9 +233,7 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
     }
     return `<section class="conta">${saldoCard}
       <div class="card"><div class="l">Investido em campanhas anteriores</div><div class="v">${eur(an.total)}</div>
-        <div class="h">${an.n ? `<b style="color:var(--ok,#22c55e)">${Number(an.leads) || 0} pedido${Number(an.leads) === 1 ? "" : "s"} de orçamento</b>${Number(an.leads) ? ` · ${eur(an.total / an.leads)} por pedido` : ""}<br>${an.n} campanha${an.n === 1 ? "" : "s"} que já não estão no ar` : "Ainda não há campanhas anteriores."}</div>
-        ${an.n ? `<details><summary>Ver campanhas</summary><ul>${an.campanhas.map(x => `<li><span>${esc(x.nome)}${x.leads != null ? `<br><small style="opacity:.7">${Number(x.leads)} pedido${Number(x.leads) === 1 ? "" : "s"}${Number(x.leads) ? ` · ${eur(x.gasto / x.leads)}/pedido` : ""}</small>` : ""}</span><b>${eur(x.gasto)}</b></li>`).join("")}</ul></details>` : ""}</div>
-      <div class="card"><div class="l">Investimento total</div><div class="v">${eur(c.gasto_total)}</div><div class="h">${c.leads_total != null ? `<b style="color:var(--ok,#22c55e)">${Number(c.leads_total)} pedidos de orçamento no total</b>${Number(c.leads_total) ? ` · ${eur(c.gasto_total / c.leads_total)} por pedido` : ""}<br>` : ""}desde a criação da conta de anúncios, incluindo as campanhas no ar</div></div>
+        <div class="h">${an.n ? "Valor já investido em campanhas que terminaram." : "Ainda não há campanhas anteriores."}</div></div>
     </section>`;
   }
   function funil(k){
