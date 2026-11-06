@@ -156,6 +156,7 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
       <section class="head"><div class="lg">${c.logo ? `<img src="${esc(c.logo)}" alt="">` : `<b>${esc((c.cliente || "").slice(0, 2))}</b>`}</div>
         <div><h1>${esc(c.cliente)}</h1><div class="sub">${c.campanhas_ativas} campanha${c.campanhas_ativas === 1 ? "" : "s"} ativa${c.campanhas_ativas === 1 ? "" : "s"} · ${c.anuncios_ativos} anúncio${c.anuncios_ativos === 1 ? "" : "s"} no ar · ${perTx}</div></div>
         <div class="per" role="group" aria-label="Período">${PER.map(([v, t]) => `<button type="button" data-p="${v}" aria-pressed="${v === periodo}">${t}</button>`).join("")}</div></section>
+      ${c.campanhas_ativas ? "" : `<section class="card" style="margin-top:16px;border-left:4px solid var(--ac)"><b>De momento não há campanhas no ar.</b><div style="color:var(--muted);font-size:13.5px">Os números aparecem aqui assim que uma campanha voltar a estar ativa.</div></section>`}
       <section class="kpis">
         <div class="k hot"><div class="l">Pedidos de orçamento</div><div class="v" id="kRes">0</div>${delta(k.res, k0.res)}<div class="h">vs. período anterior</div></div>
         <div class="k"><div class="l">Investido</div><div class="v" id="kG">0 €</div>${delta(k.g, k0.g)}<div class="h">pago diretamente à Meta</div></div>
@@ -163,17 +164,17 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
         <div class="k"><div class="l">Pessoas alcançadas</div><div class="v" id="kAlc">0</div>${delta(k.alc, k0.alc)}<div class="h">${nf(k.imp)} visualizações dos anúncios</div></div>
       </section>
       <div class="grid">
-        <section class="card"><div class="ch"><h2>Últimos 30 dias</h2><span>a laranja: o período escolhido</span></div><div class="chart" id="chart"><div class="tip" id="tip"></div></div>
+        <section class="card"><div class="ch"><h2>Últimos 30 dias</h2><span>só campanhas no ar · a laranja: o período escolhido</span></div><div class="chart" id="chart"><div class="tip" id="tip"></div></div>
           <div class="lgd"><span><i style="background:var(--ac)"></i>Investimento por dia</span><span><i style="background:var(--ink)"></i>Pedidos de orçamento</span></div></section>
         <section class="card"><div class="ch"><h2>Do anúncio ao pedido</h2><span>${perTx}</span></div><div class="funil" id="funil"></div></section>
       </div>
-      <section class="card"><div class="ch"><h2>Campanhas</h2><span>${perTx}</span></div>
+      <section class="card"><div class="ch"><h2>Campanhas no ar</h2><span>${perTx}</span></div>
         ${(d.campanhas || []).length ? `<div class="tw"><table class="tbl"><thead><tr><th>Campanha</th><th>Investido</th><th>Visualizações</th><th>Cliques</th><th>CTR</th><th>Pedidos</th><th>Custo/pedido</th></tr></thead><tbody>
-          ${d.campanhas.map(x => { const m = kz(x); return `<tr><td><b>${esc(x.nome)}</b><br><span class="st ${x.estado === "ACTIVE" ? "on" : "off"}">${x.estado === "ACTIVE" ? "Ativa" : "Em pausa"}</span>${x.orcamento_diario ? ` <span style="font-size:11.5px;color:var(--muted)">${eur(x.orcamento_diario)}/dia</span>` : ""}</td><td>${eur(m.g)}</td><td>${nf(m.imp)}</td><td>${nf(m.cll)}</td><td>${pct(m.ctr)}</td><td><b>${m.res}</b></td><td><b>${eur(m.cpl)}</b></td></tr>`; }).join("")}</tbody></table></div>` : `<div class="empty">Sem campanhas com atividade neste período.</div>`}</section>
-      <section class="card"><div class="ch"><h2>Os seus anúncios</h2><span>ordenados por pedidos de orçamento</span></div>
+          ${d.campanhas.map(x => { const m = kz(x); return `<tr><td><b>${esc(x.nome)}</b><br><span class="st ${x.estado === "ACTIVE" ? "on" : "off"}">${x.estado === "ACTIVE" ? "Ativa" : "Em pausa"}</span>${x.orcamento_diario ? ` <span style="font-size:11.5px;color:var(--muted)">${eur(x.orcamento_diario)}/dia</span>` : ""}</td><td>${eur(m.g)}</td><td>${nf(m.imp)}</td><td>${nf(m.cll)}</td><td>${pct(m.ctr)}</td><td><b>${m.res}</b></td><td><b>${eur(m.cpl)}</b></td></tr>`; }).join("")}</tbody></table></div>` : `<div class="empty">De momento não há campanhas no ar.</div>`}</section>
+      <section class="card"><div class="ch"><h2>Anúncios no ar</h2><span>ordenados por pedidos de orçamento</span></div>
         ${(d.anuncios || []).length ? `<div class="ads">${d.anuncios.map((x, i) => { const m = kz(x); return `<article class="ad"><div class="im">${x.img ? `<img src="${esc(x.img)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<span style="color:#7A6F69;font-size:12px">Sem pré-visualização</span>`}${i === 0 && m.res ? `<span class="best">MELHOR RESULTADO</span>` : ""}</div>
-          <div class="bd"><p class="nm">${esc(x.titulo || x.nome)}</p><div class="ms"><div><span>Pedidos</span><b>${m.res}</b></div><div><span>Custo/ped.</span><b>${eur(m.cpl)}</b></div><div><span>Cliques</span><b>${nf(m.cll)}</b></div></div></div></article>`; }).join("")}</div>` : `<div class="empty">Sem anúncios com atividade neste período.</div>`}</section>
-      <div class="foot"><img src="assets/marca/logo-metrica.png" alt="Métrica Digital">Gerido pela Métrica Digital · Os números vêm diretamente da Meta (Facebook e Instagram) e atualizam-se ao longo do dia.<br>Os valores do dia atual podem ainda ser ajustados pela Meta.</div>`;
+          <div class="bd"><p class="nm">${esc(x.titulo || x.nome)}</p><div class="ms"><div><span>Pedidos</span><b>${m.res}</b></div><div><span>Custo/ped.</span><b>${eur(m.cpl)}</b></div><div><span>Cliques</span><b>${nf(m.cll)}</b></div></div></div></article>`; }).join("")}</div>` : `<div class="empty">De momento não há anúncios no ar.</div>`}</section>
+      <div class="foot"><img src="assets/marca/logo-metrica.png" alt="Métrica Digital">Gerido pela Métrica Digital · Mostra apenas as campanhas que estão no ar. Os números vêm diretamente da Meta (Facebook e Instagram) e atualizam-se ao longo do dia.<br>Os valores do dia atual podem ainda ser ajustados pela Meta.</div>`;
     contar(document.getElementById("kRes"), k.res, v => nf(v));
     contar(document.getElementById("kG"), k.g, v => eur(v));
     if (k.cpl != null) contar(document.getElementById("kCpl"), k.cpl, v => eur(v));
