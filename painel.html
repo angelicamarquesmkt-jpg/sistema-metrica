@@ -226,7 +226,7 @@ main{max-width:1180px;margin:-56px auto 40px;padding:0 20px;position:relative;z-
   function delta(a, b, inv){ if (a == null || b == null || !isFinite(a) || !isFinite(b) || b === 0) return `<span class="d">—</span>`; const d = (a - b) / Math.abs(b); if (Math.abs(d) < .02) return `<span class="d">= igual</span>`; const bom = inv ? d < 0 : d > 0; return `<span class="d ${bom ? "up" : "dn"}">${d > 0 ? "▲" : "▼"} ${Math.round(Math.abs(d) * 100)}%</span>`; }
 
   function render(primeiro){
-    const d = dados, c = d.conta || {}, k = kz(d.k), k0 = kz(d.k0), p = d.periodo || {};
+    const d = dados, c = d.conta || {}; if (!c.logo && /métrica digital/i.test(c.cliente || "")) c.logo = "assets/marca/icone-metrica.png"; const _x = 0, k = kz(d.k), k0 = kz(d.k0), p = d.periodo || {};
     const ativo = c.campanhas_ativas > 0;
     setLive(ativo, (ativo ? "Campanhas ativas · " : "Campanhas em pausa · ") + atualizadoTx());
     const perTx = p.ini === p.fim ? (p.ini === p.hoje ? "hoje" : dm(p.ini)) : `${dm(p.ini)} a ${dm(p.fim)}`;
