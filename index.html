@@ -993,8 +993,14 @@ const STAGES = [
   {id:"reuniao",nome:"Reunião marcada",cor:"#8B5CF6"},
   {id:"proposta",nome:"Proposta enviada",cor:"#3B82F6"},
   {id:"fechado",nome:"Fechado",cor:"#16A34A"},
+  {id:"desqualificado",nome:"Desqualificado",cor:"#DC2626"},
   {id:"perdido",nome:"Perdido",cor:"#9CA3AF"}
 ];
+const FIM = ["fechado","perdido","desqualificado"];
+const MOTIVOS = {
+  perdido: ["","Sem orçamento","Não respondeu","Escolheu outra agência","Não era o momento","Fora do perfil","Outro"],
+  desqualificado: ["","Não é o público (fora do perfil)","Sem orçamento para investir","Contacto inválido (telefone ou e-mail errado)","Não se lembra de ter pedido contacto","Procura emprego ou é fornecedor","Fora da zona de atuação","Outro"]
+};
 const ORIGENS = {meta_form:"Formulário Meta",site:"Site",whatsapp:"WhatsApp",instagram:"Instagram",indicacao:"Indicação",manual:"Manual"};
 const ATIV = {nota:"Nota",ligacao:"Ligação",whatsapp:"WhatsApp",email:"E-mail",reuniao:"Reunião",etapa:"Etapa",sistema:"Sistema"};
 const ATIV_IC = {nota:"N",ligacao:"L",whatsapp:"W",email:"@",reuniao:"R",etapa:"→",sistema:"•"};
@@ -1102,7 +1108,7 @@ function renderFilters(){
 function cardHTML(l){
   let follow = "";
   if (l.etapa === "reuniao" && l.reuniao_em) follow = `<span class="pill ok">Reunião ${esc(fmtDate(l.reuniao_em))}</span>`;
-  else if (l.proximo_contacto && !["fechado","perdido"].includes(l.etapa)) {
+  else if (l.proximo_contacto && !FIM.includes(l.etapa)) {
     const late = new Date(l.proximo_contacto) < new Date();
     follow = `<span class="pill ${late ? "late" : "soon"}">${late ? "Atrasado" : "Contactar"} ${esc(fmtDate(l.proximo_contacto))}</span>`;
   }
@@ -1132,7 +1138,7 @@ function periodStart(){
   const d = new Date(now); d.setHours(0,0,0,0); d.setDate(d.getDate() - Number(v) + 1); return d;
 }
 const STAGE_IDX = Object.fromEntries(STAGES.map((s,i) => [s.id, i]));
-function reached(l, stage){ return l.etapa !== "perdido" && STAGE_IDX[l.etapa] >= STAGE_IDX[stage]; }
+function reached(l, stage){ return l.etapa !== "perdido" && l.etapa !== "desqualificado" && STAGE_IDX[l.etapa] >= STAGE_IDX[stage]; }
 function deltaHTML(cur, prev){
   if (prev === null) return "";
   if (!prev) return cur ? `<span class="delta up">novo</span>` : "";
@@ -1178,15 +1184,15 @@ function renderDash(){
 
   // funnel
   const base = inP.length || 1;
-  $("#dFunnel").innerHTML = STAGES.filter(s => s.id !== "perdido").map((s, i) => {
+  $("#dFunnel").innerHTML = STAGES.filter(s => s.id !== "perdido" && s.id !== "desqualificado").map((s, i) => {
     const n = i === 0 ? inP.length : inP.filter(l => reached(l, s.id)).length;
     return `<div class="f-row"><span>${s.nome}</span><div class="f-bar"><i style="width:${n / base * 100}%"></i></div><span class="n num"><b>${n}</b> · ${pct(n, inP.length)}%</span></div>`;
-  }).join("") + `<div class="f-row"><span>Perdidos</span><div class="f-bar"><i style="width:${inP.filter(l=>l.etapa==="perdido").length / base * 100}%;background:var(--muted)"></i></div><span class="n num"><b>${inP.filter(l=>l.etapa==="perdido").length}</b></span></div>`;
+  }).join("") + `<div class="f-row"><span>Perdidos</span><div class="f-bar"><i style="width:${inP.filter(l=>l.etapa==="perdido").length / base * 100}%;background:var(--muted)"></i></div><span class="n num"><b>${inP.filter(l=>l.etapa==="perdido").length}</b></span></div><div class="f-row"><span>Desqualificados</span><div class="f-bar"><i style="width:${inP.filter(l=>l.etapa==="desqualificado").length / base * 100}%;background:#DC2626"></i></div><span class="n num"><b>${inP.filter(l=>l.etapa==="desqualificado").length}</b></span></div>`;
 
   // agenda
   const lim = Date.now() + 7 * 864e5, ag = [];
   all.forEach(l => {
-    if (["fechado","perdido"].includes(l.etapa)) return;
+    if (FIM.includes(l.etapa)) return;
     if (l.reuniao_em && new Date(l.reuniao_em) <= lim && new Date(l.reuniao_em) >= Date.now() - 864e5) ag.push({l, d:l.reuniao_em, tipo:"Reunião"});
     if (l.proximo_contacto && new Date(l.proximo_contacto) <= lim) ag.push({l, d:l.proximo_contacto, tipo:"Contactar"});
   });
@@ -1615,8 +1621,8 @@ function sysItems(){
   const from = agStart, to = addDays(agStart, 7), out = [];
   const inR = d => d >= from && d < to;
   leads.forEach(l => {
-    if (l.reuniao_em && inR(new Date(l.reuniao_em)) && !["fechado","perdido"].includes(l.etapa)) { const s = new Date(l.reuniao_em); out.push({src:"lead", id:l.id, title:"Reunião · " + l.nome, sub: l.empresa || "", start:s, end:new Date(+s + 36e5), allDay:false}); }
-    if (l.proximo_contacto && inR(new Date(l.proximo_contacto)) && !["fechado","perdido"].includes(l.etapa)) { const s = new Date(l.proximo_contacto); out.push({src:"cont", id:l.id, title:"Contactar · " + l.nome, sub: l.telefone || "", start:s, end:new Date(+s + 18e5), allDay:false}); }
+    if (l.reuniao_em && inR(new Date(l.reuniao_em)) && !FIM.includes(l.etapa)) { const s = new Date(l.reuniao_em); out.push({src:"lead", id:l.id, title:"Reunião · " + l.nome, sub: l.empresa || "", start:s, end:new Date(+s + 36e5), allDay:false}); }
+    if (l.proximo_contacto && inR(new Date(l.proximo_contacto)) && !FIM.includes(l.etapa)) { const s = new Date(l.proximo_contacto); out.push({src:"cont", id:l.id, title:"Contactar · " + l.nome, sub: l.telefone || "", start:s, end:new Date(+s + 18e5), allDay:false}); }
   });
   demandas.forEach(d => {
     if (!d.prazo || d.status === "concluida") return;
@@ -2588,7 +2594,7 @@ async function loadCad(silent){
 }
 function reunioes(){
   const lim = Date.now() - 3 * 864e5;
-  return leads.filter(l => l.reuniao_em && !l.arquivado && (!l.reuniao_resultado || l.reuniao_resultado === "no_show") && new Date(l.reuniao_em) > lim && !(l.reuniao_resultado === "no_show" && ["fechado","perdido"].includes(l.etapa)))
+  return leads.filter(l => l.reuniao_em && !l.arquivado && (!l.reuniao_resultado || l.reuniao_resultado === "no_show") && new Date(l.reuniao_em) > lim && !(l.reuniao_resultado === "no_show" && FIM.includes(l.etapa)))
     .sort((a,b) => new Date(a.reuniao_em) - new Date(b.reuniao_em));
 }
 function passosDe(l){
@@ -2941,7 +2947,7 @@ $("#board").addEventListener("click", e => { const c = e.target.closest(".card")
 
 async function moveStage(id, etapa){
   const l = leads.find(x => x.id === id); if (!l || l.etapa === etapa) return;
-  if (etapa === "perdido") { openLead(id, {askLoss:true}); return; }
+  if (etapa === "perdido" || etapa === "desqualificado") { openLead(id, {askLoss:etapa}); return; }
   const prev = l.etapa; l.etapa = etapa; render();
   try { await updateLead(id, {etapa}); render(); toast("Movido para " + STAGES.find(s => s.id === etapa).nome); if (openId === id || etapa === "fechado") openLead(id); }
   catch(e){ l.etapa = prev; render(); toast(errMsg(e), true); }
@@ -2963,12 +2969,13 @@ async function openLead(id, opts={}){
     </div>
     <div class="dr-b">
       <div class="sec"><h4>Etapa</h4><div class="stages">${STAGES.map(s => `<button type="button" data-stage="${s.id}" aria-pressed="${l.etapa === s.id}">${s.nome}</button>`).join("")}</div>
-        <div id="lossBox" ${opts.askLoss || l.etapa === "perdido" ? "" : "hidden"} style="margin-top:10px" class="fl">
-          <label for="lossReason">Motivo da perda</label>
+        ${(() => { const alvo = opts.askLoss === true ? "perdido" : (opts.askLoss || (["perdido","desqualificado"].includes(l.etapa) ? l.etapa : "perdido")); const ver = opts.askLoss || ["perdido","desqualificado"].includes(l.etapa); const dq = alvo === "desqualificado"; return `<div id="lossBox" data-alvo="${alvo}" ${ver ? "" : "hidden"} style="margin-top:10px" class="fl">
+          <label for="lossReason">${dq ? "Porque é que este lead não serve?" : "Motivo da perda"}</label>
           <div style="display:flex;gap:8px;flex-wrap:wrap"><select class="field" id="lossReason" style="flex:1">
-            ${["","Sem orçamento","Não respondeu","Escolheu outra agência","Não era o momento","Fora do perfil","Outro"].map(o => `<option ${l.motivo_perda === o ? "selected" : ""} value="${esc(o)}">${o || "Escolher…"}</option>`).join("")}
-          </select>${opts.askLoss ? `<button class="btn primary" type="button" id="confirmLoss">Marcar como perdido</button>` : ""}</div>
-        </div>
+            ${MOTIVOS[alvo].map(o => `<option ${l.motivo_perda === o ? "selected" : ""} value="${esc(o)}">${o || "Escolher…"}</option>`).join("")}
+          </select>${opts.askLoss ? `<button class="btn primary" type="button" id="confirmLoss">${dq ? "Marcar como desqualificado" : "Marcar como perdido"}</button>` : ""}</div>
+          ${dq && ["meta_form","site"].includes(l.origem) ? `<div class="muted" style="margin-top:6px;font-size:12px">A campanha na Meta recebe esta informação, para aprender a mostrar os anúncios a pessoas mais parecidas com os bons leads.</div>` : ""}
+        </div>`; })()}
       </div>
       <div class="sec"><h4>Contacto</h4><div class="contact">
         ${l.telefone ? `<div class="ln"><span class="num">${esc(l.telefone)}</span><button type="button" data-copy="${esc(l.telefone)}">Copiar</button>${wa ? `<a href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</div>` : ""}
@@ -3035,15 +3042,16 @@ function bindDrawer(l, opts){
   const L = $("#layer");
   L.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", closeLayer));
   L.querySelectorAll(".stages button").forEach(b => b.addEventListener("click", () => {
-    if (b.dataset.stage === "perdido") { $("#lossBox").hidden = false; if (!$("#confirmLoss")) openLead(l.id, {askLoss:true}); return; }
+    if (b.dataset.stage === "perdido" || b.dataset.stage === "desqualificado") { openLead(l.id, {askLoss:b.dataset.stage}); return; }
     moveStage(l.id, b.dataset.stage);
   }));
   $("#confirmLoss")?.addEventListener("click", async () => {
     const motivo = $("#lossReason").value || null;
-    try { await updateLead(l.id, {etapa:"perdido", motivo_perda: motivo}); render(); openLead(l.id); toast("Marcado como perdido"); }
+    const alvo = $("#lossBox").dataset.alvo || "perdido";
+    try { await updateLead(l.id, {etapa:alvo, motivo_perda: motivo}); render(); openLead(l.id); toast(alvo === "desqualificado" ? "Marcado como desqualificado · informação enviada à campanha" : "Marcado como perdido"); }
     catch(e){ toast(errMsg(e), true); }
   });
-  if (l.etapa === "perdido") $("#lossReason").addEventListener("change", async e => { try { await updateLead(l.id, {motivo_perda: e.target.value || null}); toast("Motivo guardado"); } catch(err){ toast(errMsg(err), true); } });
+  if (["perdido","desqualificado"].includes(l.etapa) && !opts.askLoss) $("#lossReason").addEventListener("change", async e => { try { await updateLead(l.id, {motivo_perda: e.target.value || null}); toast("Motivo guardado"); } catch(err){ toast(errMsg(err), true); } });
   L.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", () => {
     navigator.clipboard.writeText(b.dataset.copy).then(() => toast("Copiado"), () => { const s = b.previousElementSibling; const r = document.createRange(); r.selectNodeContents(s); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast("Texto selecionado, copie com Ctrl+C"); });
   }));
